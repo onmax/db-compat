@@ -1,0 +1,26 @@
+packages:
+  - packages/*
+  - apps/*
+
+catalog:
+  '@types/better-sqlite3': ^7.6.12
+  '@types/node': ^22.0.0
+  tsx: ^4.0.0
+catalogs:
+  build:
+    tsdown: ^0.15.0
+  db:
+    '@electric-sql/pglite': ^0.2.0
+    '@libsql/client': ^0.14.0
+    better-sqlite3: ^11.0.0
+    db0: ^0.2.4
+  lint:
+    '@antfu/eslint-config': ^4.0.0
+    eslint: ^9.0.0
+  test:
+    vitest: ^3.0.0
+  types:
+    typescript: ^5.7.0
+onlyBuiltDependencies:
+  - better-sqlite3
+  - esbuild

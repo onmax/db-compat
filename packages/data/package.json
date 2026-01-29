@@ -1,0 +1,15 @@
+{
+  "name": "db-compat-data",
+  "type": "module",
+  "version": "0.0.1",
+  "exports": {
+    ".": { "types": "./dist/index.d.mts", "import": "./dist/index.mjs" },
+    "./data.json": "./data.json"
+  },
+  "files": ["data.json", "dist"],
+  "scripts": { "build": "tsdown" },
+  "devDependencies": {
+    "tsdown": "catalog:build",
+    "typescript": "catalog:types"
+  }
+}

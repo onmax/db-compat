@@ -1,0 +1,29 @@
+{
+  "name": "db-compat",
+  "type": "module",
+  "private": true,
+  "packageManager": "pnpm@10.5.2",
+  "scripts": {
+    "build": "pnpm -r run build",
+    "test": "vitest",
+    "test:target": "vitest run --project",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit",
+    "generate": "tsx scripts/generate.ts"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "catalog:lint",
+    "@electric-sql/pglite": "catalog:db",
+    "@libsql/client": "catalog:db",
+    "@types/better-sqlite3": "catalog:",
+    "@types/node": "catalog:",
+    "better-sqlite3": "catalog:db",
+    "db0": "catalog:db",
+    "eslint": "catalog:lint",
+    "tsdown": "catalog:build",
+    "tsx": "catalog:",
+    "typescript": "catalog:types",
+    "vitest": "catalog:test"
+  }
+}
