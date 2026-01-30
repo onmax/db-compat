@@ -1,5 +1,6 @@
 export default defineNuxtConfig({
   modules: ['@nuxt/ui', '@nuxt/fonts', '@nuxt/icon', '@vueuse/nuxt'],
+  nitro: { preset: 'vercel' },
   css: ['~/assets/css/main.css'],
   compatibilityDate: '2025-01-01',
   fonts: {
