@@ -1,6 +1,9 @@
 import type { CapabilityCategory, CapabilityDefinition, CapabilityId, CapabilityResult, CompatibilityData, CompatibilityDataV2, CompatKind, Db0Category, Dialect, TargetDefinition, TargetId } from './types'
+import _compatData from '../data.json'
 
 export * from './types'
+
+export const compatData = _compatData as unknown as CompatibilityDataV2
 
 export const targets: TargetDefinition[] = [
   // SQLite

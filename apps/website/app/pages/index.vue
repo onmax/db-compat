@@ -92,9 +92,8 @@
 </template>
 
 <script setup lang="ts">
-import type { CompatibilityDataV2, CompatKind, TargetId } from 'db-compat-data'
-import { targets } from 'db-compat-data'
-import data from 'db-compat-data/data.json'
+import type { CompatKind, TargetId } from 'db-compat-data'
+import { compatData, targets } from 'db-compat-data'
 
 const colorMode = useColorMode()
 function toggleColorMode() {
@@ -113,7 +112,6 @@ const kindTabs = [
   { label: 'db0 API', value: 'db0' },
 ]
 
-const compatData = data as unknown as CompatibilityDataV2
 const currentCapabilities = computed(() => compatData[activeKind.value])
 
 // Track active category for sticky header
