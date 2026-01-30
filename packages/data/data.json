@@ -1,7 +1,7 @@
 {
   "__meta": {
     "version": "0.0.1",
-    "generatedAt": "2026-01-30T20:10:36.512Z",
+    "generatedAt": "2026-01-30T22:13:06.514Z",
     "targets": {
       "db0-better-sqlite3": {
         "version": "db0@0.3.4",
@@ -15,6 +15,14 @@
         "version": "db0@0.3.4",
         "dialect": "postgresql"
       },
+      "db0-postgresql": {
+        "version": "db0@0.3.4",
+        "dialect": "postgresql"
+      },
+      "db0-mysql2": {
+        "version": "db0@0.3.4",
+        "dialect": "mysql"
+      },
       "db0-sqlite3": {
         "version": "db0@0.3.4",
         "dialect": "sqlite"
@@ -26,6 +34,14 @@
       "db0-cloudflare-d1": {
         "version": "db0@0.3.4",
         "dialect": "sqlite"
+      },
+      "db0-hyperdrive-postgresql": {
+        "version": "db0@0.3.4",
+        "dialect": "postgresql"
+      },
+      "db0-hyperdrive-mysql": {
+        "version": "db0@0.3.4",
+        "dialect": "mysql"
       }
     }
   },
@@ -43,6 +59,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -52,6 +74,12 @@
           "db0-cloudflare-d1": {
             "supported": false,
             "error": "Cannot read properties of undefined (reading 'duration')"
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
+            "supported": true
           }
         }
       },
@@ -67,6 +95,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -76,6 +110,12 @@
           "db0-cloudflare-d1": {
             "supported": false,
             "error": "Cannot read properties of undefined (reading 'duration')"
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
+            "supported": true
           }
         }
       },
@@ -91,6 +131,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -100,6 +146,12 @@
           "db0-cloudflare-d1": {
             "supported": false,
             "error": "Cannot read properties of undefined (reading 'duration')"
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
+            "supported": true
           }
         }
       },
@@ -115,6 +167,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -124,6 +182,12 @@
           "db0-cloudflare-d1": {
             "supported": false,
             "error": "Cannot read properties of undefined (reading 'duration')"
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
+            "supported": true
           }
         }
       },
@@ -141,6 +205,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": false,
             "notes": "Batch not atomic - partial execution"
@@ -150,6 +220,12 @@
             "notes": "Batch not atomic - partial execution"
           },
           "db0-cloudflare-d1": {
+            "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
             "supported": true
           }
         }
@@ -168,6 +244,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -175,6 +257,12 @@
             "supported": true
           },
           "db0-cloudflare-d1": {
+            "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
             "supported": true
           }
         }
@@ -191,6 +279,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -198,6 +292,12 @@
             "supported": true
           },
           "db0-cloudflare-d1": {
+            "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
             "supported": true
           }
         }
@@ -214,6 +314,14 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": false,
+            "notes": "Array types only supported in PostgreSQL",
+            "error": "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '[])' at line 1"
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -222,6 +330,14 @@
           },
           "db0-cloudflare-d1": {
             "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
+            "supported": false,
+            "notes": "Array types only supported in PostgreSQL",
+            "error": "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '[])' at line 1"
           }
         }
       },
@@ -237,6 +353,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -244,6 +366,12 @@
             "supported": true
           },
           "db0-cloudflare-d1": {
+            "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
             "supported": true
           }
         }
@@ -260,6 +388,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -267,6 +401,12 @@
             "supported": true
           },
           "db0-cloudflare-d1": {
+            "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
             "supported": true
           }
         }
@@ -283,6 +423,14 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": false,
+            "notes": "UUID type only native in PostgreSQL",
+            "error": "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'UUID)' at line 1"
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -291,6 +439,14 @@
           },
           "db0-cloudflare-d1": {
             "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
+            "supported": false,
+            "notes": "UUID type only native in PostgreSQL",
+            "error": "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'UUID)' at line 1"
           }
         }
       },
@@ -307,6 +463,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -315,6 +477,12 @@
             "error": "Value is too large to be represented as a JavaScript number: 9223372036854775807"
           },
           "db0-cloudflare-d1": {
+            "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
             "supported": true
           }
         }
@@ -331,6 +499,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -338,6 +512,12 @@
             "supported": true
           },
           "db0-cloudflare-d1": {
+            "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
             "supported": true
           }
         }
@@ -359,6 +539,14 @@
             "supported": true,
             "notes": "PostgreSQL JSONB syntax"
           },
+          "db0-postgresql": {
+            "supported": true,
+            "notes": "PostgreSQL JSONB syntax"
+          },
+          "db0-mysql2": {
+            "supported": true,
+            "notes": "json_extract function"
+          },
           "db0-sqlite3": {
             "supported": true,
             "notes": "json_extract function"
@@ -368,6 +556,14 @@
             "notes": "json_extract function"
           },
           "db0-cloudflare-d1": {
+            "supported": true,
+            "notes": "json_extract function"
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true,
+            "notes": "PostgreSQL JSONB syntax"
+          },
+          "db0-hyperdrive-mysql": {
             "supported": true,
             "notes": "json_extract function"
           }
@@ -388,6 +584,14 @@
             "supported": true,
             "notes": "PostgreSQL jsonb_set"
           },
+          "db0-postgresql": {
+            "supported": true,
+            "notes": "PostgreSQL jsonb_set"
+          },
+          "db0-mysql2": {
+            "supported": true,
+            "notes": "json_set function"
+          },
           "db0-sqlite3": {
             "supported": true,
             "notes": "json_set function"
@@ -397,6 +601,14 @@
             "notes": "json_set function"
           },
           "db0-cloudflare-d1": {
+            "supported": true,
+            "notes": "json_set function"
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true,
+            "notes": "PostgreSQL jsonb_set"
+          },
+          "db0-hyperdrive-mysql": {
             "supported": true,
             "notes": "json_set function"
           }
@@ -417,6 +629,14 @@
             "supported": true,
             "notes": "PostgreSQL jsonb_build_array"
           },
+          "db0-postgresql": {
+            "supported": true,
+            "notes": "PostgreSQL jsonb_build_array"
+          },
+          "db0-mysql2": {
+            "supported": true,
+            "notes": "json_array function"
+          },
           "db0-sqlite3": {
             "supported": true,
             "notes": "json_array function"
@@ -426,6 +646,14 @@
             "notes": "json_array function"
           },
           "db0-cloudflare-d1": {
+            "supported": true,
+            "notes": "json_array function"
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true,
+            "notes": "PostgreSQL jsonb_build_array"
+          },
+          "db0-hyperdrive-mysql": {
             "supported": true,
             "notes": "json_array function"
           }
@@ -447,6 +675,14 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": false,
+            "notes": "PostgreSQL-specific feature",
+            "error": "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '::jsonb @> '{\"a\": 1}'::jsonb as val' at line 1"
+          },
           "db0-sqlite3": {
             "supported": false,
             "notes": "PostgreSQL-specific feature",
@@ -461,6 +697,14 @@
             "supported": false,
             "notes": "PostgreSQL-specific feature",
             "error": "D1_ERROR: unrecognized token: \":\" at offset 25: SQLITE_ERROR"
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
+            "supported": false,
+            "notes": "PostgreSQL-specific feature",
+            "error": "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '::jsonb @> '{\"a\": 1}'::jsonb as val' at line 1"
           }
         }
       }
@@ -478,6 +722,14 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": false,
+            "notes": "Not supported in MySQL",
+            "error": "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'RETURNING id, name' at line 1"
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -486,6 +738,14 @@
           },
           "db0-cloudflare-d1": {
             "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
+            "supported": false,
+            "notes": "Not supported in MySQL",
+            "error": "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'RETURNING id, name' at line 1"
           }
         }
       },
@@ -501,6 +761,13 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": false,
+            "error": "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CONFLICT(id) DO UPDATE SET name = 'updated'' at line 1"
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -509,6 +776,13 @@
           },
           "db0-cloudflare-d1": {
             "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
+            "supported": false,
+            "error": "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CONFLICT(id) DO UPDATE SET name = 'updated'' at line 1"
           }
         }
       },
@@ -530,6 +804,14 @@
             "notes": "MySQL-specific syntax",
             "error": "syntax error at or near \"DUPLICATE\""
           },
+          "db0-postgresql": {
+            "supported": false,
+            "notes": "MySQL-specific syntax",
+            "error": "syntax error at or near \"DUPLICATE\""
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": false,
             "notes": "MySQL-specific syntax",
@@ -544,6 +826,14 @@
             "supported": false,
             "notes": "MySQL-specific syntax",
             "error": "Cannot read properties of undefined (reading 'duration')"
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": false,
+            "notes": "MySQL-specific syntax",
+            "error": "syntax error at or near \"DUPLICATE\""
+          },
+          "db0-hyperdrive-mysql": {
+            "supported": true
           }
         }
       },
@@ -561,6 +851,14 @@
             "notes": "SQLite/MySQL syntax",
             "error": "syntax error at or near \"REPLACE\""
           },
+          "db0-postgresql": {
+            "supported": false,
+            "notes": "SQLite/MySQL syntax",
+            "error": "syntax error at or near \"REPLACE\""
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -568,6 +866,14 @@
             "supported": true
           },
           "db0-cloudflare-d1": {
+            "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": false,
+            "notes": "SQLite/MySQL syntax",
+            "error": "syntax error at or near \"REPLACE\""
+          },
+          "db0-hyperdrive-mysql": {
             "supported": true
           }
         }
@@ -584,6 +890,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": false
+          },
           "db0-sqlite3": {
             "supported": false
           },
@@ -591,6 +903,12 @@
             "supported": false
           },
           "db0-cloudflare-d1": {
+            "supported": false
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
             "supported": false
           }
         }
@@ -607,6 +925,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": false
+          },
           "db0-sqlite3": {
             "supported": false
           },
@@ -614,6 +938,12 @@
             "supported": false
           },
           "db0-cloudflare-d1": {
+            "supported": false
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
             "supported": false
           }
         }
@@ -630,6 +960,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -637,6 +973,12 @@
             "supported": true
           },
           "db0-cloudflare-d1": {
+            "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
             "supported": true
           }
         }
@@ -653,6 +995,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -660,6 +1008,12 @@
             "supported": true
           },
           "db0-cloudflare-d1": {
+            "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
             "supported": true
           }
         }
@@ -676,6 +1030,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -683,6 +1043,12 @@
             "supported": true
           },
           "db0-cloudflare-d1": {
+            "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
             "supported": true
           }
         }
@@ -704,6 +1070,14 @@
             "supported": true,
             "notes": "PostgreSQL tsvector"
           },
+          "db0-postgresql": {
+            "supported": true,
+            "notes": "PostgreSQL tsvector"
+          },
+          "db0-mysql2": {
+            "supported": false,
+            "error": "FTS5: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'VIRTUAL TABLE _test_fts USING fts5(content)' at line 1; tsvector: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@@ to_tsquery('hello')' at line 1; FULLTEXT: Can't find FULLTEXT index matching the column list"
+          },
           "db0-sqlite3": {
             "supported": true,
             "notes": "SQLite FTS5"
@@ -715,6 +1089,14 @@
           "db0-cloudflare-d1": {
             "supported": true,
             "notes": "SQLite FTS5"
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true,
+            "notes": "PostgreSQL tsvector"
+          },
+          "db0-hyperdrive-mysql": {
+            "supported": false,
+            "error": "FTS5: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'VIRTUAL TABLE _test_fts USING fts5(content)' at line 1; tsvector: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@@ to_tsquery('hello')' at line 1; FULLTEXT: Can't find FULLTEXT index matching the column list"
           }
         }
       },
@@ -733,6 +1115,14 @@
             "supported": true,
             "notes": "PostgreSQL ts_rank"
           },
+          "db0-postgresql": {
+            "supported": true,
+            "notes": "PostgreSQL ts_rank"
+          },
+          "db0-mysql2": {
+            "supported": false,
+            "error": "bm25: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'VIRTUAL TABLE _test_fts_rank USING fts5(content)' at line 1; ts_rank: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'rank FROM _test_fts_rank WHERE to_tsvector('english', content) @@ to_tsquery('he' at line 1"
+          },
           "db0-sqlite3": {
             "supported": true,
             "notes": "SQLite FTS5 bm25"
@@ -744,6 +1134,14 @@
           "db0-cloudflare-d1": {
             "supported": true,
             "notes": "SQLite FTS5 bm25"
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true,
+            "notes": "PostgreSQL ts_rank"
+          },
+          "db0-hyperdrive-mysql": {
+            "supported": false,
+            "error": "bm25: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'VIRTUAL TABLE _test_fts_rank USING fts5(content)' at line 1; ts_rank: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'rank FROM _test_fts_rank WHERE to_tsvector('english', content) @@ to_tsquery('he' at line 1"
           }
         }
       }
@@ -761,6 +1159,13 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": false,
+            "notes": "Foreign keys not enforced"
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -769,6 +1174,13 @@
           },
           "db0-cloudflare-d1": {
             "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
+            "supported": false,
+            "notes": "Foreign keys not enforced"
           }
         }
       },
@@ -784,6 +1196,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -791,6 +1209,12 @@
             "supported": true
           },
           "db0-cloudflare-d1": {
+            "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
             "supported": true
           }
         }
@@ -807,6 +1231,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -814,6 +1244,12 @@
             "supported": true
           },
           "db0-cloudflare-d1": {
+            "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
             "supported": true
           }
         }
@@ -832,6 +1268,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -839,6 +1281,12 @@
             "supported": true
           },
           "db0-cloudflare-d1": {
+            "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
             "supported": true
           }
         }
@@ -855,6 +1303,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": false
+          },
           "db0-sqlite3": {
             "supported": false
           },
@@ -862,6 +1316,12 @@
             "supported": false
           },
           "db0-cloudflare-d1": {
+            "supported": false
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
             "supported": false
           }
         }
@@ -882,6 +1342,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -889,6 +1355,12 @@
             "supported": true
           },
           "db0-cloudflare-d1": {
+            "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
             "supported": true
           }
         }
@@ -905,6 +1377,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -912,6 +1390,12 @@
             "supported": true
           },
           "db0-cloudflare-d1": {
+            "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
             "supported": true
           }
         }
@@ -929,6 +1413,13 @@
             "supported": false,
             "error": "cannot insert multiple commands into a prepared statement"
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": false,
+            "error": "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INSERT INTO _test_batch VALUES (1, 'a');\n        INSERT INTO _test_batch VALUES ' at line 2"
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -937,6 +1428,13 @@
           },
           "db0-cloudflare-d1": {
             "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
+            "supported": false,
+            "error": "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INSERT INTO _test_batch VALUES (1, 'a');\n        INSERT INTO _test_batch VALUES ' at line 2"
           }
         }
       },
@@ -952,6 +1450,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -959,6 +1463,12 @@
             "supported": true
           },
           "db0-cloudflare-d1": {
+            "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
             "supported": true
           }
         }
@@ -975,6 +1485,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -982,6 +1498,12 @@
             "supported": true
           },
           "db0-cloudflare-d1": {
+            "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
             "supported": true
           }
         }
@@ -998,6 +1520,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -1005,6 +1533,12 @@
             "supported": true
           },
           "db0-cloudflare-d1": {
+            "supported": true
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
             "supported": true
           }
         }
@@ -1026,6 +1560,14 @@
             "supported": false,
             "notes": "close() method not available"
           },
+          "db0-postgresql": {
+            "supported": false,
+            "notes": "close() method not available"
+          },
+          "db0-mysql2": {
+            "supported": false,
+            "notes": "close() method not available"
+          },
           "db0-sqlite3": {
             "supported": false,
             "notes": "close() method not available"
@@ -1035,6 +1577,14 @@
             "notes": "close() method not available"
           },
           "db0-cloudflare-d1": {
+            "supported": false,
+            "notes": "close() method not available"
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": false,
+            "notes": "close() method not available"
+          },
+          "db0-hyperdrive-mysql": {
             "supported": false,
             "notes": "close() method not available"
           }
@@ -1052,6 +1602,12 @@
           "db0-pglite": {
             "supported": true
           },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
           "db0-sqlite3": {
             "supported": true
           },
@@ -1061,6 +1617,12 @@
           "db0-cloudflare-d1": {
             "supported": false,
             "error": "Cannot read properties of undefined (reading 'duration')"
+          },
+          "db0-hyperdrive-postgresql": {
+            "supported": true
+          },
+          "db0-hyperdrive-mysql": {
+            "supported": true
           }
         }
       }
