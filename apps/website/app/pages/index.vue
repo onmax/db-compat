@@ -20,7 +20,19 @@
     <main class="max-w-6xl mx-auto px-4 pb-16">
       <!-- Kind Toggle -->
       <div class="flex justify-center mb-8">
-        <UTabs v-model="activeKind" :items="kindTabs" class="w-auto" />
+        <div class="inline-flex gap-1 p-0.5 bg-bg-subtle border border-border-subtle rounded-md" role="tablist">
+          <button
+            v-for="tab in kindTabs"
+            :key="tab.value"
+            role="tab"
+            :aria-selected="activeKind === tab.value"
+            class="px-3 py-1.5 font-mono text-xs rounded border transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fg/50"
+            :class="activeKind === tab.value ? 'bg-bg text-fg border-border shadow-sm' : 'text-fg-subtle border-transparent hover:text-fg'"
+            @click="activeKind = tab.value"
+          >
+            {{ tab.label }}
+          </button>
+        </div>
       </div>
 
       <!-- Sticky header outside scroll container -->
@@ -106,27 +118,19 @@ const currentCapabilities = computed(() => compatData[activeKind.value])
 
 // Track active category for sticky header using VueUse
 const activeCategory = ref<string | null>(null)
-const categoryElements = ref<HTMLElement[]>([])
 const categories = computed(() => Object.keys(currentCapabilities.value))
 
+// Observer setup directly in ref callback - VueUse auto-cleans up on unmount
 function setCategoryRef(el: Element | ComponentPublicInstance | null, index: number) {
-  if (el) categoryElements.value[index] = el as HTMLElement
+  if (!el) return
+  useIntersectionObserver(el as HTMLElement, ([{ isIntersecting }]) => {
+    if (isIntersecting) activeCategory.value = categories.value[index]
+  }, { rootMargin: '-60px 0px -80% 0px' })
 }
 
-// Set up intersection observers for each category
-watch([activeKind, categoryElements], () => {
-  categoryElements.value = []
+// Reset category label when switching tabs
+watch(activeKind, () => {
   activeCategory.value = null
-}, { flush: 'pre' })
-
-onMounted(() => {
-  watch(categoryElements, (els) => {
-    els.forEach((el, index) => {
-      useIntersectionObserver(el, ([{ isIntersecting }]) => {
-        if (isIntersecting) activeCategory.value = categories.value[index]
-      }, { rootMargin: '-60px 0px -80% 0px' })
-    })
-  }, { immediate: true })
 })
 
 const targetsMap = Object.fromEntries(targets.map(t => [t.id, t]))
