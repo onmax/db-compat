@@ -35,10 +35,11 @@
         </div>
       </div>
 
-      <div class="overflow-x-auto border border-border rounded-lg">
+      <!-- Sticky header -->
+      <div class="sticky top-0 z-20 bg-bg border border-border border-b-0 rounded-t-lg overflow-x-auto">
         <table class="w-full text-sm border-collapse">
-          <thead class="sticky top-0 z-20">
-            <tr class="bg-bg-subtle">
+          <thead>
+            <tr>
               <th class="text-left font-mono font-medium p-3 min-w-48 bg-bg-subtle text-fg">Capability</th>
               <th v-for="target in testedTargets" :key="target" class="text-center font-mono text-xs p-3 min-w-24 bg-bg-subtle">
                 <AppTooltip :text="`${compatData.__meta.targets[target].version} · ${compatData.__meta.targets[target].dialect}`" position="bottom">
@@ -47,6 +48,11 @@
               </th>
             </tr>
           </thead>
+        </table>
+      </div>
+      <!-- Scrollable body -->
+      <div class="border border-border border-t-0 rounded-b-lg overflow-x-auto">
+        <table class="w-full text-sm border-collapse">
           <tbody>
             <template v-for="(caps, category) in currentCapabilities" :key="category">
               <tr>
