@@ -2,7 +2,7 @@
   "name": "db-compat-website",
   "private": true,
   "scripts": {
-    "build": "pnpm -C ../../packages/data build && nuxt build",
+    "build": "pnpm -C ../packages/data build && nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",

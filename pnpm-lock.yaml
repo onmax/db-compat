@@ -141,7 +141,16 @@ importers:
         specifier: catalog:test
         version: 3.2.4(@types/debug@4.1.12)(@types/node@22.19.7)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
 
-  apps/website:
+  packages/data:
+    devDependencies:
+      tsdown:
+        specifier: catalog:build
+        version: 0.15.12(typescript@5.9.3)
+      typescript:
+        specifier: catalog:types
+        version: 5.9.3
+
+  website:
     dependencies:
       '@nuxt/fonts':
         specifier: catalog:nuxt
@@ -160,22 +169,13 @@ importers:
         version: 14.1.0(magicast@0.5.1)(nuxt@4.3.0(@electric-sql/pglite@0.2.17)(@libsql/client@0.14.0)(@parcel/watcher@2.5.6)(@planetscale/database@1.19.0)(@types/node@22.19.7)(@vue/compiler-sfc@3.5.27)(better-sqlite3@11.10.0)(cac@6.7.14)(db0@0.3.4(@electric-sql/pglite@0.2.17)(@libsql/client@0.14.0)(better-sqlite3@11.10.0)(mysql2@3.16.2)(sqlite3@5.1.7))(encoding@0.1.13)(eslint@9.39.2(jiti@2.6.1))(ioredis@5.9.2)(lightningcss@1.31.1)(magicast@0.5.1)(mysql2@3.16.2)(optionator@0.9.4)(rolldown@1.0.0-beta.45)(rollup@4.57.1)(sqlite3@5.1.7)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@22.19.7)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(vue@3.5.27(typescript@5.9.3))
       db-compat-data:
         specifier: workspace:^
-        version: link:../../packages/data
+        version: link:../packages/data
       nuxt:
         specifier: catalog:nuxt
         version: 4.3.0(@electric-sql/pglite@0.2.17)(@libsql/client@0.14.0)(@parcel/watcher@2.5.6)(@planetscale/database@1.19.0)(@types/node@22.19.7)(@vue/compiler-sfc@3.5.27)(better-sqlite3@11.10.0)(cac@6.7.14)(db0@0.3.4(@electric-sql/pglite@0.2.17)(@libsql/client@0.14.0)(better-sqlite3@11.10.0)(mysql2@3.16.2)(sqlite3@5.1.7))(encoding@0.1.13)(eslint@9.39.2(jiti@2.6.1))(ioredis@5.9.2)(lightningcss@1.31.1)(magicast@0.5.1)(mysql2@3.16.2)(optionator@0.9.4)(rolldown@1.0.0-beta.45)(rollup@4.57.1)(sqlite3@5.1.7)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@22.19.7)(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
       tailwindcss:
         specifier: catalog:nuxt
         version: 4.1.18
-
-  packages/data:
-    devDependencies:
-      tsdown:
-        specifier: catalog:build
-        version: 0.15.12(typescript@5.9.3)
-      typescript:
-        specifier: catalog:types
-        version: 5.9.3
 
 packages:
 
