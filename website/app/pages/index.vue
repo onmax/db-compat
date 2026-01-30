@@ -35,14 +35,11 @@
         </div>
       </div>
 
-      <!-- Sticky header outside scroll container -->
-      <div class="sticky top-0 z-20 bg-bg">
-        <table class="w-full text-sm border-collapse border border-border border-b-0 rounded-t-lg">
-          <thead>
+      <div class="overflow-x-auto border border-border rounded-lg">
+        <table class="w-full text-sm border-collapse">
+          <thead class="sticky top-0 z-20">
             <tr class="bg-bg-subtle">
-              <th class="text-left font-mono font-medium p-3 min-w-48 bg-bg-subtle text-fg">
-                <span class="transition-opacity duration-200">{{ activeCategory || 'Capability' }}</span>
-              </th>
+              <th class="text-left font-mono font-medium p-3 min-w-48 bg-bg-subtle text-fg">Capability</th>
               <th v-for="target in testedTargets" :key="target" class="text-center font-mono text-xs p-3 min-w-24 bg-bg-subtle">
                 <AppTooltip :text="`${compatData.__meta.targets[target].version} · ${compatData.__meta.targets[target].dialect}`" position="bottom">
                   <NuxtLink :to="getConnectorUrl(target)" external class="no-underline text-fg-muted hover:text-fg transition-colors">{{ getTargetName(target) }}</NuxtLink>
@@ -50,21 +47,14 @@
               </th>
             </tr>
           </thead>
-        </table>
-      </div>
-      <!-- Scrollable body -->
-      <div class="overflow-x-auto border border-border border-t-0 rounded-b-lg">
-        <table class="w-full text-sm border-collapse">
           <tbody>
             <template v-for="(caps, category) in currentCapabilities" :key="category">
-              <!-- Category header (sentinel for intersection observer) -->
-              <tr :ref="(el) => { if (el) categoryRefs[Object.keys(currentCapabilities).indexOf(category as string)] = el as HTMLElement }">
+              <tr>
                 <td :colspan="testedTargets.length + 1" class="pt-6 pb-2 px-3">
                   <span class="text-xs font-mono uppercase tracking-wide text-fg-subtle">{{ category }}</span>
                 </td>
               </tr>
-              <!-- Capability rows -->
-              <tr v-for="(cap, capId) in caps" :key="capId" class="group transition-colors duration-150 hover:bg-bg-subtle border-t border-border-subtle">
+              <tr v-for="(cap, capId) in caps" :key="capId" class="group transition-colors hover:bg-bg-subtle border-t border-border-subtle">
                 <td class="p-3 min-w-48">
                   <span class="font-mono text-sm text-fg">{{ capId }}</span>
                   <p class="text-xs mt-0.5 text-fg-subtle">{{ cap.description }}</p>
@@ -113,27 +103,6 @@ const kindTabs = [
 ]
 
 const currentCapabilities = computed(() => compatData[activeKind.value])
-
-// Track active category for sticky header
-const activeCategory = ref<string | null>(null)
-const categories = computed(() => Object.keys(currentCapabilities.value))
-const categoryRefs = ref<HTMLElement[]>([])
-
-// Single observer watching all category elements
-const { stop: stopObserver } = useIntersectionObserver(categoryRefs, (entries) => {
-  for (const entry of entries) {
-    if (entry.isIntersecting) {
-      const idx = categoryRefs.value.indexOf(entry.target as HTMLElement)
-      if (idx !== -1) activeCategory.value = categories.value[idx]
-    }
-  }
-}, { rootMargin: '-60px 0px -80% 0px' })
-
-// Reset on tab switch
-watch(activeKind, () => {
-  activeCategory.value = null
-  categoryRefs.value = []
-})
 
 const targetsMap = Object.fromEntries(targets.map(t => [t.id, t]))
 const testedTargets = Object.keys(compatData.__meta.targets) as TargetId[]
