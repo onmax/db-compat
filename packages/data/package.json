@@ -5,7 +5,7 @@
   "license": "MIT",
   "sideEffects": false,
   "exports": {
-    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js", "default": "./dist/index.js" },
     "./data.json": "./data.json"
   },
   "main": "./dist/index.js",
