@@ -67,7 +67,6 @@
                 </td>
                 <td v-for="target in testedTargets" :key="target" class="p-3 text-center min-w-24">
                   <UIcon v-if="cap.support[target]?.supported" name="carbon:checkmark" class="size-4 mx-auto text-fg-muted" />
-                  <UIcon v-else name="carbon:subtract" class="size-4 mx-auto text-fg-subtle" />
                 </td>
               </tr>
             </template>
