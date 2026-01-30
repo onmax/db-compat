@@ -23,7 +23,7 @@ export const capability: CapabilityTest = {
       // If not atomic, one row will exist
       return {
         supported: (result.rows?.length ?? 0) < 1,
-        notes: result.rows?.length ?? 0 > 0 ? 'Batch not atomic - partial execution' : undefined,
+        notes: (result.rows?.length ?? 0) > 0 ? 'Batch not atomic - partial execution' : undefined,
       }
     }
     catch (error) {

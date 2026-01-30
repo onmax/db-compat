@@ -1,0 +1,50 @@
+name: Generate Compat Data
+on:
+  schedule: [{cron: '0 12 * * *'}]
+  push: {branches: [main]}
+  workflow_dispatch: {}
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env: {POSTGRES_PASSWORD: postgres}
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      mysql:
+        image: mysql:8
+        env: {MYSQL_ROOT_PASSWORD: mysql, MYSQL_DATABASE: test}
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd "mysqladmin ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      - uses: oven-sh/setup-bun@v2
+      - run: pnpm install
+      - run: pnpm generate
+        env:
+          POSTGRES_URL: postgres://postgres:postgres@localhost:5432/postgres
+          MYSQL_URL: mysql://root:mysql@localhost:3306/test
+      - name: Check for changes
+        id: diff
+        run: |
+          git diff --quiet packages/data/data.json || echo "changed=true" >> $GITHUB_OUTPUT
+      - name: Create PR
+        if: steps.diff.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          title: 'chore: update compat data'
+          commit-message: 'chore: update compat data'
+          branch: auto/update-data

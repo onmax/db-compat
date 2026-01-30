@@ -2,10 +2,14 @@
   "name": "db-compat-data",
   "type": "module",
   "version": "0.0.1",
+  "license": "MIT",
+  "sideEffects": false,
   "exports": {
-    ".": { "types": "./dist/index.d.mts", "import": "./dist/index.mjs" },
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
     "./data.json": "./data.json"
   },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "files": ["data.json", "dist"],
   "scripts": { "build": "tsdown" },
   "devDependencies": {

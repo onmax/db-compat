@@ -1,18 +1,26 @@
-import type { CapabilityId, CapabilityResult, CompatibilityData, TargetDefinition, TargetId } from './types'
+import type { CapabilityCategory, CapabilityDefinition, CapabilityId, CapabilityResult, CompatibilityData, CompatibilityDataV2, Dialect, TargetDefinition, TargetId } from './types'
 
 export * from './types'
 
 export const targets: TargetDefinition[] = [
+  // SQLite
   { id: 'db0-better-sqlite3', name: 'better-sqlite3', dialect: 'sqlite', connector: 'better-sqlite3' },
   { id: 'db0-libsql', name: 'libSQL', dialect: 'sqlite', connector: 'libsql' },
-  { id: 'db0-pglite', name: 'PGlite', dialect: 'postgresql', connector: 'pglite' },
+  { id: 'db0-bun-sqlite', name: 'Bun SQLite', dialect: 'sqlite', connector: 'bun-sqlite' },
+  { id: 'db0-node-sqlite', name: 'Node SQLite', dialect: 'sqlite', connector: 'node-sqlite' },
+  { id: 'db0-sqlite3', name: 'sqlite3', dialect: 'sqlite', connector: 'sqlite3' },
   { id: 'db0-cloudflare-d1', name: 'Cloudflare D1', dialect: 'sqlite', connector: 'cloudflare-d1' },
+  // PostgreSQL
+  { id: 'db0-pglite', name: 'PGlite', dialect: 'postgresql', connector: 'pglite' },
   { id: 'db0-postgresql', name: 'PostgreSQL', dialect: 'postgresql', connector: 'postgresql' },
+  { id: 'db0-hyperdrive-postgresql', name: 'Hyperdrive PostgreSQL', dialect: 'postgresql', connector: 'cloudflare-hyperdrive-postgresql' },
+  // MySQL
   { id: 'db0-mysql2', name: 'MySQL', dialect: 'mysql', connector: 'mysql2' },
   { id: 'db0-planetscale', name: 'PlanetScale', dialect: 'mysql', connector: 'planetscale' },
+  { id: 'db0-hyperdrive-mysql', name: 'Hyperdrive MySQL', dialect: 'mysql', connector: 'cloudflare-hyperdrive-mysql' },
 ]
 
-export const capabilities: { id: CapabilityId, category: string, description: string }[] = [
+export const capabilities: CapabilityDefinition[] = [
   // Transactions
   { id: 'BEGIN', category: 'transactions', description: 'Explicit transaction start' },
   { id: 'COMMIT', category: 'transactions', description: 'Commit transaction' },
@@ -67,6 +75,33 @@ export function getTargetsByDialect(dialect: 'sqlite' | 'postgresql' | 'mysql'):
   return targets.filter(t => t.dialect === dialect)
 }
 
-export function getCapabilitiesByCategory(category: string): typeof capabilities {
+export function getCapabilitiesByCategory(category: CapabilityCategory): CapabilityDefinition[] {
   return capabilities.filter(c => c.category === category)
+}
+
+// V2 helpers
+export function isSupportedV2(data: CompatibilityDataV2, target: TargetId, category: CapabilityCategory, capabilityId: string): boolean {
+  return data.capabilities[category]?.[capabilityId]?.support[target]?.supported ?? false
+}
+
+export function getResultV2(data: CompatibilityDataV2, target: TargetId, category: CapabilityCategory, capabilityId: string) {
+  return data.capabilities[category]?.[capabilityId]?.support[target]
+}
+
+export function getTargetsByDialectV2(data: CompatibilityDataV2, dialect: Dialect): TargetId[] {
+  return (Object.entries(data.__meta.targets) as [TargetId, { dialect: Dialect }][])
+    .filter(([_, meta]) => meta.dialect === dialect)
+    .map(([id]) => id)
+}
+
+export function getCoverageV2(data: CompatibilityDataV2, target: TargetId): { supported: number, total: number, percentage: number } {
+  let supported = 0; let total = 0
+  for (const cat of Object.values(data.capabilities)) {
+    for (const cap of Object.values(cat)) {
+      total++
+      if (cap.support[target]?.supported)
+        supported++
+    }
+  }
+  return { supported, total, percentage: total > 0 ? Math.round((supported / total) * 100) : 0 }
 }

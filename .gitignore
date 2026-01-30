@@ -2,6 +2,9 @@ node_modules
 dist
 .nuxt
 .output
+.vercel
+.env*.local
 *.log
 .DS_Store
 packages/data/data.json
+.bun-results.json

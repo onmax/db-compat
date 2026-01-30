@@ -1,10 +1,13 @@
 import { createDatabase } from 'db0'
-import libsql from 'db0/connectors/libsql/node'
+import hyperdriveMysql from 'db0/connectors/cloudflare-hyperdrive-mysql'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { capabilities, runTest } from '../runner'
 
-describe('db0-libsql', () => {
-  const db = createDatabase(libsql({ url: ':memory:' }))
+// Hyperdrive requires Cloudflare Workers environment with Hyperdrive binding
+const skipReason = typeof (globalThis as Record<string, unknown>).HYPERDRIVE_MYSQL === 'undefined' ? 'Hyperdrive MySQL binding not available' : undefined
+
+describe.skipIf(skipReason)('db0-hyperdrive-mysql', () => {
+  const db = createDatabase(hyperdriveMysql({ bindingName: 'HYPERDRIVE_MYSQL' }))
 
   beforeAll(() => {})
 

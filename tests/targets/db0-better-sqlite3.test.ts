@@ -13,7 +13,8 @@ describe('db0-better-sqlite3', () => {
   for (const cap of capabilities) {
     it(cap.id, async () => {
       const result = await runTest(db, cap.id as Parameters<typeof runTest>[1])
-      expect(result).toBeDefined()
+      expect(result.error).toBeUndefined()
+      expect(result.supported).toBe(true)
     })
   }
 })

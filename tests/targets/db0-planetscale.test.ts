@@ -1,10 +1,12 @@
 import { createDatabase } from 'db0'
-import libsql from 'db0/connectors/libsql/node'
+import planetscale from 'db0/connectors/planetscale'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { capabilities, runTest } from '../runner'
 
-describe('db0-libsql', () => {
-  const db = createDatabase(libsql({ url: ':memory:' }))
+const skipReason = process.env.PLANETSCALE_URL ? undefined : 'PLANETSCALE_URL not set'
+
+describe.skipIf(skipReason)('db0-planetscale', () => {
+  const db = createDatabase(planetscale({ url: process.env.PLANETSCALE_URL! }))
 
   beforeAll(() => {})
 

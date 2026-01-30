@@ -1,10 +1,12 @@
 import { createDatabase } from 'db0'
-import libsql from 'db0/connectors/libsql/node'
+import postgresql from 'db0/connectors/postgresql'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { capabilities, runTest } from '../runner'
 
-describe('db0-libsql', () => {
-  const db = createDatabase(libsql({ url: ':memory:' }))
+const skipReason = process.env.POSTGRESQL_URL ? undefined : 'POSTGRESQL_URL not set'
+
+describe.skipIf(skipReason)('db0-postgresql', () => {
+  const db = createDatabase(postgresql({ url: process.env.POSTGRESQL_URL! }))
 
   beforeAll(() => {})
 

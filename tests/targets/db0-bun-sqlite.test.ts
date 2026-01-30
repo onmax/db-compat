@@ -1,10 +1,12 @@
 import { createDatabase } from 'db0'
-import libsql from 'db0/connectors/libsql/node'
+import bunSqlite from 'db0/connectors/bun-sqlite'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { capabilities, runTest } from '../runner'
 
-describe('db0-libsql', () => {
-  const db = createDatabase(libsql({ url: ':memory:' }))
+const skipReason = typeof (globalThis as Record<string, unknown>).Bun === 'undefined' ? 'Bun runtime required' : undefined
+
+describe.skipIf(skipReason)('db0-bun-sqlite', () => {
+  const db = createDatabase(bunSqlite({ name: ':memory:' }))
 
   beforeAll(() => {})
 

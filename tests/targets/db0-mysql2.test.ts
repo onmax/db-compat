@@ -1,10 +1,12 @@
 import { createDatabase } from 'db0'
-import libsql from 'db0/connectors/libsql/node'
+import mysql2 from 'db0/connectors/mysql2'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { capabilities, runTest } from '../runner'
 
-describe('db0-libsql', () => {
-  const db = createDatabase(libsql({ url: ':memory:' }))
+const skipReason = process.env.MYSQL_URL ? undefined : 'MYSQL_URL not set'
+
+describe.skipIf(skipReason)('db0-mysql2', () => {
+  const db = createDatabase(mysql2({ uri: process.env.MYSQL_URL! }))
 
   beforeAll(() => {})
 

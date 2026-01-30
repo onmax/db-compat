@@ -10,20 +10,65 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",
-    "generate": "tsx scripts/generate.ts"
+    "generate": "tsx scripts/generate.ts",
+    "generate:docker": "POSTGRESQL_URL=postgres://postgres:postgres@localhost:5432/test MYSQL_URL=mysql://root:mysql@localhost:3306/test tsx scripts/generate.ts",
+    "generate:full": "bash scripts/generate-with-docker.sh",
+    "generate:types": "tsx scripts/generate-types.ts"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:lint",
     "@electric-sql/pglite": "catalog:db",
     "@libsql/client": "catalog:db",
+    "@planetscale/database": "catalog:db",
     "@types/better-sqlite3": "catalog:",
     "@types/node": "catalog:",
+    "@types/pg": "catalog:",
     "better-sqlite3": "catalog:db",
     "db0": "catalog:db",
     "eslint": "catalog:lint",
+    "mysql2": "catalog:db",
+    "pg": "catalog:db",
+    "sqlite3": "catalog:db",
     "tsdown": "catalog:build",
     "tsx": "catalog:",
     "typescript": "catalog:types",
     "vitest": "catalog:test"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "apps/*"
+    ],
+    "catalog": {
+      "@types/better-sqlite3": "^7.6.12",
+      "@types/node": "^22.0.0",
+      "@types/pg": "^8.11.0",
+      "tsx": "^4.0.0"
+    },
+    "catalogs": {
+      "build": {
+        "tsdown": "^0.15.0"
+      },
+      "db": {
+        "@electric-sql/pglite": "^0.2.0",
+        "@libsql/client": "^0.14.0",
+        "@planetscale/database": "^1.19.0",
+        "better-sqlite3": "^11.0.0",
+        "db0": "^0.3.4",
+        "mysql2": "^3.11.0",
+        "pg": "^8.13.0",
+        "sqlite3": "^5.1.7"
+      },
+      "lint": {
+        "@antfu/eslint-config": "^4.0.0",
+        "eslint": "^9.0.0"
+      },
+      "test": {
+        "vitest": "^3.0.0"
+      },
+      "types": {
+        "typescript": "^5.7.0"
+      }
+    }
   }
 }

@@ -5,6 +5,7 @@ export const capability: CapabilityTest = {
   category: 'fts',
   description: 'FTS ranking/scoring',
   async test(db) {
+    const errors: string[] = []
     try {
       // Try SQLite FTS5 with bm25
       try {
@@ -14,7 +15,7 @@ export const capability: CapabilityTest = {
         await db.exec('DROP TABLE _test_fts_rank')
         return { supported: (result.rows?.length ?? 0) >= 2, notes: 'SQLite FTS5 bm25' }
       }
-      catch {}
+      catch (e) { errors.push(`bm25: ${(e as Error).message}`) }
 
       // Try PostgreSQL ts_rank
       try {
@@ -24,15 +25,15 @@ export const capability: CapabilityTest = {
         await db.exec('DROP TABLE _test_fts_rank')
         return { supported: (result.rows?.length ?? 0) >= 2, notes: 'PostgreSQL ts_rank' }
       }
-      catch {}
+      catch (e) { errors.push(`ts_rank: ${(e as Error).message}`) }
 
-      return { supported: false }
+      return { supported: false, error: errors.join('; ') }
     }
     catch (error) {
       try {
         await db.exec('DROP TABLE _test_fts_rank')
       }
-      catch {}
+      catch { /* ignore */ }
       return { supported: false, error: (error as Error).message }
     }
   },

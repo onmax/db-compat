@@ -1,0 +1,1098 @@
+{
+  "__meta": {
+    "version": "0.0.1",
+    "generatedAt": "2026-01-30T09:51:45.676Z",
+    "targets": {
+      "db0-better-sqlite3": {
+        "version": "db0@0.3.4",
+        "dialect": "sqlite"
+      },
+      "db0-libsql": {
+        "version": "db0@0.3.4",
+        "dialect": "sqlite"
+      },
+      "db0-pglite": {
+        "version": "db0@0.3.4",
+        "dialect": "postgresql"
+      },
+      "db0-postgresql": {
+        "version": "db0@0.3.4",
+        "dialect": "postgresql"
+      },
+      "db0-mysql2": {
+        "version": "db0@0.3.4",
+        "dialect": "mysql"
+      },
+      "db0-sqlite3": {
+        "version": "db0@0.3.4",
+        "dialect": "sqlite"
+      },
+      "db0-node-sqlite": {
+        "version": "db0@0.3.4",
+        "dialect": "sqlite"
+      },
+      "db0-bun-sqlite": {
+        "version": "db0@0.3.4",
+        "dialect": "sqlite"
+      }
+    }
+  },
+  "capabilities": {
+    "transactions": {
+      "BEGIN": {
+        "description": "Explicit transaction start",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true
+          },
+          "db0-libsql": {
+            "supported": true
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
+          "db0-sqlite3": {
+            "supported": true
+          },
+          "db0-node-sqlite": {
+            "supported": true
+          },
+          "db0-bun-sqlite": {
+            "supported": true
+          }
+        }
+      },
+      "COMMIT": {
+        "description": "Commit transaction",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true
+          },
+          "db0-libsql": {
+            "supported": true
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
+          "db0-sqlite3": {
+            "supported": true
+          },
+          "db0-node-sqlite": {
+            "supported": true
+          },
+          "db0-bun-sqlite": {
+            "supported": true
+          }
+        }
+      },
+      "ROLLBACK": {
+        "description": "Rollback transaction",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true
+          },
+          "db0-libsql": {
+            "supported": true
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
+          "db0-sqlite3": {
+            "supported": true
+          },
+          "db0-node-sqlite": {
+            "supported": true
+          },
+          "db0-bun-sqlite": {
+            "supported": true
+          }
+        }
+      },
+      "SAVEPOINT": {
+        "description": "Transaction savepoints",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true
+          },
+          "db0-libsql": {
+            "supported": true
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
+          "db0-sqlite3": {
+            "supported": true
+          },
+          "db0-node-sqlite": {
+            "supported": true
+          },
+          "db0-bun-sqlite": {
+            "supported": true
+          }
+        }
+      },
+      "batch_atomicity": {
+        "description": "Atomic batch execution",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": false,
+            "notes": "Batch not atomic - partial execution"
+          },
+          "db0-libsql": {
+            "supported": false,
+            "notes": "Batch not atomic - partial execution"
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
+          "db0-sqlite3": {
+            "supported": false,
+            "notes": "Batch not atomic - partial execution"
+          },
+          "db0-node-sqlite": {
+            "supported": false,
+            "notes": "Batch not atomic - partial execution"
+          },
+          "db0-bun-sqlite": {
+            "supported": false,
+            "notes": "Batch not atomic - partial execution"
+          }
+        }
+      }
+    },
+    "types": {
+      "type_boolean": {
+        "description": "Boolean type support",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true
+          },
+          "db0-libsql": {
+            "supported": true
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
+          "db0-sqlite3": {
+            "supported": true
+          },
+          "db0-node-sqlite": {
+            "supported": true
+          },
+          "db0-bun-sqlite": {
+            "supported": true
+          }
+        }
+      },
+      "type_json": {
+        "description": "JSON/JSONB column type",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true
+          },
+          "db0-libsql": {
+            "supported": true
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
+          "db0-sqlite3": {
+            "supported": true
+          },
+          "db0-node-sqlite": {
+            "supported": true
+          },
+          "db0-bun-sqlite": {
+            "supported": true
+          }
+        }
+      },
+      "type_array": {
+        "description": "Array column type",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true
+          },
+          "db0-libsql": {
+            "supported": true
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": false,
+            "notes": "Array types only supported in PostgreSQL",
+            "error": "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '[])' at line 1"
+          },
+          "db0-sqlite3": {
+            "supported": true
+          },
+          "db0-node-sqlite": {
+            "supported": true
+          },
+          "db0-bun-sqlite": {
+            "supported": true
+          }
+        }
+      },
+      "type_date": {
+        "description": "DATE type",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true
+          },
+          "db0-libsql": {
+            "supported": true
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
+          "db0-sqlite3": {
+            "supported": true
+          },
+          "db0-node-sqlite": {
+            "supported": true
+          },
+          "db0-bun-sqlite": {
+            "supported": true
+          }
+        }
+      },
+      "type_timestamp": {
+        "description": "TIMESTAMP type",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true
+          },
+          "db0-libsql": {
+            "supported": true
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
+          "db0-sqlite3": {
+            "supported": true
+          },
+          "db0-node-sqlite": {
+            "supported": true
+          },
+          "db0-bun-sqlite": {
+            "supported": true
+          }
+        }
+      },
+      "type_uuid": {
+        "description": "UUID type",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true
+          },
+          "db0-libsql": {
+            "supported": true
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": false,
+            "notes": "UUID type only native in PostgreSQL",
+            "error": "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'UUID)' at line 1"
+          },
+          "db0-sqlite3": {
+            "supported": true
+          },
+          "db0-node-sqlite": {
+            "supported": true
+          },
+          "db0-bun-sqlite": {
+            "supported": true
+          }
+        }
+      },
+      "type_bigint": {
+        "description": "BIGINT type",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true
+          },
+          "db0-libsql": {
+            "supported": false,
+            "error": "Received integer which cannot be safely represented as a JavaScript number"
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
+          "db0-sqlite3": {
+            "supported": true
+          },
+          "db0-node-sqlite": {
+            "supported": false,
+            "error": "Value is too large to be represented as a JavaScript number: 9223372036854775807"
+          },
+          "db0-bun-sqlite": {
+            "supported": true
+          }
+        }
+      },
+      "type_decimal": {
+        "description": "DECIMAL/NUMERIC type",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true
+          },
+          "db0-libsql": {
+            "supported": true
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
+          "db0-sqlite3": {
+            "supported": true
+          },
+          "db0-node-sqlite": {
+            "supported": true
+          },
+          "db0-bun-sqlite": {
+            "supported": true
+          }
+        }
+      }
+    },
+    "json": {
+      "JSON_EXTRACT": {
+        "description": "Extract JSON values",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true,
+            "notes": "json_extract function"
+          },
+          "db0-libsql": {
+            "supported": true,
+            "notes": "json_extract function"
+          },
+          "db0-pglite": {
+            "supported": true,
+            "notes": "PostgreSQL JSONB syntax"
+          },
+          "db0-postgresql": {
+            "supported": true,
+            "notes": "PostgreSQL JSONB syntax"
+          },
+          "db0-mysql2": {
+            "supported": true,
+            "notes": "json_extract function"
+          },
+          "db0-sqlite3": {
+            "supported": true,
+            "notes": "json_extract function"
+          },
+          "db0-node-sqlite": {
+            "supported": true,
+            "notes": "json_extract function"
+          },
+          "db0-bun-sqlite": {
+            "supported": true,
+            "notes": "json_extract function"
+          }
+        }
+      },
+      "JSON_SET": {
+        "description": "Modify JSON values",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true,
+            "notes": "json_set function"
+          },
+          "db0-libsql": {
+            "supported": true,
+            "notes": "json_set function"
+          },
+          "db0-pglite": {
+            "supported": true,
+            "notes": "PostgreSQL jsonb_set"
+          },
+          "db0-postgresql": {
+            "supported": true,
+            "notes": "PostgreSQL jsonb_set"
+          },
+          "db0-mysql2": {
+            "supported": true,
+            "notes": "json_set function"
+          },
+          "db0-sqlite3": {
+            "supported": true,
+            "notes": "json_set function"
+          },
+          "db0-node-sqlite": {
+            "supported": true,
+            "notes": "json_set function"
+          },
+          "db0-bun-sqlite": {
+            "supported": true,
+            "notes": "json_set function"
+          }
+        }
+      },
+      "JSON_ARRAY": {
+        "description": "Create JSON arrays",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true,
+            "notes": "json_array function"
+          },
+          "db0-libsql": {
+            "supported": true,
+            "notes": "json_array function"
+          },
+          "db0-pglite": {
+            "supported": true,
+            "notes": "PostgreSQL jsonb_build_array"
+          },
+          "db0-postgresql": {
+            "supported": true,
+            "notes": "PostgreSQL jsonb_build_array"
+          },
+          "db0-mysql2": {
+            "supported": true,
+            "notes": "json_array function"
+          },
+          "db0-sqlite3": {
+            "supported": true,
+            "notes": "json_array function"
+          },
+          "db0-node-sqlite": {
+            "supported": true,
+            "notes": "json_array function"
+          },
+          "db0-bun-sqlite": {
+            "supported": true,
+            "notes": "json_array function"
+          }
+        }
+      },
+      "jsonb_operators": {
+        "description": "PostgreSQL JSONB operators (@>, ->, etc.)",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": false,
+            "notes": "PostgreSQL-specific feature",
+            "error": "unrecognized token: \":\""
+          },
+          "db0-libsql": {
+            "supported": false,
+            "notes": "PostgreSQL-specific feature",
+            "error": "SQLITE_ERROR: unrecognized token: \":\""
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": false,
+            "notes": "PostgreSQL-specific feature",
+            "error": "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '::jsonb @> '{\"a\": 1}'::jsonb as val' at line 1"
+          },
+          "db0-sqlite3": {
+            "supported": false,
+            "notes": "PostgreSQL-specific feature",
+            "error": "SQLITE_ERROR: unrecognized token: \":\""
+          },
+          "db0-node-sqlite": {
+            "supported": false,
+            "notes": "PostgreSQL-specific feature",
+            "error": "unrecognized token: \":\""
+          },
+          "db0-bun-sqlite": {
+            "supported": false,
+            "notes": "PostgreSQL-specific feature",
+            "error": "unrecognized token: \":\""
+          }
+        }
+      }
+    },
+    "queries": {
+      "RETURNING": {
+        "description": "RETURNING clause",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true
+          },
+          "db0-libsql": {
+            "supported": true
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": false,
+            "notes": "Not supported in MySQL",
+            "error": "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'RETURNING id, name' at line 1"
+          },
+          "db0-sqlite3": {
+            "supported": true
+          },
+          "db0-node-sqlite": {
+            "supported": true
+          },
+          "db0-bun-sqlite": {
+            "supported": true
+          }
+        }
+      },
+      "UPSERT_on_conflict": {
+        "description": "ON CONFLICT clause (PostgreSQL/SQLite)",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true
+          },
+          "db0-libsql": {
+            "supported": true
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": false,
+            "error": "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CONFLICT(id) DO UPDATE SET name = 'updated'' at line 1"
+          },
+          "db0-sqlite3": {
+            "supported": true
+          },
+          "db0-node-sqlite": {
+            "supported": true
+          },
+          "db0-bun-sqlite": {
+            "supported": true
+          }
+        }
+      },
+      "UPSERT_on_duplicate": {
+        "description": "ON DUPLICATE KEY (MySQL)",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": false,
+            "notes": "MySQL-specific syntax",
+            "error": "near \"DUPLICATE\": syntax error"
+          },
+          "db0-libsql": {
+            "supported": false,
+            "notes": "MySQL-specific syntax",
+            "error": "SQLITE_ERROR: near \"DUPLICATE\": syntax error"
+          },
+          "db0-pglite": {
+            "supported": false,
+            "notes": "MySQL-specific syntax",
+            "error": "syntax error at or near \"DUPLICATE\""
+          },
+          "db0-postgresql": {
+            "supported": false,
+            "notes": "MySQL-specific syntax",
+            "error": "syntax error at or near \"DUPLICATE\""
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
+          "db0-sqlite3": {
+            "supported": false,
+            "notes": "MySQL-specific syntax",
+            "error": "SQLITE_ERROR: near \"DUPLICATE\": syntax error"
+          },
+          "db0-node-sqlite": {
+            "supported": false,
+            "notes": "MySQL-specific syntax",
+            "error": "near \"DUPLICATE\": syntax error"
+          },
+          "db0-bun-sqlite": {
+            "supported": false,
+            "notes": "MySQL-specific syntax",
+            "error": "near \"DUPLICATE\": syntax error"
+          }
+        }
+      },
+      "UPSERT_replace": {
+        "description": "REPLACE INTO (SQLite)",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true
+          },
+          "db0-libsql": {
+            "supported": true
+          },
+          "db0-pglite": {
+            "supported": false,
+            "notes": "SQLite/MySQL syntax",
+            "error": "syntax error at or near \"REPLACE\""
+          },
+          "db0-postgresql": {
+            "supported": false,
+            "notes": "SQLite/MySQL syntax",
+            "error": "syntax error at or near \"REPLACE\""
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
+          "db0-sqlite3": {
+            "supported": true
+          },
+          "db0-node-sqlite": {
+            "supported": true
+          },
+          "db0-bun-sqlite": {
+            "supported": true
+          }
+        }
+      },
+      "CTE": {
+        "description": "Common Table Expressions (WITH)",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": false
+          },
+          "db0-libsql": {
+            "supported": true
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": false
+          },
+          "db0-sqlite3": {
+            "supported": false
+          },
+          "db0-node-sqlite": {
+            "supported": false
+          },
+          "db0-bun-sqlite": {
+            "supported": false
+          }
+        }
+      },
+      "CTE_recursive": {
+        "description": "Recursive CTEs (WITH RECURSIVE)",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": false
+          },
+          "db0-libsql": {
+            "supported": true
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": false
+          },
+          "db0-sqlite3": {
+            "supported": false
+          },
+          "db0-node-sqlite": {
+            "supported": false
+          },
+          "db0-bun-sqlite": {
+            "supported": false
+          }
+        }
+      },
+      "window_functions": {
+        "description": "Window functions (ROW_NUMBER, etc.)",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true
+          },
+          "db0-libsql": {
+            "supported": true
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
+          "db0-sqlite3": {
+            "supported": true
+          },
+          "db0-node-sqlite": {
+            "supported": true
+          },
+          "db0-bun-sqlite": {
+            "supported": true
+          }
+        }
+      },
+      "LIMIT_OFFSET": {
+        "description": "LIMIT and OFFSET",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true
+          },
+          "db0-libsql": {
+            "supported": true
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
+          "db0-sqlite3": {
+            "supported": true
+          },
+          "db0-node-sqlite": {
+            "supported": true
+          },
+          "db0-bun-sqlite": {
+            "supported": true
+          }
+        }
+      },
+      "subqueries": {
+        "description": "Subqueries",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true
+          },
+          "db0-libsql": {
+            "supported": true
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
+          "db0-sqlite3": {
+            "supported": true
+          },
+          "db0-node-sqlite": {
+            "supported": true
+          },
+          "db0-bun-sqlite": {
+            "supported": true
+          }
+        }
+      }
+    },
+    "fts": {
+      "FTS_basic": {
+        "description": "Full-text search",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true,
+            "notes": "SQLite FTS5"
+          },
+          "db0-libsql": {
+            "supported": true,
+            "notes": "SQLite FTS5"
+          },
+          "db0-pglite": {
+            "supported": true,
+            "notes": "PostgreSQL tsvector"
+          },
+          "db0-postgresql": {
+            "supported": true,
+            "notes": "PostgreSQL tsvector"
+          },
+          "db0-mysql2": {
+            "supported": false,
+            "error": "FTS5: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'VIRTUAL TABLE _test_fts USING fts5(content)' at line 1; tsvector: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@@ to_tsquery('hello')' at line 1; FULLTEXT: Can't find FULLTEXT index matching the column list"
+          },
+          "db0-sqlite3": {
+            "supported": true,
+            "notes": "SQLite FTS5"
+          },
+          "db0-node-sqlite": {
+            "supported": true,
+            "notes": "SQLite FTS5"
+          },
+          "db0-bun-sqlite": {
+            "supported": true,
+            "notes": "SQLite FTS5"
+          }
+        }
+      },
+      "FTS_ranking": {
+        "description": "FTS ranking/scoring",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true,
+            "notes": "SQLite FTS5 bm25"
+          },
+          "db0-libsql": {
+            "supported": true,
+            "notes": "SQLite FTS5 bm25"
+          },
+          "db0-pglite": {
+            "supported": true,
+            "notes": "PostgreSQL ts_rank"
+          },
+          "db0-postgresql": {
+            "supported": true,
+            "notes": "PostgreSQL ts_rank"
+          },
+          "db0-mysql2": {
+            "supported": false,
+            "error": "bm25: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'VIRTUAL TABLE _test_fts_rank USING fts5(content)' at line 1; ts_rank: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'rank FROM _test_fts_rank WHERE to_tsvector('english', content) @@ to_tsquery('he' at line 1"
+          },
+          "db0-sqlite3": {
+            "supported": true,
+            "notes": "SQLite FTS5 bm25"
+          },
+          "db0-node-sqlite": {
+            "supported": true,
+            "notes": "SQLite FTS5 bm25"
+          },
+          "db0-bun-sqlite": {
+            "supported": true,
+            "notes": "SQLite FTS5 bm25"
+          }
+        }
+      }
+    },
+    "constraints": {
+      "foreign_keys": {
+        "description": "Foreign key constraints",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true
+          },
+          "db0-libsql": {
+            "supported": true
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": false,
+            "notes": "Foreign keys not enforced"
+          },
+          "db0-sqlite3": {
+            "supported": true
+          },
+          "db0-node-sqlite": {
+            "supported": true
+          },
+          "db0-bun-sqlite": {
+            "supported": true
+          }
+        }
+      },
+      "CHECK_constraint": {
+        "description": "CHECK constraints",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true
+          },
+          "db0-libsql": {
+            "supported": true
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
+          "db0-sqlite3": {
+            "supported": true
+          },
+          "db0-node-sqlite": {
+            "supported": true
+          },
+          "db0-bun-sqlite": {
+            "supported": true
+          }
+        }
+      },
+      "UNIQUE_constraint": {
+        "description": "UNIQUE constraints",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true
+          },
+          "db0-libsql": {
+            "supported": true
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
+          "db0-sqlite3": {
+            "supported": true
+          },
+          "db0-node-sqlite": {
+            "supported": true
+          },
+          "db0-bun-sqlite": {
+            "supported": true
+          }
+        }
+      }
+    },
+    "other": {
+      "prepared_statements": {
+        "description": "Prepared statements",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": true
+          },
+          "db0-libsql": {
+            "supported": true
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": true
+          },
+          "db0-sqlite3": {
+            "supported": true
+          },
+          "db0-node-sqlite": {
+            "supported": true
+          },
+          "db0-bun-sqlite": {
+            "supported": true
+          }
+        }
+      },
+      "EXPLAIN": {
+        "description": "Query explain/analysis",
+        "support": {
+          "db0-better-sqlite3": {
+            "supported": false
+          },
+          "db0-libsql": {
+            "supported": true
+          },
+          "db0-pglite": {
+            "supported": true
+          },
+          "db0-postgresql": {
+            "supported": true
+          },
+          "db0-mysql2": {
+            "supported": false
+          },
+          "db0-sqlite3": {
+            "supported": false
+          },
+          "db0-node-sqlite": {
+            "supported": false
+          },
+          "db0-bun-sqlite": {
+            "supported": false
+          }
+        }
+      }
+    }
+  }
+}

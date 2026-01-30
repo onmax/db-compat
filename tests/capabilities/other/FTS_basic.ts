@@ -5,6 +5,7 @@ export const capability: CapabilityTest = {
   category: 'fts',
   description: 'Full-text search',
   async test(db) {
+    const errors: string[] = []
     try {
       // Try SQLite FTS5
       try {
@@ -14,7 +15,7 @@ export const capability: CapabilityTest = {
         await db.exec('DROP TABLE _test_fts')
         return { supported: (result.rows?.length ?? 0) >= 1, notes: 'SQLite FTS5' }
       }
-      catch {}
+      catch (e) { errors.push(`FTS5: ${(e as Error).message}`) }
 
       // Try PostgreSQL tsvector
       try {
@@ -24,7 +25,7 @@ export const capability: CapabilityTest = {
         await db.exec('DROP TABLE _test_fts')
         return { supported: (result.rows?.length ?? 0) >= 1, notes: 'PostgreSQL tsvector' }
       }
-      catch {}
+      catch (e) { errors.push(`tsvector: ${(e as Error).message}`) }
 
       // Try MySQL FULLTEXT
       try {
@@ -34,15 +35,15 @@ export const capability: CapabilityTest = {
         await db.exec('DROP TABLE _test_fts')
         return { supported: (result.rows?.length ?? 0) >= 1, notes: 'MySQL FULLTEXT' }
       }
-      catch {}
+      catch (e) { errors.push(`FULLTEXT: ${(e as Error).message}`) }
 
-      return { supported: false }
+      return { supported: false, error: errors.join('; ') }
     }
     catch (error) {
       try {
         await db.exec('DROP TABLE _test_fts')
       }
-      catch {}
+      catch { /* ignore */ }
       return { supported: false, error: (error as Error).message }
     }
   },

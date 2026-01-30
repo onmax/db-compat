@@ -1,10 +1,13 @@
 import { createDatabase } from 'db0'
-import libsql from 'db0/connectors/libsql/node'
+import nodeSqlite from 'db0/connectors/node-sqlite'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { capabilities, runTest } from '../runner'
 
-describe('db0-libsql', () => {
-  const db = createDatabase(libsql({ url: ':memory:' }))
+const nodeMajor = typeof process.versions.node === 'string' ? Number.parseInt(process.versions.node.split('.')[0]) : 0
+const skipReason = nodeMajor < 22 ? 'Node.js 22+ required for node:sqlite' : undefined
+
+describe.skipIf(skipReason)('db0-node-sqlite', () => {
+  const db = createDatabase(nodeSqlite({ name: ':memory:' }))
 
   beforeAll(() => {})
 
