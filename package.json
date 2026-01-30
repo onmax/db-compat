@@ -4,7 +4,7 @@
   "private": true,
   "packageManager": "pnpm@10.5.2",
   "scripts": {
-    "build": "pnpm -r run build",
+    "build": "pnpm -r run build && ([ -d website/.vercel/output ] && cp -r website/.vercel/output .vercel/output || true)",
     "test": "vitest",
     "test:target": "vitest run --project",
     "lint": "eslint .",
