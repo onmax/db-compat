@@ -58,7 +58,7 @@
           <tbody>
             <template v-for="(caps, category) in currentCapabilities" :key="category">
               <!-- Category header (sentinel for intersection observer) -->
-              <tr :ref="(el) => setCategoryRef(el, Object.keys(currentCapabilities).indexOf(category as string))">
+              <tr :ref="(el) => { if (el) categoryRefs[Object.keys(currentCapabilities).indexOf(category as string)] = el as HTMLElement }">
                 <td :colspan="testedTargets.length + 1" class="pt-6 pb-2 px-3">
                   <span class="text-xs font-mono uppercase tracking-wide text-fg-subtle">{{ category }}</span>
                 </td>
@@ -69,9 +69,9 @@
                   <span class="font-mono text-sm text-fg">{{ capId }}</span>
                   <p class="text-xs mt-0.5 text-fg-subtle">{{ cap.description }}</p>
                 </td>
-                <td v-for="target in testedTargets" :key="target" class="p-3 text-center min-w-24">
-                  <UIcon v-if="cap.support[target]?.supported" name="carbon:checkmark" class="size-5 mx-auto text-green-500" />
-                  <UIcon v-else name="carbon:close" class="size-5 mx-auto text-red-500" />
+                <td v-for="target in testedTargets" :key="target" class="p-3 text-center min-w-24 font-mono">
+                  <span v-if="cap.support[target]?.supported" class="text-fg-muted">✓</span>
+                  <span v-else class="text-fg-subtle">–</span>
                 </td>
               </tr>
             </template>
@@ -116,21 +116,25 @@ const kindTabs = [
 const compatData = data as unknown as CompatibilityDataV2
 const currentCapabilities = computed(() => compatData[activeKind.value])
 
-// Track active category for sticky header using VueUse
+// Track active category for sticky header
 const activeCategory = ref<string | null>(null)
 const categories = computed(() => Object.keys(currentCapabilities.value))
+const categoryRefs = ref<HTMLElement[]>([])
 
-// Observer setup directly in ref callback - VueUse auto-cleans up on unmount
-function setCategoryRef(el: Element | ComponentPublicInstance | null, index: number) {
-  if (!el) return
-  useIntersectionObserver(el as HTMLElement, ([{ isIntersecting }]) => {
-    if (isIntersecting) activeCategory.value = categories.value[index]
-  }, { rootMargin: '-60px 0px -80% 0px' })
-}
+// Single observer watching all category elements
+const { stop: stopObserver } = useIntersectionObserver(categoryRefs, (entries) => {
+  for (const entry of entries) {
+    if (entry.isIntersecting) {
+      const idx = categoryRefs.value.indexOf(entry.target as HTMLElement)
+      if (idx !== -1) activeCategory.value = categories.value[idx]
+    }
+  }
+}, { rootMargin: '-60px 0px -80% 0px' })
 
-// Reset category label when switching tabs
+// Reset on tab switch
 watch(activeKind, () => {
   activeCategory.value = null
+  categoryRefs.value = []
 })
 
 const targetsMap = Object.fromEntries(targets.map(t => [t.id, t]))
