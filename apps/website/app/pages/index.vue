@@ -69,9 +69,9 @@
                   <span class="font-mono text-sm text-fg">{{ capId }}</span>
                   <p class="text-xs mt-0.5 text-fg-subtle">{{ cap.description }}</p>
                 </td>
-                <td v-for="target in testedTargets" :key="target" class="p-3 text-center min-w-24 font-mono">
-                  <span v-if="cap.support[target]?.supported" class="text-fg-muted">✓</span>
-                  <span v-else class="text-fg-subtle">–</span>
+                <td v-for="target in testedTargets" :key="target" class="p-3 text-center min-w-24">
+                  <UIcon v-if="cap.support[target]?.supported" name="carbon:checkmark" class="size-4 mx-auto text-fg-muted" />
+                  <UIcon v-else name="carbon:subtract" class="size-4 mx-auto text-fg-subtle" />
                 </td>
               </tr>
             </template>
