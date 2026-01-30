@@ -2,6 +2,7 @@ import type { CapabilityTest } from '../../types'
 
 export const capability: CapabilityTest = {
   id: 'CTE_recursive',
+  kind: 'sql',
   category: 'queries',
   description: 'Recursive CTEs (WITH RECURSIVE)',
   async test(db) {

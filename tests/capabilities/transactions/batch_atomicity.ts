@@ -2,6 +2,7 @@ import type { CapabilityTest } from '../../types'
 
 export const capability: CapabilityTest = {
   id: 'batch_atomicity',
+  kind: 'sql',
   category: 'transactions',
   description: 'Atomic batch execution',
   async test(db) {

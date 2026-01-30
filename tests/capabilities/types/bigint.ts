@@ -2,6 +2,7 @@ import type { CapabilityTest } from '../../types'
 
 export const capability: CapabilityTest = {
   id: 'type_bigint',
+  kind: 'sql',
   category: 'types',
   description: 'BIGINT type',
   async test(db) {

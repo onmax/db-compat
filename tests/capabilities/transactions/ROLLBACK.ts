@@ -2,6 +2,7 @@ import type { CapabilityTest } from '../../types'
 
 export const capability: CapabilityTest = {
   id: 'ROLLBACK',
+  kind: 'sql',
   category: 'transactions',
   description: 'Rollback transaction',
   async test(db) {

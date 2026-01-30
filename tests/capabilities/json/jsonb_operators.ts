@@ -2,6 +2,7 @@ import type { CapabilityTest } from '../../types'
 
 export const capability: CapabilityTest = {
   id: 'jsonb_operators',
+  kind: 'sql',
   category: 'json',
   description: 'PostgreSQL JSONB operators (@>, ->, etc.)',
   async test(db) {

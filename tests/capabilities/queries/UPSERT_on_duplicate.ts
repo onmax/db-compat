@@ -2,6 +2,7 @@ import type { CapabilityTest } from '../../types'
 
 export const capability: CapabilityTest = {
   id: 'UPSERT_on_duplicate',
+  kind: 'sql',
   category: 'queries',
   description: 'ON DUPLICATE KEY (MySQL)',
   async test(db) {

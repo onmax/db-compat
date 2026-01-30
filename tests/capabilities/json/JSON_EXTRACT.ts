@@ -2,6 +2,7 @@ import type { CapabilityTest } from '../../types'
 
 export const capability: CapabilityTest = {
   id: 'JSON_EXTRACT',
+  kind: 'sql',
   category: 'json',
   description: 'Extract JSON values',
   async test(db) {

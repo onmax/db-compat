@@ -2,6 +2,7 @@ import type { CapabilityTest } from '../../types'
 
 export const capability: CapabilityTest = {
   id: 'UPSERT_replace',
+  kind: 'sql',
   category: 'queries',
   description: 'REPLACE INTO (SQLite)',
   async test(db) {

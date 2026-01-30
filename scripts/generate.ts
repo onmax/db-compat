@@ -1,6 +1,7 @@
-import type { CapabilityCategory, CapabilityResults, CompatibilityData, CompatibilityDataV2, TargetId } from '../packages/data/src/types'
+import type { CapabilityCategory, CapabilityResults, CompatibilityData, CompatibilityDataV2, Db0Category, TargetId } from '../packages/data/src/types'
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
+import process from 'node:process'
 import { createDatabase } from 'db0'
 import betterSqlite3 from 'db0/connectors/better-sqlite3'
 import libsql from 'db0/connectors/libsql/node'
@@ -9,7 +10,7 @@ import nodeSqlite from 'db0/connectors/node-sqlite'
 import pglite from 'db0/connectors/pglite'
 import postgresql from 'db0/connectors/postgresql'
 import sqlite3 from 'db0/connectors/sqlite3'
-import { capabilities as capabilityDefs, targets } from '../packages/data/src/index'
+import { capabilities as capabilityDefs, db0Categories, sqlCategories, targets } from '../packages/data/src/index'
 import { runAllTests } from '../tests/runner'
 
 async function generate() {
@@ -62,7 +63,7 @@ async function generate() {
     Object.assign(results, bunResults)
   }
 
-  // Build v2 format
+  // Build v2 format with sql/db0 split
   const testedTargets = Object.keys(results) as TargetId[]
   const v2: CompatibilityDataV2 = {
     __meta: {
@@ -73,21 +74,36 @@ async function generate() {
         return [id, { version: 'db0@0.3.4', dialect: def.dialect }]
       })) as CompatibilityDataV2['__meta']['targets'],
     },
-    capabilities: {} as CompatibilityDataV2['capabilities'],
+    sql: {} as CompatibilityDataV2['sql'],
+    db0: {} as CompatibilityDataV2['db0'],
   }
 
-  // Group capabilities by category
-  const categories: CapabilityCategory[] = ['transactions', 'types', 'json', 'queries', 'fts', 'constraints', 'other']
-  for (const cat of categories) {
-    v2.capabilities[cat] = {}
-    const caps = capabilityDefs.filter(c => c.category === cat)
+  // Group SQL capabilities by category
+  for (const cat of sqlCategories) {
+    v2.sql[cat] = {}
+    const caps = capabilityDefs.filter(c => c.kind === 'sql' && c.category === cat)
     for (const cap of caps) {
-      v2.capabilities[cat][cap.id] = {
+      v2.sql[cat][cap.id] = {
         description: cap.description,
         support: Object.fromEntries(testedTargets.map((targetId) => {
           const r = results[targetId]![cap.id]
           return [targetId, { supported: r.supported, ...(r.notes && { notes: r.notes }), ...(r.error && { error: r.error }) }]
-        })) as CompatibilityDataV2['capabilities'][CapabilityCategory][string]['support'],
+        })) as CompatibilityDataV2['sql'][CapabilityCategory][string]['support'],
+      }
+    }
+  }
+
+  // Group db0 capabilities by category
+  for (const cat of db0Categories) {
+    v2.db0[cat] = {}
+    const caps = capabilityDefs.filter(c => c.kind === 'db0' && c.category === cat)
+    for (const cap of caps) {
+      v2.db0[cat][cap.id] = {
+        description: cap.description,
+        support: Object.fromEntries(testedTargets.map((targetId) => {
+          const r = results[targetId]![cap.id]
+          return [targetId, { supported: r.supported, ...(r.notes && { notes: r.notes }), ...(r.error && { error: r.error }) }]
+        })) as CompatibilityDataV2['db0'][Db0Category][string]['support'],
       }
     }
   }

@@ -18,6 +18,11 @@
 
     <!-- Matrix -->
     <main class="max-w-6xl mx-auto px-4 pb-16">
+      <!-- Kind Toggle -->
+      <div class="flex justify-center mb-8">
+        <UTabs v-model="activeKind" :items="kindTabs" class="w-auto" />
+      </div>
+
       <!-- Sticky header outside scroll container -->
       <div class="sticky top-0 z-20 bg-bg">
         <table class="w-full text-sm border-collapse border border-border border-b-0 rounded-t-lg">
@@ -39,9 +44,9 @@
       <div class="overflow-x-auto border border-border border-t-0 rounded-b-lg">
         <table class="w-full text-sm border-collapse">
           <tbody>
-            <template v-for="(caps, category) in compatData.capabilities" :key="category">
+            <template v-for="(caps, category) in currentCapabilities" :key="category">
               <!-- Category header (sentinel for intersection observer) -->
-              <tr :ref="(el) => setCategoryRef(el, Object.keys(compatData.capabilities).indexOf(category as string))">
+              <tr :ref="(el) => setCategoryRef(el, Object.keys(currentCapabilities).indexOf(category as string))">
                 <td :colspan="testedTargets.length + 1" class="pt-6 pb-2 px-3">
                   <span class="text-xs font-mono uppercase tracking-wide text-fg-subtle">{{ category }}</span>
                 </td>
@@ -75,68 +80,64 @@
 </template>
 
 <script setup lang="ts">
-import type { CompatibilityDataV2 } from '~/types'
-import data from '~/data/data.json'
+import type { CompatibilityDataV2, CompatKind, TargetId } from 'db-compat-data'
+import { targets } from 'db-compat-data'
+import data from 'db-compat-data/data.json'
 
 const colorMode = useColorMode()
 function toggleColorMode() {
   colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
 }
 
+// Kind toggle (sql vs db0)
+const route = useRoute()
+const router = useRouter()
+const activeKind = computed<CompatKind>({
+  get: () => (route.query.kind === 'db0' ? 'db0' : 'sql'),
+  set: (val) => { router.replace({ query: val === 'sql' ? {} : { kind: val } }) },
+})
+const kindTabs = [
+  { label: 'SQL', value: 'sql' },
+  { label: 'db0 API', value: 'db0' },
+]
+
+const compatData = data as unknown as CompatibilityDataV2
+const currentCapabilities = computed(() => compatData[activeKind.value])
+
 // Track active category for sticky header using VueUse
 const activeCategory = ref<string | null>(null)
 const categoryElements = ref<HTMLElement[]>([])
-const categories = computed(() => Object.keys(compatData.capabilities))
+const categories = computed(() => Object.keys(currentCapabilities.value))
 
 function setCategoryRef(el: Element | ComponentPublicInstance | null, index: number) {
   if (el) categoryElements.value[index] = el as HTMLElement
 }
 
 // Set up intersection observers for each category
+watch([activeKind, categoryElements], () => {
+  categoryElements.value = []
+  activeCategory.value = null
+}, { flush: 'pre' })
+
 onMounted(() => {
-  categoryElements.value.forEach((el, index) => {
-    useIntersectionObserver(el, ([{ isIntersecting }]) => {
-      if (isIntersecting) activeCategory.value = categories.value[index]
-    }, { rootMargin: '-60px 0px -80% 0px' })
-  })
+  watch(categoryElements, (els) => {
+    els.forEach((el, index) => {
+      useIntersectionObserver(el, ([{ isIntersecting }]) => {
+        if (isIntersecting) activeCategory.value = categories.value[index]
+      }, { rootMargin: '-60px 0px -80% 0px' })
+    })
+  }, { immediate: true })
 })
 
-const targetNames: Record<string, string> = {
-  'db0-better-sqlite3': 'better-sqlite3',
-  'db0-libsql': 'libSQL',
-  'db0-bun-sqlite': 'Bun SQLite',
-  'db0-node-sqlite': 'Node SQLite',
-  'db0-sqlite3': 'sqlite3',
-  'db0-cloudflare-d1': 'D1',
-  'db0-pglite': 'PGlite',
-  'db0-postgresql': 'PostgreSQL',
-  'db0-hyperdrive-postgresql': 'Hyperdrive PG',
-  'db0-mysql2': 'MySQL',
-  'db0-planetscale': 'PlanetScale',
-  'db0-hyperdrive-mysql': 'Hyperdrive MySQL',
+const targetsMap = Object.fromEntries(targets.map(t => [t.id, t]))
+const testedTargets = Object.keys(compatData.__meta.targets) as TargetId[]
+
+function getTargetName(id: TargetId) {
+  return targetsMap[id]?.name ?? id.replace('db0-', '')
 }
 
-const compatData = data as CompatibilityDataV2
-const testedTargets = Object.keys(compatData.__meta.targets)
-
-function getTargetName(id: string) {
-  return targetNames[id] ?? id.replace('db0-', '')
-}
-
-const connectorUrls: Record<string, string> = {
-  'db0-better-sqlite3': 'https://github.com/unjs/db0/tree/main/src/connectors/better-sqlite3',
-  'db0-libsql': 'https://github.com/unjs/db0/tree/main/src/connectors/libsql',
-  'db0-bun-sqlite': 'https://github.com/unjs/db0/tree/main/src/connectors/bun-sqlite',
-  'db0-node-sqlite': 'https://github.com/unjs/db0/tree/main/src/connectors/node-sqlite',
-  'db0-sqlite3': 'https://github.com/unjs/db0/tree/main/src/connectors/sqlite3',
-  'db0-cloudflare-d1': 'https://github.com/unjs/db0/tree/main/src/connectors/cloudflare-d1',
-  'db0-pglite': 'https://github.com/unjs/db0/tree/main/src/connectors/pglite',
-  'db0-postgresql': 'https://github.com/unjs/db0/tree/main/src/connectors/postgresql',
-  'db0-mysql2': 'https://github.com/unjs/db0/tree/main/src/connectors/mysql2',
-  'db0-planetscale': 'https://github.com/unjs/db0/tree/main/src/connectors/planetscale',
-}
-
-function getConnectorUrl(id: string) {
-  return connectorUrls[id] ?? `https://github.com/unjs/db0/tree/main/src/connectors/${id.replace('db0-', '')}`
+function getConnectorUrl(id: TargetId) {
+  const connector = targetsMap[id]?.connector
+  return `https://github.com/unjs/db0/tree/main/src/connectors/${connector ?? id.replace('db0-', '')}`
 }
 </script>

@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  modules: ['@nuxt/ui', '@nuxt/fonts', '@vueuse/nuxt'],
+  modules: ['@nuxt/ui', '@nuxt/fonts', '@nuxt/icon', '@vueuse/nuxt'],
   css: ['~/assets/css/main.css'],
   compatibilityDate: '2025-01-01',
   fonts: {

@@ -2,6 +2,7 @@ import type { CapabilityTest } from '../../types'
 
 export const capability: CapabilityTest = {
   id: 'UPSERT_on_conflict',
+  kind: 'sql',
   category: 'queries',
   description: 'ON CONFLICT clause (PostgreSQL/SQLite)',
   async test(db) {

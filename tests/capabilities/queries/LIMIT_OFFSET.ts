@@ -2,6 +2,7 @@ import type { CapabilityTest } from '../../types'
 
 export const capability: CapabilityTest = {
   id: 'LIMIT_OFFSET',
+  kind: 'sql',
   category: 'queries',
   description: 'LIMIT and OFFSET',
   async test(db) {

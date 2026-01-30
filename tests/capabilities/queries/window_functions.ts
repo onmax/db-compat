@@ -2,6 +2,7 @@ import type { CapabilityTest } from '../../types'
 
 export const capability: CapabilityTest = {
   id: 'window_functions',
+  kind: 'sql',
   category: 'queries',
   description: 'Window functions (ROW_NUMBER, etc.)',
   async test(db) {

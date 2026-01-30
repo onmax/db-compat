@@ -1,6 +1,7 @@
 import type { CapabilityResults, TargetId } from '../packages/data/src/types'
 import { writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
+import process from 'node:process'
 import { createDatabase } from 'db0'
 import bunSqlite from 'db0/connectors/bun-sqlite'
 import { runAllTests } from '../tests/runner'

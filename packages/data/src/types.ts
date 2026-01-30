@@ -4,43 +4,53 @@ export interface CapabilityResult {
   notes?: string
 }
 
+export type CompatKind = 'sql' | 'db0'
 export type CapabilityCategory = 'transactions' | 'types' | 'json' | 'queries' | 'fts' | 'constraints' | 'other'
+export type Db0Category = 'api' | 'connection'
 export type Dialect = 'sqlite' | 'postgresql' | 'mysql'
 
 // V2 Data Format
+export interface CapabilityEntry {
+  description: string
+  support: Record<TargetId, { supported: boolean, notes?: string, error?: string }>
+}
+
 export interface CompatibilityDataV2 {
   __meta: {
     version: string
     generatedAt: string
     targets: Record<TargetId, { version: string, dialect: Dialect }>
   }
-  capabilities: Record<CapabilityCategory, Record<string, {
-    description: string
-    support: Record<TargetId, { supported: boolean, notes?: string, error?: string }>
-  }>>
+  sql: Record<CapabilityCategory, Record<string, CapabilityEntry>>
+  db0: Record<Db0Category, Record<string, CapabilityEntry>>
 }
 
 export interface CapabilityDefinition {
   id: CapabilityId
-  category: CapabilityCategory
+  kind: CompatKind
+  category: CapabilityCategory | Db0Category
   description: string
 }
 
 export type CapabilityId
-  // Transactions
+  // Transactions (SQL)
   = | 'BEGIN' | 'COMMIT' | 'ROLLBACK' | 'SAVEPOINT' | 'batch_atomicity'
-  // Types
+  // Types (SQL)
     | 'type_boolean' | 'type_json' | 'type_array' | 'type_date' | 'type_timestamp' | 'type_uuid' | 'type_bigint' | 'type_decimal'
-  // JSON
+  // JSON (SQL)
     | 'JSON_EXTRACT' | 'JSON_SET' | 'JSON_ARRAY' | 'jsonb_operators'
-  // Queries
+  // Queries (SQL)
     | 'RETURNING' | 'UPSERT_on_conflict' | 'UPSERT_on_duplicate' | 'UPSERT_replace' | 'CTE' | 'CTE_recursive' | 'window_functions' | 'LIMIT_OFFSET' | 'subqueries'
-  // FTS
+  // FTS (SQL)
     | 'FTS_basic' | 'FTS_ranking'
-  // Constraints
+  // Constraints (SQL)
     | 'foreign_keys' | 'CHECK_constraint' | 'UNIQUE_constraint'
-  // Other
+  // Other (SQL)
     | 'prepared_statements' | 'EXPLAIN'
+  // db0 API
+    | 'db0_sql_template' | 'db0_exec' | 'db0_batch' | 'db0_prepare' | 'db0_first' | 'db0_rows'
+  // db0 Connection
+    | 'db0_close' | 'db0_transaction'
 
 export type CapabilityResults = Record<CapabilityId, CapabilityResult>
 

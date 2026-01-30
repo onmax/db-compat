@@ -2,6 +2,7 @@ import type { CapabilityTest } from '../../types'
 
 export const capability: CapabilityTest = {
   id: 'BEGIN',
+  kind: 'sql',
   category: 'transactions',
   description: 'Explicit transaction start with BEGIN statement',
   async test(db) {
