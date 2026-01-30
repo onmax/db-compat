@@ -63,6 +63,22 @@ async function generate() {
     Object.assign(results, bunResults)
   }
 
+  // Merge D1 results if available
+  const d1ResultsPath = process.env.D1_RESULTS_PATH
+  if (d1ResultsPath && existsSync(d1ResultsPath)) {
+    console.log('Merging cloudflare-d1 results...')
+    const d1Results = JSON.parse(readFileSync(d1ResultsPath, 'utf-8')) as Record<TargetId, CapabilityResults>
+    Object.assign(results, d1Results)
+  }
+
+  // Merge Hyperdrive results if available
+  const hyperdriveResultsPath = process.env.HYPERDRIVE_RESULTS_PATH
+  if (hyperdriveResultsPath && existsSync(hyperdriveResultsPath)) {
+    console.log('Merging hyperdrive results...')
+    const hyperdriveResults = JSON.parse(readFileSync(hyperdriveResultsPath, 'utf-8')) as Record<TargetId, CapabilityResults>
+    Object.assign(results, hyperdriveResults)
+  }
+
   // Build v2 format with sql/db0 split
   const testedTargets = Object.keys(results) as TargetId[]
   const v2: CompatibilityDataV2 = {
