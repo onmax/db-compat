@@ -1,6 +1,4 @@
 {
-  "buildCommand": "cd ../.. && pnpm -C packages/data build && pnpm -C apps/website build",
-  "outputDirectory": ".vercel/output",
-  "framework": null,
-  "installCommand": "cd ../.. && pnpm install"
+  "installCommand": "cd ../.. && pnpm install",
+  "buildCommand": "cd ../.. && pnpm -C packages/data build && pnpm -C apps/website build"
 }
