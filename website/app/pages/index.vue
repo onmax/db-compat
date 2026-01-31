@@ -118,10 +118,13 @@ const kindTabs: { label: string, value: CompatKind }[] = [
 const currentCapabilities = computed(() => compatData[activeKind.value])
 
 const targetsMap = Object.fromEntries(targets.map(t => [t.id, t]))
-const testedTargets = Object.keys(compatData.__meta.targets) as TargetId[]
+const allTestedTargets = Object.keys(compatData.__meta.targets) as TargetId[]
 
-// Group targets by dialect (preserving order from testedTargets)
-const sqliteTargets = computed(() => testedTargets.filter(id => targetsMap[id]?.dialect === 'sqlite'))
-const postgresTargets = computed(() => testedTargets.filter(id => targetsMap[id]?.dialect === 'postgresql'))
-const mysqlTargets = computed(() => testedTargets.filter(id => targetsMap[id]?.dialect === 'mysql'))
+// Group targets by dialect
+const sqliteTargets = allTestedTargets.filter(id => targetsMap[id]?.dialect === 'sqlite')
+const postgresTargets = allTestedTargets.filter(id => targetsMap[id]?.dialect === 'postgresql')
+const mysqlTargets = allTestedTargets.filter(id => targetsMap[id]?.dialect === 'mysql')
+
+// Ordered by dialect groups
+const testedTargets = [...sqliteTargets, ...postgresTargets, ...mysqlTargets]
 </script>
