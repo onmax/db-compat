@@ -38,7 +38,7 @@
       </div>
 
       <!-- Sticky header -->
-      <div class="sticky top-0 z-20 bg-bg border border-border border-b-0 rounded-t-lg overflow-clip">
+      <div class="sticky top-0 z-20 bg-bg border border-border border-b-0 rounded-t-lg">
         <table class="w-full text-sm border-collapse">
           <thead>
             <tr>
@@ -48,17 +48,19 @@
               <th v-if="mysqlTargets.length" :colspan="mysqlTargets.length" class="text-center font-mono text-xs p-2 bg-bg-subtle text-fg-muted border-l border-l-border-subtle">MySQL</th>
             </tr>
             <tr>
-              <th v-for="(target, idx) in testedTargets" :key="target" class="font-mono text-xs p-2 min-w-12 bg-bg-subtle [writing-mode:vertical-lr] rotate-180 h-24" :class="{ 'border-l border-l-border-subtle': idx === 0 || idx === sqliteTargets.length || idx === sqliteTargets.length + postgresTargets.length }">
-                <AppTooltip :text="`${compatData.__meta.targets[target].version} · ${compatData.__meta.targets[target].dialect} · ${new Date(compatData.__meta.targets[target].generatedAt).toLocaleDateString()}`" position="bottom">
-                  <NuxtLink :to="getConnectorUrl(target)" external class="no-underline text-fg-muted hover:text-fg transition-colors">{{ getTargetName(target) }}</NuxtLink>
-                </AppTooltip>
+              <th v-for="(target, idx) in testedTargets" :key="target" class="font-mono text-xs p-2 min-w-12 bg-bg-subtle h-28 align-bottom" :class="{ 'border-l border-l-border-subtle': idx === 0 || idx === sqliteTargets.length || idx === sqliteTargets.length + postgresTargets.length }">
+                <div class="origin-bottom-left -rotate-45 whitespace-nowrap w-max">
+                  <AppTooltip :text="`${compatData.__meta.targets[target].version} · ${compatData.__meta.targets[target].dialect} · ${new Date(compatData.__meta.targets[target].generatedAt).toLocaleDateString()}`" position="bottom">
+                    <NuxtLink :to="getConnectorUrl(target)" external class="no-underline hover:no-underline text-fg-muted hover:text-fg transition-colors">{{ getTargetName(target) }}</NuxtLink>
+                  </AppTooltip>
+                </div>
               </th>
             </tr>
           </thead>
         </table>
       </div>
       <!-- Scrollable body -->
-      <div class="border border-border border-t-0 rounded-b-lg overflow-clip">
+      <div class="border border-border border-t-0 rounded-b-lg">
         <table class="w-full text-sm border-collapse">
           <tbody>
             <template v-for="(caps, category) in currentCapabilities" :key="category">
