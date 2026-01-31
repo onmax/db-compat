@@ -31,9 +31,24 @@ const icons: Record<string, string> = {
   'db0-hyperdrive-mysql': 'carbon:cloud-services',
 }
 
+const links: Record<string, { repo: string, docs: string }> = {
+  'db0-better-sqlite3': { repo: 'https://github.com/WiseLibs/better-sqlite3', docs: 'https://github.com/WiseLibs/better-sqlite3/blob/master/docs/api.md' },
+  'db0-libsql': { repo: 'https://github.com/tursodatabase/libsql', docs: 'https://docs.turso.tech/libsql' },
+  'db0-bun-sqlite': { repo: 'https://github.com/oven-sh/bun', docs: 'https://bun.sh/docs/api/sqlite' },
+  'db0-node-sqlite': { repo: 'https://github.com/nodejs/node', docs: 'https://nodejs.org/api/sqlite.html' },
+  'db0-sqlite3': { repo: 'https://github.com/TryGhost/node-sqlite3', docs: 'https://github.com/TryGhost/node-sqlite3/wiki/API' },
+  'db0-cloudflare-d1': { repo: 'https://github.com/cloudflare/workers-sdk', docs: 'https://developers.cloudflare.com/d1/' },
+  'db0-pglite': { repo: 'https://github.com/electric-sql/pglite', docs: 'https://pglite.dev/docs' },
+  'db0-postgresql': { repo: 'https://github.com/brianc/node-postgres', docs: 'https://node-postgres.com/' },
+  'db0-hyperdrive-postgresql': { repo: 'https://github.com/cloudflare/workers-sdk', docs: 'https://developers.cloudflare.com/hyperdrive/' },
+  'db0-mysql2': { repo: 'https://github.com/sidorares/node-mysql2', docs: 'https://sidorares.github.io/node-mysql2/docs' },
+  'db0-planetscale': { repo: 'https://github.com/planetscale/database-js', docs: 'https://planetscale.com/docs' },
+  'db0-hyperdrive-mysql': { repo: 'https://github.com/cloudflare/workers-sdk', docs: 'https://developers.cloudflare.com/hyperdrive/' },
+}
+
 const icon = computed(() => icons[props.target] ?? 'carbon:unknown')
-const connectorUrl = computed(() => `https://github.com/unjs/db0/tree/main/src/connectors/${targetDef.value?.connector ?? props.target.replace('db0-', '')}`)
-const docsUrl = computed(() => `https://db0.unjs.io/connectors/${targetDef.value?.connector ?? props.target.replace('db0-', '')}`)
+const repoUrl = computed(() => links[props.target]?.repo ?? '#')
+const docsUrl = computed(() => links[props.target]?.docs ?? '#')
 
 function toggle() { isOpen.value = !isOpen.value }
 function close() { isOpen.value = false }
@@ -62,11 +77,11 @@ onClickOutside(triggerRef, close)
             <UIcon name="carbon:warning" class="size-3.5" /> No test data yet
           </div>
           <div class="flex flex-col gap-1.5">
-            <NuxtLink :to="connectorUrl" external class="text-xs text-fg-muted hover:text-fg transition-colors flex items-center gap-1">
+            <NuxtLink :to="repoUrl" external class="text-xs text-fg-muted hover:text-fg transition-colors flex items-center gap-1">
               <UIcon name="carbon:logo-github" class="size-3.5" /> GitHub
             </NuxtLink>
             <NuxtLink :to="docsUrl" external class="text-xs text-fg-muted hover:text-fg transition-colors flex items-center gap-1">
-              <UIcon name="carbon:document" class="size-3.5" /> db0 Docs
+              <UIcon name="carbon:document" class="size-3.5" /> Docs
             </NuxtLink>
           </div>
         </div>
