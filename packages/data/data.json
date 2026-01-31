@@ -1,17 +1,17 @@
 {
   "__meta": {
     "version": "0.0.1",
-    "generatedAt": "2026-01-31T10:45:27.736Z",
+    "generatedAt": "2026-01-31T21:07:46.826Z",
     "targets": {
       "db0-better-sqlite3": {
         "version": "db0@0.3.4",
         "dialect": "sqlite",
-        "generatedAt": "2026-01-31T10:36:02.963Z"
+        "generatedAt": "2026-01-31T21:07:46.826Z"
       },
       "db0-libsql": {
         "version": "db0@0.3.4",
         "dialect": "sqlite",
-        "generatedAt": "2026-01-31T10:36:02.963Z"
+        "generatedAt": "2026-01-31T21:07:46.826Z"
       },
       "db0-pglite": {
         "version": "db0@0.3.4",
