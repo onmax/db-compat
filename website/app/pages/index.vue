@@ -20,11 +20,11 @@
 
     <!-- Accuracy warning -->
     <div class="mx-auto px-4 mb-6">
-      <div class="rounded-lg border border-amber-600/40 bg-amber-500/10 px-4 py-3 flex items-center gap-2">
-        <UIcon name="carbon:warning" class="size-4 text-amber-600 dark:text-amber-400 shrink-0" />
-        <p class="text-sm text-amber-700 dark:text-amber-400">
-          This data is auto-generated and may not be 100% accurate.
-          <NuxtLink to="/how-it-works" class="underline hover:no-underline">Learn how it works →</NuxtLink>
+      <div class="rounded-md border border-yellow-600/20 bg-yellow-500/5 px-3 py-2 flex items-center gap-2">
+        <UIcon name="carbon:warning" class="size-3.5 text-yellow-600 dark:text-yellow-500 shrink-0" />
+        <p class="text-xs text-yellow-700 dark:text-yellow-500/90">
+          Auto-generated data, may not be 100% accurate.
+          <NuxtLink to="/how-it-works" class="underline hover:no-underline">Learn more →</NuxtLink>
         </p>
       </div>
     </div>
@@ -49,7 +49,7 @@
       </div>
 
       <!-- Sticky header -->
-      <div class="sticky top-0 z-20 bg-bg border border-border border-b-0 rounded-t-lg">
+      <div class="sticky top-0 z-20 bg-bg border border-border border-b-0 rounded-t-lg overflow-hidden">
         <table class="w-full text-sm border-collapse">
           <thead>
             <tr>
@@ -59,7 +59,7 @@
               <th v-if="mysqlTargets.length" :colspan="mysqlTargets.length" class="text-center font-mono text-xs p-2 bg-bg-subtle text-fg-muted border-l border-l-border-subtle">MySQL</th>
             </tr>
             <tr>
-              <th v-for="(target, idx) in testedTargets" :key="target" class="p-2 min-w-14 bg-bg-subtle align-middle text-center" :class="{ 'border-l border-l-border-subtle': idx === 0 || idx === sqliteTargets.length || idx === sqliteTargets.length + postgresTargets.length }">
+              <th v-for="(target, idx) in testedTargets" :key="target" class="p-2 min-w-14 bg-bg-subtle align-middle text-center border-b border-border-subtle" :class="{ 'border-l border-l-border-subtle': idx === 0 || idx === sqliteTargets.length || idx === sqliteTargets.length + postgresTargets.length }">
                 <ConnectorPopover :target="target" />
               </th>
             </tr>
@@ -81,7 +81,7 @@
                   <span class="font-mono text-sm text-fg">{{ capId }}</span>
                   <p class="text-xs mt-0.5 text-fg-subtle">{{ cap.description }}</p>
                 </td>
-                <td v-for="target in testedTargets" :key="target" class="p-2 text-center min-w-12">
+                <td v-for="target in testedTargets" :key="target" class="p-2 text-center min-w-14">
                   <UIcon v-if="cap.support[target]?.supported" name="carbon:checkmark" class="size-4 mx-auto text-fg-muted" />
                 </td>
               </tr>
