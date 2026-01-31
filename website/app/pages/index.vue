@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-bg text-fg">
     <!-- Theme toggle -->
-    <div class="fixed top-4 right-4 z-50">
+    <div class="fixed top-4 right-4 z-50 p-1 rounded-lg bg-bg/80 backdrop-blur-sm border border-border-subtle">
       <ThemeToggle />
     </div>
 
@@ -72,8 +72,8 @@
           </colgroup>
           <tbody>
             <template v-for="(caps, category) in currentCapabilities" :key="category">
-              <tr>
-                <td :colspan="allTargets.length + 1" class="pt-6 pb-2 px-3">
+              <tr class="border-t border-border">
+                <td :colspan="allTargets.length + 1" class="pt-4 pb-2 px-3">
                   <span class="text-xs font-mono uppercase tracking-wide text-fg-subtle">{{ category }}</span>
                 </td>
               </tr>
