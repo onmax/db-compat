@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  modules: ['@nuxt/ui', '@nuxt/fonts', '@nuxt/icon', '@vueuse/nuxt', '@nuxt/content'],
+  modules: ['@nuxt/ui', '@nuxt/fonts', '@nuxt/icon', '@vueuse/nuxt', '@nuxt/content', '@nuxtjs/seo'],
   css: ['~/assets/css/main.css'],
   compatibilityDate: '2025-01-01',
   fonts: {
@@ -8,10 +8,10 @@ export default defineNuxtConfig({
       { name: 'Geist Mono', provider: 'google' },
     ],
   },
-  app: {
-    head: {
-      title: 'db-compat',
-      meta: [{ name: 'description', content: 'Database compatibility for db0' }],
-    },
+  site: {
+    url: 'https://db-compat.onmax.me',
+    name: 'db-compat',
+    description: 'Compare SQL and API capabilities across SQLite, PostgreSQL, and MySQL',
   },
+  ogImage: { enabled: true },
 })
