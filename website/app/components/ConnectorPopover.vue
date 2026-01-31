@@ -25,10 +25,10 @@ const icons: Record<string, string> = {
   'db0-cloudflare-d1': 'simple-icons:cloudflare',
   'db0-pglite': 'simple-icons:postgresql',
   'db0-postgresql': 'simple-icons:postgresql',
-  'db0-hyperdrive-postgresql': 'simple-icons:cloudflare',
+  'db0-hyperdrive-postgresql': 'simple-icons:postgresql',
   'db0-mysql2': 'simple-icons:mysql',
   'db0-planetscale': 'simple-icons:planetscale',
-  'db0-hyperdrive-mysql': 'simple-icons:cloudflare',
+  'db0-hyperdrive-mysql': 'simple-icons:mysql',
 }
 
 const icon = computed(() => icons[props.target] ?? 'carbon:unknown')
