@@ -12,7 +12,7 @@
         Compare SQL and API capabilities across SQLite, PostgreSQL, and MySQL.
         Test what features work with each <NuxtLink to="https://github.com/unjs/db0" external class="font-mono">db0</NuxtLink> connector—transactions, JSON, CTEs, full-text search, and more.
       </p>
-      <div class="max-w-lg mx-auto mt-4 rounded-md border border-yellow-600/20 bg-yellow-500/5 px-3 py-2 flex items-center gap-2">
+      <div class="w-max mx-auto mt-4 rounded-md border border-yellow-600/20 bg-yellow-500/5 px-3 py-2 flex items-center gap-2">
         <UIcon name="carbon:warning" class="size-3.5 text-yellow-600 dark:text-yellow-500 shrink-0" />
         <p class="text-xs text-yellow-700 dark:text-yellow-500/90">Auto-generated data, may not be 100% accurate.</p>
       </div>
