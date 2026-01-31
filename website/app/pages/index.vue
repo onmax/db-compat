@@ -18,6 +18,17 @@
       </div>
     </header>
 
+    <!-- Accuracy warning -->
+    <div class="mx-auto px-4 mb-6">
+      <div class="rounded-lg border border-amber-600/40 bg-amber-500/10 px-4 py-3 flex items-center gap-2">
+        <UIcon name="carbon:warning" class="size-4 text-amber-600 dark:text-amber-400 shrink-0" />
+        <p class="text-sm text-amber-700 dark:text-amber-400">
+          This data is auto-generated and may not be 100% accurate.
+          <NuxtLink to="/how-it-works" class="underline hover:no-underline">Learn how it works →</NuxtLink>
+        </p>
+      </div>
+    </div>
+
     <!-- Matrix -->
     <main class="mx-auto px-4 pb-16">
       <!-- Kind Toggle -->
@@ -48,12 +59,8 @@
               <th v-if="mysqlTargets.length" :colspan="mysqlTargets.length" class="text-center font-mono text-xs p-2 bg-bg-subtle text-fg-muted border-l border-l-border-subtle">MySQL</th>
             </tr>
             <tr>
-              <th v-for="(target, idx) in testedTargets" :key="target" class="font-mono text-xs p-2 min-w-12 bg-bg-subtle h-28 align-bottom" :class="{ 'border-l border-l-border-subtle': idx === 0 || idx === sqliteTargets.length || idx === sqliteTargets.length + postgresTargets.length }">
-                <div class="origin-bottom-left -rotate-45 whitespace-nowrap w-max">
-                  <AppTooltip :text="`${compatData.__meta.targets[target].version} · ${compatData.__meta.targets[target].dialect} · ${new Date(compatData.__meta.targets[target].generatedAt).toLocaleDateString()}`" position="bottom">
-                    <NuxtLink :to="getConnectorUrl(target)" external class="no-underline hover:no-underline text-fg-muted hover:text-fg transition-colors">{{ getTargetName(target) }}</NuxtLink>
-                  </AppTooltip>
-                </div>
+              <th v-for="(target, idx) in testedTargets" :key="target" class="p-2 min-w-14 bg-bg-subtle align-middle text-center" :class="{ 'border-l border-l-border-subtle': idx === 0 || idx === sqliteTargets.length || idx === sqliteTargets.length + postgresTargets.length }">
+                <ConnectorPopover :target="target" />
               </th>
             </tr>
           </thead>
@@ -120,13 +127,4 @@ const testedTargets = Object.keys(compatData.__meta.targets) as TargetId[]
 const sqliteTargets = computed(() => testedTargets.filter(id => targetsMap[id]?.dialect === 'sqlite'))
 const postgresTargets = computed(() => testedTargets.filter(id => targetsMap[id]?.dialect === 'postgresql'))
 const mysqlTargets = computed(() => testedTargets.filter(id => targetsMap[id]?.dialect === 'mysql'))
-
-function getTargetName(id: TargetId) {
-  return targetsMap[id]?.name ?? id.replace('db0-', '')
-}
-
-function getConnectorUrl(id: TargetId) {
-  const connector = targetsMap[id]?.connector
-  return `https://github.com/unjs/db0/tree/main/src/connectors/${connector ?? id.replace('db0-', '')}`
-}
 </script>
