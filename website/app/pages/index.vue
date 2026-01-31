@@ -14,6 +14,10 @@
       <p class="text-base max-w-md mx-auto text-fg-muted">
         Database capability matrix for <NuxtLink to="https://github.com/unjs/db0" external class="font-mono">db0</NuxtLink>
       </p>
+      <div class="flex gap-4 justify-center mt-4">
+        <NuxtLink to="/how-it-works" class="text-sm text-fg-subtle hover:text-fg transition-colors">How it works →</NuxtLink>
+        <NuxtLink to="https://github.com/unjs/db-compat" external class="text-sm text-fg-subtle hover:text-fg transition-colors">GitHub →</NuxtLink>
+      </div>
     </header>
 
     <!-- Matrix -->
@@ -80,7 +84,7 @@
       <p class="mb-2">Generated {{ new Date(compatData.__meta.generatedAt).toLocaleDateString() }}</p>
       <div class="flex gap-4 justify-center">
         <NuxtLink to="https://unjs.io" external>UnJS</NuxtLink>
-        <NuxtLink to="https://github.com/unjs/db0" external>GitHub</NuxtLink>
+        <NuxtLink to="https://github.com/unjs/db-compat" external>GitHub</NuxtLink>
       </div>
     </footer>
   </div>
@@ -102,7 +106,7 @@ const activeKind = computed<CompatKind>({
   get: () => (route.query.kind === 'db0' ? 'db0' : 'sql'),
   set: (val) => { router.replace({ query: val === 'sql' ? {} : { kind: val } }) },
 })
-const kindTabs = [
+const kindTabs: { label: string, value: CompatKind }[] = [
   { label: 'SQL', value: 'sql' },
   { label: 'db0 API', value: 'db0' },
 ]
