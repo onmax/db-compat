@@ -19,7 +19,7 @@
     </header>
 
     <!-- Matrix -->
-    <main class="max-w-6xl mx-auto px-4 pb-16">
+    <main class="mx-auto px-4 pb-16">
       <!-- Kind Toggle -->
       <div class="flex justify-center mb-8">
         <div class="inline-flex gap-1 p-0.5 bg-bg-subtle border border-border-subtle rounded-md" role="tablist">
@@ -38,17 +38,17 @@
       </div>
 
       <!-- Sticky header -->
-      <div class="sticky top-0 z-20 bg-bg border border-border border-b-0 rounded-t-lg overflow-x-auto">
+      <div class="sticky top-0 z-20 bg-bg border border-border border-b-0 rounded-t-lg overflow-clip">
         <table class="w-full text-sm border-collapse">
           <thead>
             <tr>
-              <th rowspan="2" class="text-left font-mono font-medium p-3 min-w-48 bg-bg-subtle text-fg border-b border-border-subtle">Capability</th>
+              <th rowspan="2" class="text-left font-mono font-medium p-2 min-w-40 bg-bg-subtle text-fg border-b border-border-subtle">Capability</th>
               <th v-if="sqliteTargets.length" :colspan="sqliteTargets.length" class="text-center font-mono text-xs p-2 bg-bg-subtle text-fg-muted border-l border-l-border-subtle">SQLite</th>
               <th v-if="postgresTargets.length" :colspan="postgresTargets.length" class="text-center font-mono text-xs p-2 bg-bg-subtle text-fg-muted border-l border-l-border-subtle">PostgreSQL</th>
               <th v-if="mysqlTargets.length" :colspan="mysqlTargets.length" class="text-center font-mono text-xs p-2 bg-bg-subtle text-fg-muted border-l border-l-border-subtle">MySQL</th>
             </tr>
             <tr>
-              <th v-for="(target, idx) in testedTargets" :key="target" class="text-center font-mono text-xs p-3 min-w-24 bg-bg-subtle" :class="{ 'border-l border-l-border-subtle': idx === 0 || idx === sqliteTargets.length || idx === sqliteTargets.length + postgresTargets.length }">
+              <th v-for="(target, idx) in testedTargets" :key="target" class="font-mono text-xs p-2 min-w-12 bg-bg-subtle [writing-mode:vertical-lr] rotate-180 h-24" :class="{ 'border-l border-l-border-subtle': idx === 0 || idx === sqliteTargets.length || idx === sqliteTargets.length + postgresTargets.length }">
                 <AppTooltip :text="`${compatData.__meta.targets[target].version} · ${compatData.__meta.targets[target].dialect} · ${new Date(compatData.__meta.targets[target].generatedAt).toLocaleDateString()}`" position="bottom">
                   <NuxtLink :to="getConnectorUrl(target)" external class="no-underline text-fg-muted hover:text-fg transition-colors">{{ getTargetName(target) }}</NuxtLink>
                 </AppTooltip>
@@ -58,7 +58,7 @@
         </table>
       </div>
       <!-- Scrollable body -->
-      <div class="border border-border border-t-0 rounded-b-lg overflow-x-auto">
+      <div class="border border-border border-t-0 rounded-b-lg overflow-clip">
         <table class="w-full text-sm border-collapse">
           <tbody>
             <template v-for="(caps, category) in currentCapabilities" :key="category">
@@ -68,11 +68,11 @@
                 </td>
               </tr>
               <tr v-for="(cap, capId) in caps" :key="capId" class="group transition-colors hover:bg-bg-subtle border-t border-border-subtle">
-                <td class="p-3 min-w-48">
+                <td class="p-2 min-w-40">
                   <span class="font-mono text-sm text-fg">{{ capId }}</span>
                   <p class="text-xs mt-0.5 text-fg-subtle">{{ cap.description }}</p>
                 </td>
-                <td v-for="target in testedTargets" :key="target" class="p-3 text-center min-w-24">
+                <td v-for="target in testedTargets" :key="target" class="p-2 text-center min-w-12">
                   <UIcon v-if="cap.support[target]?.supported" name="carbon:checkmark" class="size-4 mx-auto text-fg-muted" />
                 </td>
               </tr>
