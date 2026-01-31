@@ -2,7 +2,7 @@
 import type { TargetId } from 'db-compat-data'
 import { compatData, targets } from 'db-compat-data'
 
-const props = defineProps<{ target: TargetId }>()
+const props = defineProps<{ target: TargetId, hasData?: boolean }>()
 
 const isOpen = shallowRef(false)
 const triggerRef = shallowRef<HTMLElement | null>(null)
@@ -43,18 +43,24 @@ onClickOutside(triggerRef, close)
 
 <template>
   <div class="relative inline-flex">
-    <button ref="triggerRef" class="p-1 rounded hover:bg-bg transition-colors" :aria-expanded="isOpen" @click="toggle">
-      <UIcon :name="icon" class="size-5 text-fg-muted hover:text-fg transition-colors" />
+    <button ref="triggerRef" class="p-1 rounded hover:bg-bg transition-colors relative" :aria-expanded="isOpen" @click="toggle">
+      <UIcon :name="icon" class="size-5 transition-colors" :class="hasData ? 'text-fg-muted hover:text-fg' : 'text-fg-subtle/50'" />
+      <span v-if="!hasData" class="absolute -top-0.5 -right-0.5 size-2 rounded-full bg-yellow-500" />
     </button>
     <Teleport to="body">
       <Transition enter-active-class="transition-opacity duration-150" leave-active-class="transition-opacity duration-100" enter-from-class="opacity-0" leave-to-class="opacity-0">
         <div v-if="isOpen" class="fixed z-[100] min-w-48 p-3 rounded-lg bg-bg-elevated border border-border shadow-lg" :style="popoverStyle">
           <div class="font-mono font-medium text-sm text-fg mb-2">{{ targetDef?.name ?? props.target }}</div>
-          <div class="flex gap-1.5 mb-3">
-            <span class="px-1.5 py-0.5 text-xs font-mono rounded bg-bg-subtle text-fg-muted">{{ meta?.version }}</span>
-            <span class="px-1.5 py-0.5 text-xs font-mono rounded bg-bg-subtle text-fg-muted">{{ meta?.dialect }}</span>
+          <template v-if="hasData">
+            <div class="flex gap-1.5 mb-3">
+              <span class="px-1.5 py-0.5 text-xs font-mono rounded bg-bg-subtle text-fg-muted">{{ meta?.version }}</span>
+              <span class="px-1.5 py-0.5 text-xs font-mono rounded bg-bg-subtle text-fg-muted">{{ meta?.dialect }}</span>
+            </div>
+            <div class="text-xs text-fg-subtle mb-3">Generated {{ new Date(meta?.generatedAt).toLocaleDateString() }}</div>
+          </template>
+          <div v-else class="flex items-center gap-1.5 mb-3 text-xs text-yellow-600 dark:text-yellow-500">
+            <UIcon name="carbon:warning" class="size-3.5" /> No test data yet
           </div>
-          <div class="text-xs text-fg-subtle mb-3">Generated {{ new Date(meta?.generatedAt).toLocaleDateString() }}</div>
           <div class="flex flex-col gap-1.5">
             <NuxtLink :to="connectorUrl" external class="text-xs text-fg-muted hover:text-fg transition-colors flex items-center gap-1">
               <UIcon name="carbon:logo-github" class="size-3.5" /> GitHub

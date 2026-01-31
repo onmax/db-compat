@@ -52,8 +52,8 @@
               <th v-if="mysqlTargets.length" :colspan="mysqlTargets.length" class="text-center font-mono text-xs p-2 bg-bg-subtle text-fg-muted border-l border-l-border-subtle">MySQL</th>
             </tr>
             <tr>
-              <th v-for="(target, idx) in testedTargets" :key="target" class="p-2 w-14 bg-bg-subtle align-middle text-center border-b border-border-subtle" :class="{ 'border-l border-l-border-subtle': idx === 0 || idx === sqliteTargets.length || idx === sqliteTargets.length + postgresTargets.length }">
-                <ConnectorPopover :target="target" />
+              <th v-for="(target, idx) in allTargets" :key="target" class="p-2 w-14 bg-bg-subtle align-middle text-center border-b border-border-subtle" :class="{ 'border-l border-l-border-subtle': idx === 0 || idx === sqliteTargets.length || idx === sqliteTargets.length + postgresTargets.length }">
+                <ConnectorPopover :target="target" :has-data="hasData(target)" />
               </th>
             </tr>
           </thead>
@@ -64,12 +64,12 @@
         <table class="w-full text-sm border-collapse table-fixed">
           <colgroup>
             <col class="w-48">
-            <col v-for="_ in testedTargets" :key="_" class="w-14">
+            <col v-for="_ in allTargets" :key="_" class="w-14">
           </colgroup>
           <tbody>
             <template v-for="(caps, category) in currentCapabilities" :key="category">
               <tr>
-                <td :colspan="testedTargets.length + 1" class="pt-6 pb-2 px-3">
+                <td :colspan="allTargets.length + 1" class="pt-6 pb-2 px-3">
                   <span class="text-xs font-mono uppercase tracking-wide text-fg-subtle">{{ category }}</span>
                 </td>
               </tr>
@@ -78,8 +78,11 @@
                   <span class="font-mono text-sm text-fg">{{ capId }}</span>
                   <p class="text-xs mt-0.5 text-fg-subtle">{{ cap.description }}</p>
                 </td>
-                <td v-for="target in testedTargets" :key="target" class="p-2 text-center">
-                  <UIcon v-if="cap.support[target]?.supported" name="carbon:checkmark" class="size-4 mx-auto text-fg-muted" />
+                <td v-for="target in allTargets" :key="target" class="p-2 text-center">
+                  <template v-if="hasData(target)">
+                    <UIcon v-if="cap.support[target]?.supported" name="carbon:checkmark" class="size-4 mx-auto text-fg-muted" />
+                  </template>
+                  <span v-else class="text-fg-subtle/40">—</span>
                 </td>
               </tr>
             </template>
@@ -117,14 +120,13 @@ const kindTabs: { label: string, value: CompatKind }[] = [
 
 const currentCapabilities = computed(() => compatData[activeKind.value])
 
-const targetsMap = Object.fromEntries(targets.map(t => [t.id, t]))
-const allTestedTargets = Object.keys(compatData.__meta.targets) as TargetId[]
+const hasData = (id: TargetId) => id in compatData.__meta.targets
 
-// Group targets by dialect
-const sqliteTargets = allTestedTargets.filter(id => targetsMap[id]?.dialect === 'sqlite')
-const postgresTargets = allTestedTargets.filter(id => targetsMap[id]?.dialect === 'postgresql')
-const mysqlTargets = allTestedTargets.filter(id => targetsMap[id]?.dialect === 'mysql')
+// Group all defined targets by dialect
+const sqliteTargets = targets.filter(t => t.dialect === 'sqlite').map(t => t.id)
+const postgresTargets = targets.filter(t => t.dialect === 'postgresql').map(t => t.id)
+const mysqlTargets = targets.filter(t => t.dialect === 'mysql').map(t => t.id)
 
-// Ordered by dialect groups
-const testedTargets = [...sqliteTargets, ...postgresTargets, ...mysqlTargets]
+// All targets ordered by dialect
+const allTargets = [...sqliteTargets, ...postgresTargets, ...mysqlTargets]
 </script>
