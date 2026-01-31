@@ -43,15 +43,15 @@ export const capabilities: CapabilityDefinition[] = [
   { id: 'JSON_EXTRACT', kind: 'sql', category: 'json', description: 'Extract JSON values' },
   { id: 'JSON_SET', kind: 'sql', category: 'json', description: 'Modify JSON values' },
   { id: 'JSON_ARRAY', kind: 'sql', category: 'json', description: 'Create JSON arrays' },
-  { id: 'jsonb_operators', kind: 'sql', category: 'json', description: 'PostgreSQL JSONB operators (@>, ->, etc.)' },
+  { id: 'jsonb_operators', kind: 'sql', category: 'json', description: 'JSONB operators' },
   // SQL - Queries
   { id: 'RETURNING', kind: 'sql', category: 'queries', description: 'RETURNING clause' },
-  { id: 'UPSERT_on_conflict', kind: 'sql', category: 'queries', description: 'ON CONFLICT clause (PostgreSQL/SQLite)' },
+  { id: 'UPSERT_on_conflict', kind: 'sql', category: 'queries', description: 'ON CONFLICT clause' },
   { id: 'UPSERT_on_duplicate', kind: 'sql', category: 'queries', description: 'ON DUPLICATE KEY (MySQL)' },
   { id: 'UPSERT_replace', kind: 'sql', category: 'queries', description: 'REPLACE INTO (SQLite)' },
   { id: 'CTE', kind: 'sql', category: 'queries', description: 'Common Table Expressions (WITH)' },
   { id: 'CTE_recursive', kind: 'sql', category: 'queries', description: 'Recursive CTEs (WITH RECURSIVE)' },
-  { id: 'window_functions', kind: 'sql', category: 'queries', description: 'Window functions (ROW_NUMBER, etc.)' },
+  { id: 'window_functions', kind: 'sql', category: 'queries', description: 'Window functions' },
   { id: 'LIMIT_OFFSET', kind: 'sql', category: 'queries', description: 'LIMIT and OFFSET' },
   { id: 'subqueries', kind: 'sql', category: 'queries', description: 'Subqueries' },
   // SQL - FTS

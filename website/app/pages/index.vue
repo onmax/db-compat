@@ -41,14 +41,14 @@
         </div>
       </div>
 
-      <!-- Table -->
-      <div class="border border-border rounded-lg overflow-x-auto">
+      <!-- Sticky header -->
+      <div class="sticky top-0 z-20 bg-bg border border-border border-b-0 rounded-t-lg overflow-hidden">
         <table class="w-full text-sm border-collapse table-fixed">
           <colgroup>
             <col class="w-48">
             <col v-for="_ in allTargets" :key="_" class="w-14">
           </colgroup>
-          <thead class="sticky top-0 z-20">
+          <thead>
             <tr>
               <th rowspan="2" class="text-left font-mono font-medium p-2 bg-bg-subtle text-fg border-b border-border-subtle">Capability</th>
               <th v-if="sqliteTargets.length" :colspan="sqliteTargets.length" class="text-center font-mono text-xs p-2 bg-bg-subtle text-fg-muted border-l border-l-border-subtle">SQLite</th>
@@ -61,19 +61,28 @@
               </th>
             </tr>
           </thead>
+        </table>
+      </div>
+      <!-- Scrollable body -->
+      <div class="border border-border border-t-0 rounded-b-lg">
+        <table class="w-full text-sm border-collapse table-fixed">
+          <colgroup>
+            <col class="w-48">
+            <col v-for="_ in allTargets" :key="_" class="w-14">
+          </colgroup>
           <tbody>
             <template v-for="(caps, category) in currentCapabilities" :key="category">
               <tr>
-                <td :colspan="allTargets.length + 1" class="pt-6 pb-2 px-3 bg-bg">
+                <td :colspan="allTargets.length + 1" class="pt-6 pb-2 px-3">
                   <span class="text-xs font-mono uppercase tracking-wide text-fg-subtle">{{ category }}</span>
                 </td>
               </tr>
               <tr v-for="(cap, capId) in caps" :key="capId" class="group transition-colors hover:bg-bg-subtle border-t border-border-subtle">
-                <td class="p-2 bg-bg">
+                <td class="p-2">
                   <span class="font-mono text-sm text-fg">{{ capId }}</span>
                   <p class="text-xs mt-0.5 text-fg-subtle">{{ cap.description }}</p>
                 </td>
-                <td v-for="target in allTargets" :key="target" class="p-2 text-center bg-bg">
+                <td v-for="(target, idx) in allTargets" :key="target" class="p-2 text-center" :class="{ 'border-l border-l-border-subtle': idx === 0 || idx === sqliteTargets.length || idx === sqliteTargets.length + postgresTargets.length }">
                   <template v-if="hasData(target)">
                     <UIcon v-if="cap.support[target]?.supported" name="carbon:checkmark" class="size-4 mx-auto text-fg-muted" />
                   </template>
