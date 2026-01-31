@@ -1,4 +1,5 @@
 import type { CapabilityTest } from '../../types'
+import { normalizeD1Error } from '../../types'
 
 export const capability: CapabilityTest = {
   id: 'ROLLBACK',
@@ -20,7 +21,7 @@ export const capability: CapabilityTest = {
         await db.exec('DROP TABLE _test_rollback')
       }
       catch {}
-      return { supported: false, error: (error as Error).message }
+      return { supported: false, ...normalizeD1Error(error as Error) }
     }
   },
 }

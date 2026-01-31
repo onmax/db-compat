@@ -1,7 +1,7 @@
 import { writeFileSync } from 'node:fs'
 import { createDatabase } from 'db0'
-import hyperdrivePostgresql from 'db0/connectors/cloudflare-hyperdrive-postgresql'
 import hyperdriveMysql from 'db0/connectors/cloudflare-hyperdrive-mysql'
+import hyperdrivePostgresql from 'db0/connectors/cloudflare-hyperdrive-postgresql'
 import { runAllTests } from '../tests/runner'
 
 const results: Record<string, Awaited<ReturnType<typeof runAllTests>>> = {}

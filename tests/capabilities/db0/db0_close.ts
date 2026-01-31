@@ -4,7 +4,7 @@ export const capability: CapabilityTest = {
   id: 'db0_close',
   kind: 'db0',
   category: 'connection',
-  description: 'Connection cleanup',
+  description: 'close() method exists',
   async test(db) {
     try {
       // Check if close method exists and is callable

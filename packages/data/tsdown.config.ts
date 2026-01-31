@@ -5,7 +5,8 @@ export default defineConfig({
   format: 'esm',
   dts: true,
   unbundledModuleIdResolver(id) {
-    if (id.endsWith('.json')) return false
+    if (id.endsWith('.json'))
+      return false
     return undefined
   },
 })

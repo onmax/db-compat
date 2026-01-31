@@ -1,4 +1,5 @@
 import type { CapabilityTest } from '../../types'
+import { normalizeD1Error } from '../../types'
 
 export const capability: CapabilityTest = {
   id: 'BEGIN',
@@ -13,7 +14,7 @@ export const capability: CapabilityTest = {
       return { supported: true }
     }
     catch (error) {
-      return { supported: false, error: (error as Error).message }
+      return { supported: false, ...normalizeD1Error(error as Error) }
     }
   },
 }

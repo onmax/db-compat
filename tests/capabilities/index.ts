@@ -13,6 +13,9 @@ import { capability as db0_prepare } from './db0/db0_prepare'
 import { capability as db0_rows } from './db0/db0_rows'
 import { capability as db0_sql_template } from './db0/db0_sql_template'
 import { capability as db0_transaction } from './db0/db0_transaction'
+// FTS
+import { capability as FTS_basic } from './fts/FTS_basic'
+import { capability as FTS_ranking } from './fts/FTS_ranking'
 // JSON
 import { capability as JSON_ARRAY } from './json/JSON_ARRAY'
 import { capability as JSON_EXTRACT } from './json/JSON_EXTRACT'
@@ -20,9 +23,6 @@ import { capability as JSON_SET } from './json/JSON_SET'
 import { capability as jsonb_operators } from './json/jsonb_operators'
 // Other
 import { capability as EXPLAIN } from './other/EXPLAIN'
-// FTS
-import { capability as FTS_basic } from './other/FTS_basic'
-import { capability as FTS_ranking } from './other/FTS_ranking'
 import { capability as prepared_statements } from './other/prepared_statements'
 // Queries
 import { capability as CTE } from './queries/CTE'

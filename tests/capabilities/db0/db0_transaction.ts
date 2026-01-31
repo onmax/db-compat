@@ -1,10 +1,11 @@
 import type { CapabilityTest } from '../../types'
+import { normalizeD1Error } from '../../types'
 
 export const capability: CapabilityTest = {
   id: 'db0_transaction',
   kind: 'db0',
   category: 'connection',
-  description: 'Transaction helper API',
+  description: 'Transaction via raw SQL',
   async test(db) {
     try {
       await db.exec('CREATE TABLE IF NOT EXISTS _test_txn (id INTEGER)')
@@ -19,12 +20,12 @@ export const capability: CapabilityTest = {
       try {
         await db.exec('ROLLBACK')
       }
-      catch { /* ignore */ }
+      catch {}
       try {
         await db.exec('DROP TABLE _test_txn')
       }
-      catch { /* ignore */ }
-      return { supported: false, error: (error as Error).message }
+      catch {}
+      return { supported: false, ...normalizeD1Error(error as Error) }
     }
   },
 }

@@ -69,11 +69,11 @@ export const capabilities: CapabilityDefinition[] = [
   { id: 'db0_exec', kind: 'db0', category: 'api', description: 'Raw SQL execution via exec()' },
   { id: 'db0_batch', kind: 'db0', category: 'api', description: 'Multi-statement batch execution' },
   { id: 'db0_prepare', kind: 'db0', category: 'api', description: 'Prepared statement API' },
-  { id: 'db0_first', kind: 'db0', category: 'api', description: 'First row helper' },
+  { id: 'db0_first', kind: 'db0', category: 'api', description: 'First row via rows[0]' },
   { id: 'db0_rows', kind: 'db0', category: 'api', description: 'Rows array access' },
   // db0 - Connection
-  { id: 'db0_close', kind: 'db0', category: 'connection', description: 'Connection cleanup' },
-  { id: 'db0_transaction', kind: 'db0', category: 'connection', description: 'Transaction helper API' },
+  { id: 'db0_close', kind: 'db0', category: 'connection', description: 'close() method exists' },
+  { id: 'db0_transaction', kind: 'db0', category: 'connection', description: 'Transaction via raw SQL' },
 ]
 
 export const sqlCapabilities = capabilities.filter(c => c.kind === 'sql')

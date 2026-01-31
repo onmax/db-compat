@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        target: [db0-better-sqlite3, db0-libsql, db0-pglite]
+        target: [db0-better-sqlite3, db0-libsql, db0-pglite, db0-sqlite3, db0-node-sqlite]
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4

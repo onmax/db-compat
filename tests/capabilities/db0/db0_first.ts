@@ -4,7 +4,7 @@ export const capability: CapabilityTest = {
   id: 'db0_first',
   kind: 'db0',
   category: 'api',
-  description: 'First row helper',
+  description: 'First row via rows[0]',
   async test(db) {
     try {
       await db.exec('CREATE TABLE IF NOT EXISTS _test_first (id INTEGER, name TEXT)')

@@ -1,4 +1,5 @@
 import type { CapabilityTest } from '../../types'
+import { normalizeD1Error } from '../../types'
 
 export const capability: CapabilityTest = {
   id: 'SAVEPOINT',
@@ -16,8 +17,7 @@ export const capability: CapabilityTest = {
       await db.exec('COMMIT')
       const result = await db.sql`SELECT * FROM _test_savepoint`
       await db.exec('DROP TABLE _test_savepoint')
-      // Should only have row with id=1, row with id=2 was rolled back
-      return { supported: (result.rows?.length ?? 0) >= 1 && (result.rows?.[0] as { id: number }).id === 1 }
+      return { supported: result.rows?.length === 1 && (result.rows?.[0] as { id: number }).id === 1 }
     }
     catch (error) {
       try {
@@ -28,7 +28,7 @@ export const capability: CapabilityTest = {
         await db.exec('DROP TABLE _test_savepoint')
       }
       catch {}
-      return { supported: false, error: (error as Error).message }
+      return { supported: false, ...normalizeD1Error(error as Error) }
     }
   },
 }

@@ -1,7 +1,7 @@
 import { writeFileSync } from 'node:fs'
-import { Miniflare } from 'miniflare'
 import { createDatabase } from 'db0'
 import cloudflareD1 from 'db0/connectors/cloudflare-d1'
+import { Miniflare } from 'miniflare'
 import { runAllTests } from '../tests/runner'
 
 const mf = new Miniflare({
