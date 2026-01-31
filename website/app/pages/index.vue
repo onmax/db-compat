@@ -50,16 +50,16 @@
 
       <!-- Sticky header -->
       <div class="sticky top-0 z-20 bg-bg border border-border border-b-0 rounded-t-lg overflow-hidden">
-        <table class="w-full text-sm border-collapse">
+        <table class="w-full text-sm border-collapse table-fixed">
           <thead>
             <tr>
-              <th rowspan="2" class="text-left font-mono font-medium p-2 min-w-40 bg-bg-subtle text-fg border-b border-border-subtle">Capability</th>
+              <th rowspan="2" class="text-left font-mono font-medium p-2 w-48 bg-bg-subtle text-fg border-b border-border-subtle">Capability</th>
               <th v-if="sqliteTargets.length" :colspan="sqliteTargets.length" class="text-center font-mono text-xs p-2 bg-bg-subtle text-fg-muted border-l border-l-border-subtle">SQLite</th>
               <th v-if="postgresTargets.length" :colspan="postgresTargets.length" class="text-center font-mono text-xs p-2 bg-bg-subtle text-fg-muted border-l border-l-border-subtle">PostgreSQL</th>
               <th v-if="mysqlTargets.length" :colspan="mysqlTargets.length" class="text-center font-mono text-xs p-2 bg-bg-subtle text-fg-muted border-l border-l-border-subtle">MySQL</th>
             </tr>
             <tr>
-              <th v-for="(target, idx) in testedTargets" :key="target" class="p-2 min-w-14 bg-bg-subtle align-middle text-center border-b border-border-subtle" :class="{ 'border-l border-l-border-subtle': idx === 0 || idx === sqliteTargets.length || idx === sqliteTargets.length + postgresTargets.length }">
+              <th v-for="(target, idx) in testedTargets" :key="target" class="p-2 w-14 bg-bg-subtle align-middle text-center border-b border-border-subtle" :class="{ 'border-l border-l-border-subtle': idx === 0 || idx === sqliteTargets.length || idx === sqliteTargets.length + postgresTargets.length }">
                 <ConnectorPopover :target="target" />
               </th>
             </tr>
@@ -67,8 +67,12 @@
         </table>
       </div>
       <!-- Scrollable body -->
-      <div class="border border-border border-t-0 rounded-b-lg">
-        <table class="w-full text-sm border-collapse">
+      <div class="border border-border border-t-0 rounded-b-lg overflow-x-auto">
+        <table class="w-full text-sm border-collapse table-fixed">
+          <colgroup>
+            <col class="w-48">
+            <col v-for="_ in testedTargets" :key="_" class="w-14">
+          </colgroup>
           <tbody>
             <template v-for="(caps, category) in currentCapabilities" :key="category">
               <tr>
@@ -77,11 +81,11 @@
                 </td>
               </tr>
               <tr v-for="(cap, capId) in caps" :key="capId" class="group transition-colors hover:bg-bg-subtle border-t border-border-subtle">
-                <td class="p-2 min-w-40">
+                <td class="p-2">
                   <span class="font-mono text-sm text-fg">{{ capId }}</span>
                   <p class="text-xs mt-0.5 text-fg-subtle">{{ cap.description }}</p>
                 </td>
-                <td v-for="target in testedTargets" :key="target" class="p-2 text-center min-w-14">
+                <td v-for="target in testedTargets" :key="target" class="p-2 text-center">
                   <UIcon v-if="cap.support[target]?.supported" name="carbon:checkmark" class="size-4 mx-auto text-fg-muted" />
                 </td>
               </tr>
