@@ -10,11 +10,10 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",
-    "generate": "tsx scripts/generate.ts",
+    "generate": "bash scripts/generate.sh",
+    "generate:node": "tsx scripts/generate.ts",
     "generate:d1": "tsx scripts/generate-d1.ts",
     "generate:hyperdrive": "tsx scripts/generate-hyperdrive.ts",
-    "generate:docker": "POSTGRESQL_URL=postgres://postgres:postgres@localhost:5432/test MYSQL_URL=mysql://root:mysql@localhost:3306/test tsx scripts/generate.ts",
-    "generate:full": "bash scripts/generate-with-docker.sh",
     "generate:types": "tsx scripts/generate-types.ts"
   },
   "devDependencies": {

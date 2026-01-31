@@ -43,13 +43,13 @@
           <thead>
             <tr>
               <th rowspan="2" class="text-left font-mono font-medium p-3 min-w-48 bg-bg-subtle text-fg border-b border-border-subtle">Capability</th>
-              <th v-if="sqliteTargets.length" :colspan="sqliteTargets.length" class="text-center font-mono text-xs p-2 bg-bg-subtle text-fg-muted border-b border-border-subtle border-l border-l-border-subtle">SQLite</th>
-              <th v-if="postgresTargets.length" :colspan="postgresTargets.length" class="text-center font-mono text-xs p-2 bg-bg-subtle text-fg-muted border-b border-border-subtle border-l border-l-border-subtle">PostgreSQL</th>
-              <th v-if="mysqlTargets.length" :colspan="mysqlTargets.length" class="text-center font-mono text-xs p-2 bg-bg-subtle text-fg-muted border-b border-border-subtle border-l border-l-border-subtle">MySQL</th>
+              <th v-if="sqliteTargets.length" :colspan="sqliteTargets.length" class="text-center font-mono text-xs p-2 bg-bg-subtle text-fg-muted border-l border-l-border-subtle">SQLite</th>
+              <th v-if="postgresTargets.length" :colspan="postgresTargets.length" class="text-center font-mono text-xs p-2 bg-bg-subtle text-fg-muted border-l border-l-border-subtle">PostgreSQL</th>
+              <th v-if="mysqlTargets.length" :colspan="mysqlTargets.length" class="text-center font-mono text-xs p-2 bg-bg-subtle text-fg-muted border-l border-l-border-subtle">MySQL</th>
             </tr>
             <tr>
-              <th v-for="target in testedTargets" :key="target" class="text-center font-mono text-xs p-3 min-w-24 bg-bg-subtle">
-                <AppTooltip :text="`${compatData.__meta.targets[target].version} · ${compatData.__meta.targets[target].dialect}`" position="bottom">
+              <th v-for="(target, idx) in testedTargets" :key="target" class="text-center font-mono text-xs p-3 min-w-24 bg-bg-subtle" :class="{ 'border-l border-l-border-subtle': idx === 0 || idx === sqliteTargets.length || idx === sqliteTargets.length + postgresTargets.length }">
+                <AppTooltip :text="`${compatData.__meta.targets[target].version} · ${compatData.__meta.targets[target].dialect} · ${new Date(compatData.__meta.targets[target].generatedAt).toLocaleDateString()}`" position="bottom">
                   <NuxtLink :to="getConnectorUrl(target)" external class="no-underline text-fg-muted hover:text-fg transition-colors">{{ getTargetName(target) }}</NuxtLink>
                 </AppTooltip>
               </th>
