@@ -6,7 +6,7 @@ export function createBetterSqlite3Driver(name = ':memory:'): TestDriver {
   return {
     dialect: 'sqlite',
     async exec(sql) { db.exec(sql) },
-    async query(sql, params = []) { return { rows: db.prepare(sql).all(...params) as any[] } },
+    query: async (sql, params = []) => ({ rows: db.prepare(sql).all(...params) as Record<string, unknown>[] }),
     async close() { db.close() },
   }
 }

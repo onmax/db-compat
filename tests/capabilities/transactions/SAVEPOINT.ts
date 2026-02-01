@@ -14,7 +14,7 @@ export const capability: CapabilityTest = {
       await driver.exec('INSERT INTO _test_savepoint (id) VALUES (2)')
       await driver.exec('ROLLBACK TO SAVEPOINT sp1')
       await driver.exec('COMMIT')
-      const result = await driver.query<{ id: number }>('SELECT * FROM _test_savepoint')
+      const result = await driver.query('SELECT * FROM _test_savepoint')
       await driver.exec('DROP TABLE _test_savepoint')
       return { supported: result.rows.length === 1 && result.rows[0].id === 1 }
     }

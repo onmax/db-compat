@@ -7,7 +7,7 @@ export const capability: CapabilityTest = {
   async test(driver) {
     try {
       await driver.exec('CREATE TABLE IF NOT EXISTS _test_returning (id INTEGER PRIMARY KEY, name TEXT)')
-      const result = await driver.query<{ id: number, name: string }>('INSERT INTO _test_returning (id, name) VALUES (1, \'test\') RETURNING id, name')
+      const result = await driver.query('INSERT INTO _test_returning (id, name) VALUES (1, \'test\') RETURNING id, name')
       await driver.exec('DROP TABLE _test_returning')
       return { supported: result.rows.length === 1 }
     }

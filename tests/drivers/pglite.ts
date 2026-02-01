@@ -6,9 +6,9 @@ export function createPgliteDriver(): TestDriver {
   return {
     dialect: 'postgresql',
     async exec(sql) { await db.exec(sql) },
-    async query(sql, params = []) {
-      const result = await db.query(sql, params)
-      return { rows: result.rows as any[] }
+    query: async (sql, params = []) => {
+      const result = await db.query<Record<string, unknown>>(sql, params)
+      return { rows: result.rows }
     },
     async close() { await db.close() },
   }

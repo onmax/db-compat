@@ -11,7 +11,7 @@ export const capability: CapabilityTest = {
         await driver.exec(`INSERT INTO _test_batch (id) VALUES (1); INSERT INTO _test_batch (id) VALUES (1);`)
       }
       catch {}
-      const result = await driver.query<{ id: number }>('SELECT * FROM _test_batch')
+      const result = await driver.query('SELECT * FROM _test_batch')
       await driver.exec('DROP TABLE _test_batch')
       return { supported: result.rows.length < 1, notes: result.rows.length > 0 ? 'Batch not atomic - partial execution' : undefined }
     }

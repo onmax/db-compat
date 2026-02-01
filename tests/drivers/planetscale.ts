@@ -6,9 +6,9 @@ export function createPlanetscaleDriver(url: string): TestDriver {
   return {
     dialect: 'mysql',
     async exec(sql) { await client.execute(sql) },
-    async query(sql, params = []) {
+    query: async (sql, params = []) => {
       const result = await client.execute(sql, params)
-      return { rows: result.rows as any[] }
+      return { rows: result.rows as Record<string, unknown>[] }
     },
     async close() {},
   }

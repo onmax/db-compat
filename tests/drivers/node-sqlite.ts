@@ -6,9 +6,9 @@ export async function createNodeSqliteDriver(name = ':memory:'): Promise<TestDri
   return {
     dialect: 'sqlite',
     async exec(sql) { db.exec(sql) },
-    async query(sql, params = []) {
+    query: async (sql, params = []) => {
       const stmt = db.prepare(sql)
-      return { rows: stmt.all(...(params as any)) as any[] }
+      return { rows: stmt.all(...(params as Parameters<typeof stmt.all>)) as Record<string, unknown>[] }
     },
     async close() { db.close() },
   }

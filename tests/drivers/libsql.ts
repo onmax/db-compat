@@ -6,9 +6,9 @@ export function createLibsqlDriver(url = ':memory:'): TestDriver {
   return {
     dialect: 'sqlite',
     async exec(sql) { await client.execute(sql) },
-    async query(sql, params = []) {
-      const result = await client.execute({ sql, args: params as any })
-      return { rows: result.rows as any[] }
+    query: async (sql, params = []) => {
+      const result = await client.execute({ sql, args: params as (string | number | null)[] })
+      return { rows: result.rows as Record<string, unknown>[] }
     },
     async close() { client.close() },
   }

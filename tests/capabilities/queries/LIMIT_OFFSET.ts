@@ -8,7 +8,7 @@ export const capability: CapabilityTest = {
     try {
       await driver.exec('CREATE TABLE IF NOT EXISTS _test_limit (id INTEGER)')
       await driver.exec('INSERT INTO _test_limit VALUES (1), (2), (3), (4), (5)')
-      const result = await driver.query<{ id: number }>('SELECT id FROM _test_limit ORDER BY id LIMIT 2 OFFSET 2')
+      const result = await driver.query('SELECT id FROM _test_limit ORDER BY id LIMIT 2 OFFSET 2')
       await driver.exec('DROP TABLE _test_limit')
       return { supported: result.rows.length >= 2 && result.rows[0].id === 3 }
     }

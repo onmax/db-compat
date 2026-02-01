@@ -6,9 +6,9 @@ export async function createMysql2Driver(uri: string): Promise<TestDriver> {
   return {
     dialect: 'mysql',
     async exec(sql) { await pool.execute(sql) },
-    async query(sql, params = []) {
+    query: async (sql, params = []) => {
       const [rows] = await pool.execute(sql, params)
-      return { rows: rows as any[] }
+      return { rows: rows as Record<string, unknown>[] }
     },
     async close() { await pool.end() },
   }

@@ -8,7 +8,7 @@ export const capability: CapabilityTest = {
     try {
       await driver.exec('CREATE TABLE IF NOT EXISTS _test_prep (id INTEGER, name TEXT)')
       await driver.query('INSERT INTO _test_prep (id, name) VALUES (?, ?)', [1, 'test'])
-      const result = await driver.query<{ name: string }>('SELECT * FROM _test_prep WHERE name = ?', ['test'])
+      const result = await driver.query('SELECT * FROM _test_prep WHERE name = ?', ['test'])
       await driver.exec('DROP TABLE _test_prep')
       return { supported: result.rows.length >= 1 }
     }

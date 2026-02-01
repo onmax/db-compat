@@ -9,7 +9,7 @@ export function createSqlite3Driver(name = ':memory:'): Promise<TestDriver> {
       resolve({
         dialect: 'sqlite',
         exec: sql => new Promise((res, rej) => db.exec(sql, e => e ? rej(e) : res())),
-        query: (sql, params = []) => new Promise((res, rej) => db.all(sql, params, (e, rows) => e ? rej(e) : res({ rows: rows as any[] }))),
+        query: (sql, params = []) => new Promise((res, rej) => db.all(sql, params, (e, rows) => e ? rej(e) : res({ rows: rows as Record<string, unknown>[] }))),
         close: () => new Promise(res => db.close(() => res())),
       })
     })
