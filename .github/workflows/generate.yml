@@ -41,10 +41,10 @@ jobs:
         env:
           POSTGRESQL_URL: postgres://postgres:postgres@localhost:5432/test
           MYSQL_URL: mysql://root:mysql@localhost:3306/test
-      - name: Check for changes
+      - name: Check for meaningful changes
         id: diff
         run: |
-          git diff --quiet packages/data/data.json || echo "changed=true" >> $GITHUB_OUTPUT
+          git diff packages/data/data.json | grep '^[+-]' | grep -v '^[+-]\{3\}' | grep -v 'generatedAt' | grep -q . && echo "changed=true" >> $GITHUB_OUTPUT || true
       - name: Create PR
         if: steps.diff.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v6
