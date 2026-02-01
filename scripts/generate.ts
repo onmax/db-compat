@@ -3,11 +3,6 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import process from 'node:process'
 import { consola } from 'consola'
 import { resolve } from 'pathe'
-
-function getPackageVersion(pkg: string): string {
-  const pkgJson = resolve(import.meta.dirname, '../node_modules', pkg, 'package.json')
-  return JSON.parse(readFileSync(pkgJson, 'utf-8')).version
-}
 import { capabilities as capabilityDefs, sqlCategories, targets } from '../packages/data/src/index'
 import { createBetterSqlite3Driver } from '../tests/drivers/better-sqlite3'
 import { createLibsqlDriver } from '../tests/drivers/libsql'
@@ -17,6 +12,11 @@ import { createPgDriver } from '../tests/drivers/pg'
 import { createPgliteDriver } from '../tests/drivers/pglite'
 import { createSqlite3Driver } from '../tests/drivers/sqlite3'
 import { runAllTests } from '../tests/runner'
+
+function getPackageVersion(pkg: string): string {
+  const pkgJson = resolve(import.meta.dirname, '../node_modules', pkg, 'package.json')
+  return JSON.parse(readFileSync(pkgJson, 'utf-8')).version
+}
 
 const filter = process.argv[2]?.split(',').map(s => s.trim()) ?? []
 
