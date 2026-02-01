@@ -1,7 +1,8 @@
 import type { CapabilityCategory, CapabilityResults, CompatibilityDataV2, TargetId } from '../packages/data/src/types'
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
-import { resolve } from 'node:path'
 import process from 'node:process'
+import { consola } from 'consola'
+import { resolve } from 'pathe'
 import { capabilities as capabilityDefs, sqlCategories, targets } from '../packages/data/src/index'
 import { createBetterSqlite3Driver } from '../tests/drivers/better-sqlite3'
 import { createLibsqlDriver } from '../tests/drivers/libsql'
@@ -24,49 +25,49 @@ async function generate() {
   const results: Partial<Record<TargetId, CapabilityResults>> = {}
 
   if (shouldRun('better-sqlite3')) {
-    console.log('Testing better-sqlite3...')
+    consola.start('Testing better-sqlite3...')
     const driver = createBetterSqlite3Driver()
     results['better-sqlite3'] = await runAllTests(driver)
     await driver.close()
   }
 
   if (shouldRun('libsql')) {
-    console.log('Testing libsql...')
+    consola.start('Testing libsql...')
     const driver = createLibsqlDriver()
     results.libsql = await runAllTests(driver)
     await driver.close()
   }
 
   if (shouldRun('pglite')) {
-    console.log('Testing pglite...')
+    consola.start('Testing pglite...')
     const driver = createPgliteDriver()
     results.pglite = await runAllTests(driver)
     await driver.close()
   }
 
   if (shouldRun('postgresql') && process.env.POSTGRESQL_URL) {
-    console.log('Testing postgresql...')
+    consola.start('Testing postgresql...')
     const driver = createPgDriver(process.env.POSTGRESQL_URL)
     results.postgresql = await runAllTests(driver)
     await driver.close()
   }
 
   if (shouldRun('mysql2') && process.env.MYSQL_URL) {
-    console.log('Testing mysql2...')
+    consola.start('Testing mysql2...')
     const driver = await createMysql2Driver(process.env.MYSQL_URL)
     results.mysql2 = await runAllTests(driver)
     await driver.close()
   }
 
   if (shouldRun('sqlite3')) {
-    console.log('Testing sqlite3...')
+    consola.start('Testing sqlite3...')
     const driver = await createSqlite3Driver()
     results.sqlite3 = await runAllTests(driver)
     await driver.close()
   }
 
   if (shouldRun('node-sqlite')) {
-    console.log('Testing node-sqlite...')
+    consola.start('Testing node-sqlite...')
     const driver = await createNodeSqliteDriver()
     results['node-sqlite'] = await runAllTests(driver)
     await driver.close()
@@ -75,19 +76,19 @@ async function generate() {
   // Merge external results
   const bunResultsPath = process.env.BUN_RESULTS_PATH
   if (bunResultsPath && existsSync(bunResultsPath) && shouldRun('bun-sqlite')) {
-    console.log('Merging bun-sqlite results...')
+    consola.info('Merging bun-sqlite results...')
     Object.assign(results, JSON.parse(readFileSync(bunResultsPath, 'utf-8')))
   }
 
   const d1ResultsPath = process.env.D1_RESULTS_PATH
   if (d1ResultsPath && existsSync(d1ResultsPath) && shouldRun('d1')) {
-    console.log('Merging cloudflare-d1 results...')
+    consola.info('Merging cloudflare-d1 results...')
     Object.assign(results, JSON.parse(readFileSync(d1ResultsPath, 'utf-8')))
   }
 
   const hyperdriveResultsPath = process.env.HYPERDRIVE_RESULTS_PATH
   if (hyperdriveResultsPath && existsSync(hyperdriveResultsPath) && shouldRun('hyperdrive')) {
-    console.log('Merging hyperdrive results...')
+    consola.info('Merging hyperdrive results...')
     Object.assign(results, JSON.parse(readFileSync(hyperdriveResultsPath, 'utf-8')))
   }
 
@@ -131,12 +132,12 @@ async function generate() {
   }
 
   writeFileSync(outPath, JSON.stringify(v2, null, 2))
-  console.log(`\nResults written to ${outPath}`)
+  consola.success(`Results written to ${outPath}`)
 
   for (const [target, caps] of Object.entries(results)) {
     const supported = Object.values(caps).filter(c => c.supported).length
-    console.log(`${target}: ${supported}/${Object.values(caps).length} capabilities`)
+    consola.info(`${target}: ${supported}/${Object.values(caps).length} capabilities`)
   }
 }
 
-generate().catch(console.error)
+generate().catch(consola.error)

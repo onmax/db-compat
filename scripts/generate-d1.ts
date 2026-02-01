@@ -1,7 +1,8 @@
 import { writeFileSync } from 'node:fs'
-import { resolve } from 'node:path'
 import process from 'node:process'
+import { consola } from 'consola'
 import { Miniflare } from 'miniflare'
+import { resolve } from 'pathe'
 import { createD1Driver } from '../tests/drivers/cloudflare-d1'
 import { runAllTests } from '../tests/runner'
 
@@ -13,10 +14,10 @@ const mf = new Miniflare({
 })
 const d1 = await mf.getD1Database('D1_DATABASE')
 
-console.log('Testing cloudflare-d1...')
+consola.start('Testing cloudflare-d1...')
 const driver = createD1Driver(d1 as any)
 const results = { 'cloudflare-d1': await runAllTests(driver) }
 
 writeFileSync(outputPath, JSON.stringify(results))
-console.log(`D1 results written to ${outputPath}`)
+consola.success(`D1 results written to ${outputPath}`)
 await mf.dispose()

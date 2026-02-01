@@ -11,7 +11,10 @@ catalog:
   '@types/better-sqlite3': ^7.6.12
   '@types/node': ^22.0.0
   '@types/pg': ^8.11.0
+  consola: ^3.4.2
+  defu: ^6.1.4
   miniflare: ^4.20260128.0
+  pathe: ^2.0.3
   tsx: ^4.0.0
 catalogs:
   build:

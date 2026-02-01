@@ -1,5 +1,6 @@
 import { writeFileSync } from 'node:fs'
-import { resolve } from 'node:path'
+import { consola } from 'consola'
+import { resolve } from 'pathe'
 import { capabilities, targets } from '../packages/data/src/index'
 
 const capabilityIds = capabilities.map(c => c.id)
@@ -13,4 +14,4 @@ export type TargetId = ${targetIds.map(id => `'${id}'`).join(' | ')}
 
 const outPath = resolve(import.meta.dirname, '../packages/data/src/generated.ts')
 writeFileSync(outPath, typesContent)
-console.log(`Types written to ${outPath}`)
+consola.success(`Types written to ${outPath}`)

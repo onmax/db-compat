@@ -47,9 +47,18 @@ catalogs:
     '@types/pg':
       specifier: ^8.11.0
       version: 8.16.0
+    consola:
+      specifier: ^3.4.2
+      version: 3.4.2
+    defu:
+      specifier: ^6.1.4
+      version: 6.1.4
     miniflare:
       specifier: ^4.20260128.0
       version: 4.20260128.0
+    pathe:
+      specifier: ^2.0.3
+      version: 2.0.3
     tsx:
       specifier: ^4.0.0
       version: 4.21.0
@@ -119,6 +128,12 @@ importers:
       better-sqlite3:
         specifier: catalog:db
         version: 11.10.0
+      consola:
+        specifier: 'catalog:'
+        version: 3.4.2
+      defu:
+        specifier: 'catalog:'
+        version: 6.1.4
       eslint:
         specifier: catalog:lint
         version: 9.39.2(jiti@2.6.1)
@@ -128,6 +143,9 @@ importers:
       mysql2:
         specifier: catalog:db
         version: 3.16.2
+      pathe:
+        specifier: 'catalog:'
+        version: 2.0.3
       pg:
         specifier: catalog:db
         version: 8.17.2
