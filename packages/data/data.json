@@ -1,7 +1,7 @@
 {
   "__meta": {
     "version": "0.1.0",
-    "generatedAt": "2026-02-01T08:01:10.572Z",
+    "generatedAt": "2026-02-01T08:35:10.535Z",
     "targets": {
       "better-sqlite3": {
         "version": "better-sqlite3",
@@ -41,22 +41,22 @@
       "postgresql": {
         "version": "pg",
         "dialect": "postgresql",
-        "generatedAt": "2026-02-01T08:01:10.572Z"
+        "generatedAt": "2026-02-01T08:35:04.095Z"
       },
       "mysql2": {
         "version": "mysql2",
         "dialect": "mysql",
-        "generatedAt": "2026-02-01T08:01:10.572Z"
+        "generatedAt": "2026-02-01T08:35:04.095Z"
       },
       "hyperdrive-postgresql": {
         "version": "pg+hyperdrive",
         "dialect": "postgresql",
-        "generatedAt": "2026-02-01T08:01:10.572Z"
+        "generatedAt": "2026-02-01T08:35:10.535Z"
       },
       "hyperdrive-mysql": {
         "version": "mysql2+hyperdrive",
         "dialect": "mysql",
-        "generatedAt": "2026-02-01T08:01:10.572Z"
+        "generatedAt": "2026-02-01T08:35:10.535Z"
       }
     }
   },
