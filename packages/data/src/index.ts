@@ -2,6 +2,7 @@ import type { CapabilityCategory, CapabilityDefinition, CapabilityId, Capability
 import _compatData from '../data.json'
 
 export * from './types'
+export * from './db0'
 
 export const compatData = _compatData as unknown as CompatibilityDataV2
 
