@@ -1,5 +1,6 @@
 import { writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
+import process from 'node:process'
 import { Miniflare } from 'miniflare'
 import { createD1Driver } from '../tests/drivers/cloudflare-d1'
 import { runAllTests } from '../tests/runner'
