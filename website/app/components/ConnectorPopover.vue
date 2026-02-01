@@ -17,33 +17,33 @@ const meta = computed(() => compatData.__meta.targets[props.target])
 const targetDef = computed(() => targetsMap[props.target])
 
 const icons: Record<string, string> = {
-  'db0-better-sqlite3': 'simple-icons:sqlite',
-  'db0-libsql': 'simple-icons:turso',
-  'db0-bun-sqlite': 'simple-icons:bun',
-  'db0-node-sqlite': 'simple-icons:nodedotjs',
-  'db0-sqlite3': 'simple-icons:sqlite',
-  'db0-cloudflare-d1': 'simple-icons:cloudflare',
-  'db0-pglite': 'simple-icons:postgresql',
-  'db0-postgresql': 'simple-icons:postgresql',
-  'db0-hyperdrive-postgresql': 'carbon:cloud-services',
-  'db0-mysql2': 'simple-icons:mysql',
-  'db0-planetscale': 'simple-icons:planetscale',
-  'db0-hyperdrive-mysql': 'carbon:cloud-services',
+  'better-sqlite3': 'simple-icons:sqlite',
+  'libsql': 'simple-icons:turso',
+  'bun-sqlite': 'simple-icons:bun',
+  'node-sqlite': 'simple-icons:nodedotjs',
+  'sqlite3': 'simple-icons:sqlite',
+  'cloudflare-d1': 'simple-icons:cloudflare',
+  'pglite': 'simple-icons:postgresql',
+  'postgresql': 'simple-icons:postgresql',
+  'hyperdrive-postgresql': 'carbon:cloud-services',
+  'mysql2': 'simple-icons:mysql',
+  'planetscale': 'simple-icons:planetscale',
+  'hyperdrive-mysql': 'carbon:cloud-services',
 }
 
 const links: Record<string, { repo: string, docs: string }> = {
-  'db0-better-sqlite3': { repo: 'https://github.com/WiseLibs/better-sqlite3', docs: 'https://github.com/WiseLibs/better-sqlite3/blob/master/docs/api.md' },
-  'db0-libsql': { repo: 'https://github.com/tursodatabase/libsql', docs: 'https://docs.turso.tech/libsql' },
-  'db0-bun-sqlite': { repo: 'https://github.com/oven-sh/bun', docs: 'https://bun.sh/docs/api/sqlite' },
-  'db0-node-sqlite': { repo: 'https://github.com/nodejs/node', docs: 'https://nodejs.org/api/sqlite.html' },
-  'db0-sqlite3': { repo: 'https://github.com/TryGhost/node-sqlite3', docs: 'https://github.com/TryGhost/node-sqlite3/wiki/API' },
-  'db0-cloudflare-d1': { repo: 'https://github.com/cloudflare/workers-sdk', docs: 'https://developers.cloudflare.com/d1/' },
-  'db0-pglite': { repo: 'https://github.com/electric-sql/pglite', docs: 'https://pglite.dev/docs' },
-  'db0-postgresql': { repo: 'https://github.com/brianc/node-postgres', docs: 'https://node-postgres.com/' },
-  'db0-hyperdrive-postgresql': { repo: 'https://github.com/cloudflare/workers-sdk', docs: 'https://developers.cloudflare.com/hyperdrive/' },
-  'db0-mysql2': { repo: 'https://github.com/sidorares/node-mysql2', docs: 'https://sidorares.github.io/node-mysql2/docs' },
-  'db0-planetscale': { repo: 'https://github.com/planetscale/database-js', docs: 'https://planetscale.com/docs' },
-  'db0-hyperdrive-mysql': { repo: 'https://github.com/cloudflare/workers-sdk', docs: 'https://developers.cloudflare.com/hyperdrive/' },
+  'better-sqlite3': { repo: 'https://github.com/WiseLibs/better-sqlite3', docs: 'https://github.com/WiseLibs/better-sqlite3/blob/master/docs/api.md' },
+  'libsql': { repo: 'https://github.com/tursodatabase/libsql', docs: 'https://docs.turso.tech/libsql' },
+  'bun-sqlite': { repo: 'https://github.com/oven-sh/bun', docs: 'https://bun.sh/docs/api/sqlite' },
+  'node-sqlite': { repo: 'https://github.com/nodejs/node', docs: 'https://nodejs.org/api/sqlite.html' },
+  'sqlite3': { repo: 'https://github.com/TryGhost/node-sqlite3', docs: 'https://github.com/TryGhost/node-sqlite3/wiki/API' },
+  'cloudflare-d1': { repo: 'https://github.com/cloudflare/workers-sdk', docs: 'https://developers.cloudflare.com/d1/' },
+  'pglite': { repo: 'https://github.com/electric-sql/pglite', docs: 'https://pglite.dev/docs' },
+  'postgresql': { repo: 'https://github.com/brianc/node-postgres', docs: 'https://node-postgres.com/' },
+  'hyperdrive-postgresql': { repo: 'https://github.com/cloudflare/workers-sdk', docs: 'https://developers.cloudflare.com/hyperdrive/' },
+  'mysql2': { repo: 'https://github.com/sidorares/node-mysql2', docs: 'https://sidorares.github.io/node-mysql2/docs' },
+  'planetscale': { repo: 'https://github.com/planetscale/database-js', docs: 'https://planetscale.com/docs' },
+  'hyperdrive-mysql': { repo: 'https://github.com/cloudflare/workers-sdk', docs: 'https://developers.cloudflare.com/hyperdrive/' },
 }
 
 const icon = computed(() => icons[props.target] ?? 'carbon:unknown')
@@ -71,7 +71,7 @@ onClickOutside(triggerRef, close)
               <span class="px-1.5 py-0.5 text-xs font-mono rounded bg-bg-subtle text-fg-muted">{{ meta?.version }}</span>
               <span class="px-1.5 py-0.5 text-xs font-mono rounded bg-bg-subtle text-fg-muted">{{ meta?.dialect }}</span>
             </div>
-            <div class="text-xs text-fg-subtle mb-3">Generated {{ new Date(meta?.generatedAt).toLocaleDateString() }}</div>
+            <div class="text-xs text-fg-subtle mb-3">Generated <NuxtTime :datetime="meta?.generatedAt" date-style="medium" /></div>
           </template>
           <div v-else class="flex items-center gap-1.5 mb-3 text-xs text-yellow-600 dark:text-yellow-500">
             <UIcon name="carbon:warning" class="size-3.5" /> No test data yet

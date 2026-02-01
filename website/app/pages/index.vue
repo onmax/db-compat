@@ -81,7 +81,7 @@
 
     <!-- Footer -->
     <footer class="text-center text-sm py-8 px-4 text-fg-subtle border-t border-border-subtle">
-      <p class="mb-2">Generated {{ new Date(compatData.__meta.generatedAt).toLocaleDateString() }}</p>
+      <p class="mb-2">Generated <NuxtTime :datetime="compatData.__meta.generatedAt" date-style="medium" /></p>
       <div class="flex gap-4 justify-center">
         <NuxtLink to="https://unjs.io" external>UnJS</NuxtLink>
         <NuxtLink to="https://github.com/unjs/db-compat" external>GitHub</NuxtLink>
