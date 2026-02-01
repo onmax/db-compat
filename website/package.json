@@ -18,7 +18,7 @@
     "@vueuse/nuxt": "catalog:nuxt",
     "db-compat-data": "workspace:^",
     "nuxt": "catalog:nuxt",
-    "reka-ui": "^2.8.0",
+    "reka-ui": "catalog:nuxt",
     "tailwindcss": "catalog:nuxt"
   }
 }
