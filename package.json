@@ -25,7 +25,6 @@
     "@types/node": "catalog:",
     "@types/pg": "catalog:",
     "better-sqlite3": "catalog:db",
-    "db0": "catalog:db",
     "eslint": "catalog:lint",
     "miniflare": "catalog:",
     "mysql2": "catalog:db",
