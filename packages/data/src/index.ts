@@ -1,8 +1,8 @@
 import type { CapabilityCategory, CapabilityDefinition, CapabilityId, CapabilityResult, CompatibilityData, CompatibilityDataV2, Dialect, TargetDefinition, TargetId } from './types'
 import _compatData from '../data.json'
 
-export * from './types'
 export * from './db0'
+export * from './types'
 
 export const compatData = _compatData as unknown as CompatibilityDataV2
 
