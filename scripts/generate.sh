@@ -3,8 +3,10 @@ set -e
 
 FILTER="${1:-}"
 
-# Start postgres and mysql
-docker compose up -d --wait postgres mysql
+# Start postgres and mysql (skip if already running, e.g. in CI with services)
+if ! nc -z localhost 5432 2>/dev/null || ! nc -z localhost 3306 2>/dev/null; then
+  docker compose up -d --wait postgres mysql
+fi
 
 # Run bun-sqlite tests in Bun container
 if [ -z "$FILTER" ] || [[ "bun-sqlite" == *"$FILTER"* ]]; then
