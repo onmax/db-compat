@@ -1,10 +1,15 @@
-import { writeFileSync } from 'node:fs'
+import { readFileSync, writeFileSync } from 'node:fs'
 import process from 'node:process'
 import { consola } from 'consola'
 import { Miniflare } from 'miniflare'
 import { resolve } from 'pathe'
 import { createD1Driver } from '../tests/drivers/cloudflare-d1'
 import { runAllTests } from '../tests/runner'
+
+function getMiniflareVersion(): string {
+  const pkgJson = resolve(import.meta.dirname, '../node_modules/miniflare/package.json')
+  return JSON.parse(readFileSync(pkgJson, 'utf-8')).version
+}
 
 const outputPath = resolve(process.cwd(), '.d1-results.json')
 
@@ -16,8 +21,13 @@ const d1 = await mf.getD1Database('D1_DATABASE')
 
 consola.start('Testing cloudflare-d1...')
 const driver = createD1Driver(d1 as any)
-const results = { 'cloudflare-d1': await runAllTests(driver) }
+const testResults = await runAllTests(driver)
 
-writeFileSync(outputPath, JSON.stringify(results))
+const output = {
+  results: { 'cloudflare-d1': testResults },
+  versions: { 'cloudflare-d1': getMiniflareVersion() },
+}
+
+writeFileSync(outputPath, JSON.stringify(output))
 consola.success(`D1 results written to ${outputPath}`)
 await mf.dispose()

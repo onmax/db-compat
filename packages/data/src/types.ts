@@ -16,7 +16,7 @@ export interface CompatibilityDataV2 {
   __meta: {
     version: string
     generatedAt: string
-    targets: Record<TargetId, { version: string, dialect: Dialect, generatedAt: string }>
+    targets: Record<TargetId, { driver: string, version: string, dialect: Dialect, generatedAt: string }>
   }
   sql: Record<CapabilityCategory, Record<string, CapabilityEntry>>
 }

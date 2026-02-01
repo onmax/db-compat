@@ -3,6 +3,11 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import process from 'node:process'
 import { consola } from 'consola'
 import { resolve } from 'pathe'
+
+function getPackageVersion(pkg: string): string {
+  const pkgJson = resolve(import.meta.dirname, '../node_modules', pkg, 'package.json')
+  return JSON.parse(readFileSync(pkgJson, 'utf-8')).version
+}
 import { capabilities as capabilityDefs, sqlCategories, targets } from '../packages/data/src/index'
 import { createBetterSqlite3Driver } from '../tests/drivers/better-sqlite3'
 import { createLibsqlDriver } from '../tests/drivers/libsql'
@@ -74,22 +79,30 @@ async function generate() {
   }
 
   // Merge external results
+  const externalVersions: Record<string, string> = {}
+
   const bunResultsPath = process.env.BUN_RESULTS_PATH
   if (bunResultsPath && existsSync(bunResultsPath) && shouldRun('bun-sqlite')) {
     consola.info('Merging bun-sqlite results...')
-    Object.assign(results, JSON.parse(readFileSync(bunResultsPath, 'utf-8')))
+    const data = JSON.parse(readFileSync(bunResultsPath, 'utf-8'))
+    Object.assign(results, data.results)
+    Object.assign(externalVersions, data.versions)
   }
 
   const d1ResultsPath = process.env.D1_RESULTS_PATH
   if (d1ResultsPath && existsSync(d1ResultsPath) && shouldRun('d1')) {
     consola.info('Merging cloudflare-d1 results...')
-    Object.assign(results, JSON.parse(readFileSync(d1ResultsPath, 'utf-8')))
+    const data = JSON.parse(readFileSync(d1ResultsPath, 'utf-8'))
+    Object.assign(results, data.results)
+    Object.assign(externalVersions, data.versions)
   }
 
   const hyperdriveResultsPath = process.env.HYPERDRIVE_RESULTS_PATH
   if (hyperdriveResultsPath && existsSync(hyperdriveResultsPath) && shouldRun('hyperdrive')) {
     consola.info('Merging hyperdrive results...')
-    Object.assign(results, JSON.parse(readFileSync(hyperdriveResultsPath, 'utf-8')))
+    const data = JSON.parse(readFileSync(hyperdriveResultsPath, 'utf-8'))
+    Object.assign(results, data.results)
+    Object.assign(externalVersions, data.versions)
   }
 
   // Load existing data for merging
@@ -107,7 +120,17 @@ async function generate() {
         ...existingData?.__meta?.targets,
         ...Object.fromEntries(testedTargets.map((id) => {
           const def = targets.find(t => t.id === id)!
-          return [id, { version: def.driver, dialect: def.dialect, generatedAt: now }]
+          let version: string
+          if (externalVersions[id]) {
+            version = externalVersions[id]
+          }
+          else if (id === 'node-sqlite') {
+            version = process.version.replace('v', '')
+          }
+          else {
+            version = getPackageVersion(def.driver)
+          }
+          return [id, { driver: def.driver, version, dialect: def.dialect, generatedAt: now }]
         })),
       } as CompatibilityDataV2['__meta']['targets'],
     },
