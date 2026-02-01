@@ -1,73 +1,73 @@
 {
   "__meta": {
     "version": "0.1.0",
-    "generatedAt": "2026-02-01T11:01:38.414Z",
+    "generatedAt": "2026-02-01T12:30:54.169Z",
     "targets": {
       "better-sqlite3": {
         "driver": "better-sqlite3",
         "version": "11.10.0",
         "dialect": "sqlite",
-        "generatedAt": "2026-02-01T11:01:38.414Z"
+        "generatedAt": "2026-02-01T12:30:54.169Z"
       },
       "libsql": {
         "driver": "@libsql/client",
         "version": "0.14.0",
         "dialect": "sqlite",
-        "generatedAt": "2026-02-01T11:01:38.414Z"
+        "generatedAt": "2026-02-01T12:30:54.169Z"
       },
       "pglite": {
         "driver": "@electric-sql/pglite",
         "version": "0.2.17",
         "dialect": "postgresql",
-        "generatedAt": "2026-02-01T11:01:38.414Z"
+        "generatedAt": "2026-02-01T12:30:54.169Z"
       },
       "sqlite3": {
         "driver": "sqlite3",
         "version": "5.1.7",
         "dialect": "sqlite",
-        "generatedAt": "2026-02-01T11:01:38.414Z"
+        "generatedAt": "2026-02-01T12:30:54.169Z"
       },
       "node-sqlite": {
         "driver": "node:sqlite",
-        "version": "24.13.0",
+        "version": "22.22.0",
         "dialect": "sqlite",
-        "generatedAt": "2026-02-01T11:01:38.414Z"
+        "generatedAt": "2026-02-01T12:30:54.169Z"
       },
       "cloudflare-d1": {
         "driver": "D1",
         "version": "4.20260128.0",
         "dialect": "sqlite",
-        "generatedAt": "2026-02-01T11:01:38.414Z"
+        "generatedAt": "2026-02-01T12:30:54.169Z"
       },
       "bun-sqlite": {
         "driver": "bun:sqlite",
         "version": "1.3.8",
         "dialect": "sqlite",
-        "generatedAt": "2026-02-01T11:01:38.414Z"
+        "generatedAt": "2026-02-01T12:30:54.169Z"
       },
       "postgresql": {
         "driver": "pg",
         "version": "8.17.2",
         "dialect": "postgresql",
-        "generatedAt": "2026-02-01T11:01:38.414Z"
+        "generatedAt": "2026-02-01T12:30:54.169Z"
       },
       "mysql2": {
         "driver": "mysql2",
         "version": "3.16.2",
         "dialect": "mysql",
-        "generatedAt": "2026-02-01T11:01:38.414Z"
+        "generatedAt": "2026-02-01T12:30:54.169Z"
       },
       "hyperdrive-postgresql": {
         "driver": "pg+hyperdrive",
         "version": "pg 8.17.2 + hyperdrive",
         "dialect": "postgresql",
-        "generatedAt": "2026-02-01T11:01:38.414Z"
+        "generatedAt": "2026-02-01T12:30:54.169Z"
       },
       "hyperdrive-mysql": {
         "driver": "mysql2+hyperdrive",
         "version": "mysql2 3.16.2 + hyperdrive",
         "dialect": "mysql",
-        "generatedAt": "2026-02-01T11:01:38.414Z"
+        "generatedAt": "2026-02-01T12:30:54.169Z"
       }
     }
   },
