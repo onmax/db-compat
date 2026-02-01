@@ -55,6 +55,7 @@ jobs:
         with:
           name: d1-results
           path: .d1-results.json
+          include-hidden-files: true
 
   test-bun:
     runs-on: ubuntu-latest
@@ -72,6 +73,7 @@ jobs:
         with:
           name: bun-results
           path: .bun-results.json
+          include-hidden-files: true
 
   test-postgresql:
     runs-on: ubuntu-latest
