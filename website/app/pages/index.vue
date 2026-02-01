@@ -53,8 +53,8 @@
             <col v-for="_ in allTargets" :key="_" class="w-14">
           </colgroup>
           <tbody>
-            <template v-for="(caps, category) in compatData.sql" :key="category">
-              <tr class="border-t border-border">
+            <template v-for="(caps, category, idx) in compatData.sql" :key="category">
+              <tr :class="idx > 0 && 'border-t border-border'">
                 <td class="pt-4 pb-2 px-3">
                   <span class="text-xs font-mono uppercase tracking-wide text-fg-subtle">{{ category }}</span>
                 </td>
