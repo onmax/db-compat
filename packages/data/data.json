@@ -1,62 +1,62 @@
 {
   "__meta": {
     "version": "0.1.0",
-    "generatedAt": "2026-02-01T08:35:10.535Z",
+    "generatedAt": "2026-02-01T10:14:12.409Z",
     "targets": {
       "better-sqlite3": {
         "version": "better-sqlite3",
         "dialect": "sqlite",
-        "generatedAt": "2026-02-01T08:01:10.572Z"
+        "generatedAt": "2026-02-01T10:14:12.409Z"
       },
       "libsql": {
         "version": "@libsql/client",
         "dialect": "sqlite",
-        "generatedAt": "2026-02-01T08:01:10.572Z"
+        "generatedAt": "2026-02-01T10:14:12.409Z"
       },
       "pglite": {
         "version": "@electric-sql/pglite",
         "dialect": "postgresql",
-        "generatedAt": "2026-02-01T08:01:10.572Z"
+        "generatedAt": "2026-02-01T10:14:12.409Z"
       },
       "sqlite3": {
         "version": "sqlite3",
         "dialect": "sqlite",
-        "generatedAt": "2026-02-01T08:01:10.572Z"
+        "generatedAt": "2026-02-01T10:14:12.409Z"
       },
       "node-sqlite": {
         "version": "node:sqlite",
         "dialect": "sqlite",
-        "generatedAt": "2026-02-01T08:01:10.572Z"
+        "generatedAt": "2026-02-01T10:14:12.409Z"
       },
       "cloudflare-d1": {
         "version": "D1",
         "dialect": "sqlite",
-        "generatedAt": "2026-02-01T08:01:10.572Z"
+        "generatedAt": "2026-02-01T10:14:12.409Z"
       },
       "bun-sqlite": {
         "version": "bun:sqlite",
         "dialect": "sqlite",
-        "generatedAt": "2026-02-01T08:01:10.572Z"
+        "generatedAt": "2026-02-01T10:14:12.409Z"
       },
       "postgresql": {
         "version": "pg",
         "dialect": "postgresql",
-        "generatedAt": "2026-02-01T08:35:04.095Z"
+        "generatedAt": "2026-02-01T10:14:12.409Z"
       },
       "mysql2": {
         "version": "mysql2",
         "dialect": "mysql",
-        "generatedAt": "2026-02-01T08:35:04.095Z"
+        "generatedAt": "2026-02-01T10:14:12.409Z"
       },
       "hyperdrive-postgresql": {
         "version": "pg+hyperdrive",
         "dialect": "postgresql",
-        "generatedAt": "2026-02-01T08:35:10.535Z"
+        "generatedAt": "2026-02-01T10:14:12.409Z"
       },
       "hyperdrive-mysql": {
         "version": "mysql2+hyperdrive",
         "dialect": "mysql",
-        "generatedAt": "2026-02-01T08:35:10.535Z"
+        "generatedAt": "2026-02-01T10:14:12.409Z"
       }
     }
   },
