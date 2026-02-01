@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   compatibilityDate: '2025-01-01',
   icon: { serverBundle: 'remote' },
+  routeRules: { '/**': { prerender: true } },
   fonts: {
     families: [
       { name: 'Geist', provider: 'google' },
