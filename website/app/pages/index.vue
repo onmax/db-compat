@@ -1,16 +1,14 @@
 <template>
   <div class="min-h-screen bg-bg text-fg">
-    <!-- Theme toggle -->
-    <div class="fixed top-4 right-4 z-50 p-1 rounded-lg bg-bg/80 backdrop-blur-sm border border-border-subtle">
-      <ThemeToggle />
-    </div>
-
     <!-- Hero -->
-    <header class="text-center py-16 px-4">
+    <header class="relative text-center py-16 px-4">
+      <div class="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
       <h1 class="text-4xl sm:text-5xl font-mono font-medium mb-3 text-fg">db-compat</h1>
       <p class="text-base max-w-lg mx-auto text-fg-muted leading-relaxed">
-        Compare SQL and API capabilities across SQLite, PostgreSQL, and MySQL.
-        Test what features work with each <NuxtLink to="https://github.com/unjs/db0" external class="font-mono">db0</NuxtLink> connector—transactions, JSON, CTEs, full-text search, and more.
+        Compare SQL capabilities across SQLite, PostgreSQL, and MySQL drivers.
+        Test what features work with each driver—transactions, JSON, CTEs, full-text search, and more.
       </p>
       <div class="w-max mx-auto mt-4 rounded-md border border-yellow-600/20 bg-yellow-500/5 px-3 py-2 flex items-center gap-2">
         <UIcon name="carbon:warning" class="size-3.5 text-yellow-600 dark:text-yellow-500 shrink-0" />
@@ -24,25 +22,9 @@
 
     <!-- Matrix -->
     <main class="mx-auto px-4 pb-16">
-      <!-- Kind Toggle -->
-      <div class="flex justify-center mb-8">
-        <div class="inline-flex gap-1 p-0.5 bg-bg-subtle border border-border-subtle rounded-md" role="tablist">
-          <button
-            v-for="tab in kindTabs"
-            :key="tab.value"
-            role="tab"
-            :aria-selected="activeKind === tab.value"
-            class="px-3 py-1.5 font-mono text-xs rounded border transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fg/50"
-            :class="activeKind === tab.value ? 'bg-bg text-fg border-border shadow-sm' : 'text-fg-subtle border-transparent hover:text-fg'"
-            @click="activeKind = tab.value"
-          >
-            {{ tab.label }}
-          </button>
-        </div>
-      </div>
-
+      <div class="border border-border rounded-lg overflow-hidden">
       <!-- Sticky header -->
-      <div class="sticky top-0 z-20 bg-bg border border-border border-b-0 rounded-t-lg overflow-hidden">
+      <div class="sticky top-0 z-20 bg-bg">
         <table class="w-full text-sm border-collapse table-fixed">
           <colgroup>
             <col class="w-48">
@@ -64,18 +46,19 @@
         </table>
       </div>
       <!-- Scrollable body -->
-      <div class="border border-border border-t-0 rounded-b-lg">
+      <div>
         <table class="w-full text-sm border-collapse table-fixed">
           <colgroup>
             <col class="w-48">
             <col v-for="_ in allTargets" :key="_" class="w-14">
           </colgroup>
           <tbody>
-            <template v-for="(caps, category) in currentCapabilities" :key="category">
+            <template v-for="(caps, category) in compatData.sql" :key="category">
               <tr class="border-t border-border">
-                <td :colspan="allTargets.length + 1" class="pt-4 pb-2 px-3">
+                <td class="pt-4 pb-2 px-3">
                   <span class="text-xs font-mono uppercase tracking-wide text-fg-subtle">{{ category }}</span>
                 </td>
+                <td v-for="(_, idx) in allTargets" :key="idx" class="pt-4 pb-2" :class="{ 'border-l border-l-border-subtle': idx === 0 || idx === sqliteTargets.length || idx === sqliteTargets.length + postgresTargets.length }" />
               </tr>
               <tr v-for="(cap, capId) in caps" :key="capId" class="group transition-colors hover:bg-bg-subtle border-t border-border-subtle">
                 <td class="p-2">
@@ -93,6 +76,7 @@
           </tbody>
         </table>
       </div>
+      </div>
     </main>
 
     <!-- Footer -->
@@ -107,30 +91,13 @@
 </template>
 
 <script setup lang="ts">
-import type { CompatKind, TargetId } from 'db-compat-data'
+import type { TargetId } from 'db-compat-data'
 import { compatData, targets } from 'db-compat-data'
-
-// Kind toggle (sql vs db0)
-const route = useRoute()
-const router = useRouter()
-const activeKind = computed<CompatKind>({
-  get: () => (route.query.kind === 'db0' ? 'db0' : 'sql'),
-  set: (val) => { router.replace({ query: val === 'sql' ? {} : { kind: val } }) },
-})
-const kindTabs: { label: string, value: CompatKind }[] = [
-  { label: 'SQL', value: 'sql' },
-  { label: 'db0 API', value: 'db0' },
-]
-
-const currentCapabilities = computed(() => compatData[activeKind.value])
 
 const hasData = (id: TargetId) => id in compatData.__meta.targets
 
-// Group all defined targets by dialect
 const sqliteTargets = targets.filter(t => t.dialect === 'sqlite').map(t => t.id)
 const postgresTargets = targets.filter(t => t.dialect === 'postgresql').map(t => t.id)
 const mysqlTargets = targets.filter(t => t.dialect === 'mysql').map(t => t.id)
-
-// All targets ordered by dialect
 const allTargets = [...sqliteTargets, ...postgresTargets, ...mysqlTargets]
 </script>

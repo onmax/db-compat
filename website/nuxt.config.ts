@@ -2,6 +2,7 @@ export default defineNuxtConfig({
   modules: ['@nuxt/ui', '@nuxt/fonts', '@nuxt/icon', '@vueuse/nuxt', '@nuxt/content', '@nuxtjs/seo'],
   css: ['~/assets/css/main.css'],
   compatibilityDate: '2025-01-01',
+  icon: { serverBundle: 'remote' },
   fonts: {
     families: [
       { name: 'Geist', provider: 'google' },
