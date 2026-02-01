@@ -23,7 +23,7 @@ npm install @db-compat/data
 ```
 
 ```ts
-import { compatData, targets, capabilities } from '@db-compat/data'
+import { capabilities, compatData, targets } from '@db-compat/data'
 
 // Check if a target supports a capability
 const supportsJson = compatData.sql.json.JSON_EXTRACT.support['better-sqlite3'].supported

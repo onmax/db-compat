@@ -13,7 +13,7 @@
     "@nuxt/fonts": "catalog:nuxt",
     "@nuxt/icon": "catalog:nuxt",
     "@nuxt/ui": "catalog:nuxt",
-    "@nuxtjs/seo": "^3.4.0",
+    "@nuxtjs/seo": "catalog:",
     "@vueuse/core": "catalog:nuxt",
     "@vueuse/nuxt": "catalog:nuxt",
     "db-compat-data": "workspace:^",
