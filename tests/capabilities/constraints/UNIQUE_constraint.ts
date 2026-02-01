@@ -2,28 +2,27 @@ import type { CapabilityTest } from '../../types'
 
 export const capability: CapabilityTest = {
   id: 'UNIQUE_constraint',
-  kind: 'sql',
   category: 'constraints',
   description: 'UNIQUE constraints',
-  async test(db) {
+  async test(driver) {
     try {
-      await db.exec('CREATE TABLE IF NOT EXISTS _test_unique (val INTEGER UNIQUE)')
-      await db.exec('INSERT INTO _test_unique (val) VALUES (1)')
+      await driver.exec('CREATE TABLE IF NOT EXISTS _test_unique (val INTEGER UNIQUE)')
+      await driver.exec('INSERT INTO _test_unique (val) VALUES (1)')
 
       let uniqueEnforced = false
       try {
-        await db.exec('INSERT INTO _test_unique (val) VALUES (1)')
+        await driver.exec('INSERT INTO _test_unique (val) VALUES (1)')
       }
       catch {
         uniqueEnforced = true
       }
 
-      await db.exec('DROP TABLE _test_unique')
+      await driver.exec('DROP TABLE _test_unique')
       return { supported: uniqueEnforced }
     }
     catch (error) {
       try {
-        await db.exec('DROP TABLE _test_unique')
+        await driver.exec('DROP TABLE _test_unique')
       }
       catch {}
       return { supported: false, error: (error as Error).message }

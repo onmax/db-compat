@@ -4,12 +4,9 @@ export interface CapabilityResult {
   notes?: string
 }
 
-export type CompatKind = 'sql' | 'db0'
 export type CapabilityCategory = 'transactions' | 'types' | 'json' | 'queries' | 'fts' | 'constraints' | 'other'
-export type Db0Category = 'api' | 'connection'
 export type Dialect = 'sqlite' | 'postgresql' | 'mysql'
 
-// V2 Data Format
 export interface CapabilityEntry {
   description: string
   support: Record<TargetId, { supported: boolean, notes?: string, error?: string }>
@@ -22,39 +19,33 @@ export interface CompatibilityDataV2 {
     targets: Record<TargetId, { version: string, dialect: Dialect, generatedAt: string }>
   }
   sql: Record<CapabilityCategory, Record<string, CapabilityEntry>>
-  db0: Record<Db0Category, Record<string, CapabilityEntry>>
 }
 
 export interface CapabilityDefinition {
   id: CapabilityId
-  kind: CompatKind
-  category: CapabilityCategory | Db0Category
+  category: CapabilityCategory
   description: string
 }
 
 export type CapabilityId
-  // Transactions (SQL)
+  // Transactions
   = | 'BEGIN' | 'COMMIT' | 'ROLLBACK' | 'SAVEPOINT' | 'batch_atomicity'
-  // Types (SQL)
+  // Types
     | 'type_boolean' | 'type_json' | 'type_array' | 'type_date' | 'type_timestamp' | 'type_uuid' | 'type_bigint' | 'type_decimal'
-  // JSON (SQL)
+  // JSON
     | 'JSON_EXTRACT' | 'JSON_SET' | 'JSON_ARRAY' | 'jsonb_operators'
-  // Queries (SQL)
+  // Queries
     | 'RETURNING' | 'UPSERT_on_conflict' | 'UPSERT_on_duplicate' | 'UPSERT_replace' | 'CTE' | 'CTE_recursive' | 'window_functions' | 'LIMIT_OFFSET' | 'subqueries'
-  // FTS (SQL)
+  // FTS
     | 'FTS_basic' | 'FTS_ranking'
-  // Constraints (SQL)
+  // Constraints
     | 'foreign_keys' | 'CHECK_constraint' | 'UNIQUE_constraint'
-  // Other (SQL)
+  // Other
     | 'prepared_statements' | 'EXPLAIN'
-  // db0 API
-    | 'db0_sql_template' | 'db0_exec' | 'db0_batch' | 'db0_prepare' | 'db0_first' | 'db0_rows'
-  // db0 Connection
-    | 'db0_close' | 'db0_transaction'
 
 export type CapabilityResults = Record<CapabilityId, CapabilityResult>
 
-export type TargetId = 'db0-better-sqlite3' | 'db0-libsql' | 'db0-pglite' | 'db0-cloudflare-d1' | 'db0-postgresql' | 'db0-mysql2' | 'db0-planetscale' | 'db0-bun-sqlite' | 'db0-node-sqlite' | 'db0-sqlite3' | 'db0-hyperdrive-mysql' | 'db0-hyperdrive-postgresql'
+export type TargetId = 'better-sqlite3' | 'libsql' | 'pglite' | 'cloudflare-d1' | 'postgresql' | 'mysql2' | 'planetscale' | 'bun-sqlite' | 'node-sqlite' | 'sqlite3' | 'hyperdrive-mysql' | 'hyperdrive-postgresql'
 
 export type CompatibilityData = Record<TargetId, CapabilityResults>
 
@@ -62,5 +53,5 @@ export interface TargetDefinition {
   id: TargetId
   name: string
   dialect: Dialect
-  connector: string
+  driver: string
 }

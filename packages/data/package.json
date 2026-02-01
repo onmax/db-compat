@@ -8,10 +8,11 @@
   "repository": { "type": "git", "url": "https://github.com/unjs/db-compat", "directory": "packages/data" },
   "sideEffects": false,
   "exports": {
-    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js", "default": "./dist/index.js" }
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" }
   },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": ["dist"],
   "scripts": { "build": "tsdown" },
   "devDependencies": {

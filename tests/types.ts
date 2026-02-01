@@ -1,12 +1,11 @@
-import type { Database } from 'db0'
-import type { CapabilityCategory, CapabilityResult, CompatKind, Db0Category } from '../packages/data/src/types'
+import type { CapabilityCategory, CapabilityResult } from '../packages/data/src/types'
+import type { TestDriver } from './drivers/types'
 
 export interface CapabilityTest {
   id: string
-  kind: CompatKind
-  category: CapabilityCategory | Db0Category
+  category: CapabilityCategory
   description: string
-  test: (db: Database) => Promise<CapabilityResult>
+  test: (driver: TestDriver) => Promise<CapabilityResult>
 }
 
 export function normalizeD1Error(error: Error): { error: string, notes?: string } {

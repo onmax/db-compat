@@ -18,13 +18,22 @@ jobs:
         with: {node-version: 22, cache: pnpm}
       - run: pnpm install
       - run: pnpm lint
+
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: pnpm}
+      - run: pnpm install
       - run: pnpm typecheck
 
   test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        target: [db0-better-sqlite3, db0-libsql, db0-pglite, db0-sqlite3, db0-node-sqlite]
+        target: [better-sqlite3, libsql, pglite, sqlite3, node-sqlite]
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -33,8 +42,7 @@ jobs:
       - run: pnpm install
       - run: pnpm test:target ${{ matrix.target }}
 
-  generate:
-    needs: test
+  test-d1:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -42,7 +50,125 @@ jobs:
       - uses: actions/setup-node@v4
         with: {node-version: 22, cache: pnpm}
       - run: pnpm install
-      - run: pnpm generate
+      - run: pnpm generate:d1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: d1-results
+          path: .d1-results.json
+
+  test-bun:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: pnpm}
+      - run: pnpm install
+      - run: bun run scripts/generate-bun.ts
+        env:
+          BUN_RESULTS_PATH: .bun-results.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bun-results
+          path: .bun-results.json
+
+  test-postgresql:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: pnpm}
+      - run: pnpm install
+      - run: pnpm test:target postgresql
+        env:
+          POSTGRESQL_URL: postgres://postgres:postgres@localhost:5432/test
+
+  test-mysql:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_ROOT_PASSWORD: mysql
+          MYSQL_DATABASE: test
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd "mysqladmin ping -h localhost"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: pnpm}
+      - run: pnpm install
+      - run: pnpm test:target mysql2
+        env:
+          MYSQL_URL: mysql://root:mysql@localhost:3306/test
+
+  generate:
+    needs: [test, test-d1, test-bun, test-postgresql, test-mysql]
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_ROOT_PASSWORD: mysql
+          MYSQL_DATABASE: test
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd "mysqladmin ping -h localhost"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: d1-results
+          path: .
+      - uses: actions/download-artifact@v4
+        with:
+          name: bun-results
+          path: .
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: pnpm}
+      - run: pnpm install
+      - run: pnpm generate:node
+        env:
+          POSTGRESQL_URL: postgres://postgres:postgres@localhost:5432/test
+          MYSQL_URL: mysql://root:mysql@localhost:3306/test
+          BUN_RESULTS_PATH: .bun-results.json
+          D1_RESULTS_PATH: .d1-results.json
       - uses: actions/upload-artifact@v4
         with:
           name: data

@@ -3,14 +3,13 @@ import { normalizeD1Error } from '../../types'
 
 export const capability: CapabilityTest = {
   id: 'BEGIN',
-  kind: 'sql',
   category: 'transactions',
   description: 'Explicit transaction start with BEGIN statement',
-  async test(db) {
+  async test(driver) {
     try {
-      await db.exec('BEGIN')
-      await db.exec('SELECT 1')
-      await db.exec('COMMIT')
+      await driver.exec('BEGIN')
+      await driver.exec('SELECT 1')
+      await driver.exec('COMMIT')
       return { supported: true }
     }
     catch (error) {

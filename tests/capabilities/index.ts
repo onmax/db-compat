@@ -4,15 +4,6 @@ import type { CapabilityTest } from '../types'
 import { capability as CHECK_constraint } from './constraints/CHECK_constraint'
 import { capability as foreign_keys } from './constraints/foreign_keys'
 import { capability as UNIQUE_constraint } from './constraints/UNIQUE_constraint'
-// db0 API
-import { capability as db0_batch } from './db0/db0_batch'
-import { capability as db0_close } from './db0/db0_close'
-import { capability as db0_exec } from './db0/db0_exec'
-import { capability as db0_first } from './db0/db0_first'
-import { capability as db0_prepare } from './db0/db0_prepare'
-import { capability as db0_rows } from './db0/db0_rows'
-import { capability as db0_sql_template } from './db0/db0_sql_template'
-import { capability as db0_transaction } from './db0/db0_transaction'
 // FTS
 import { capability as FTS_basic } from './fts/FTS_basic'
 import { capability as FTS_ranking } from './fts/FTS_ranking'
@@ -51,7 +42,6 @@ import { capability as type_timestamp } from './types/timestamp'
 import { capability as type_uuid } from './types/uuid'
 
 export const capabilities: CapabilityTest[] = [
-  // SQL capabilities
   BEGIN,
   COMMIT,
   ROLLBACK,
@@ -85,16 +75,4 @@ export const capabilities: CapabilityTest[] = [
   UNIQUE_constraint,
   prepared_statements,
   EXPLAIN,
-  // db0 capabilities
-  db0_sql_template,
-  db0_exec,
-  db0_batch,
-  db0_prepare,
-  db0_first,
-  db0_rows,
-  db0_close,
-  db0_transaction,
 ]
-
-export const sqlCapabilities = capabilities.filter(c => c.kind === 'sql')
-export const db0Capabilities = capabilities.filter(c => c.kind === 'db0')
