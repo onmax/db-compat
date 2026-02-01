@@ -22,7 +22,7 @@
 
     <!-- Matrix -->
     <main class="mx-auto px-4 pb-16">
-      <div class="border border-border rounded-lg overflow-hidden">
+      <div class="border border-border rounded-lg overflow-clip">
       <!-- Sticky header -->
       <div class="sticky top-0 z-20 bg-bg">
         <table class="w-full text-sm border-collapse table-fixed">
