@@ -112,10 +112,11 @@ async function generate() {
   // Build v2 format
   const testedTargets = Object.keys(results) as TargetId[]
   const now = new Date().toISOString()
+  let anyTargetChanged = false
   const v2: CompatibilityDataV2 = {
     __meta: {
       version: '0.1.0',
-      generatedAt: now,
+      generatedAt: existingData?.__meta?.generatedAt ?? now,
       targets: {
         ...existingData?.__meta?.targets,
         ...Object.fromEntries(testedTargets.map((id) => {
@@ -130,7 +131,10 @@ async function generate() {
           else {
             version = getPackageVersion(def.driver)
           }
-          return [id, { driver: def.driver, version, dialect: def.dialect, generatedAt: now }]
+          const existing = existingData?.__meta?.targets?.[id]
+          const changed = existing?.version !== version
+          if (changed) anyTargetChanged = true
+          return [id, { driver: def.driver, version, dialect: def.dialect, generatedAt: changed ? now : (existing?.generatedAt ?? now) }]
         })),
       } as CompatibilityDataV2['__meta']['targets'],
     },
@@ -153,6 +157,8 @@ async function generate() {
       }
     }
   }
+
+  if (anyTargetChanged) v2.__meta.generatedAt = now
 
   writeFileSync(outPath, JSON.stringify(v2, null, 2))
   consola.success(`Results written to ${outPath}`)
