@@ -20,7 +20,7 @@
     <footer class="text-center text-sm py-8 px-4 text-fg-subtle border-t border-border-subtle">
       <div class="flex gap-4 justify-center">
         <NuxtLink to="https://unjs.io" external>UnJS</NuxtLink>
-        <NuxtLink to="https://github.com/unjs/db-compat" external>GitHub</NuxtLink>
+        <NuxtLink to="https://github.com/onmax/db-compat" external>GitHub</NuxtLink>
       </div>
     </footer>
   </div>

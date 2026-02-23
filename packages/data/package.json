@@ -4,8 +4,8 @@
   "version": "0.0.1",
   "description": "Database capability compatibility data for db0",
   "license": "MIT",
-  "homepage": "https://github.com/unjs/db-compat",
-  "repository": { "type": "git", "url": "https://github.com/unjs/db-compat", "directory": "packages/data" },
+  "homepage": "https://github.com/onmax/db-compat",
+  "repository": { "type": "git", "url": "https://github.com/onmax/db-compat", "directory": "packages/data" },
   "sideEffects": false,
   "exports": {
     ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },

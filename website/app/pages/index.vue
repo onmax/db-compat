@@ -15,8 +15,9 @@
         <p class="text-xs text-yellow-700 dark:text-yellow-500/90">Auto-generated data, may not be 100% accurate.</p>
       </div>
       <div class="flex gap-4 justify-center mt-4">
+        <NuxtLink to="/db0" class="text-sm text-fg-subtle hover:text-fg transition-colors">db0 Matrix →</NuxtLink>
         <NuxtLink to="/how-it-works" class="text-sm text-fg-subtle hover:text-fg transition-colors">How it works →</NuxtLink>
-        <NuxtLink to="https://github.com/unjs/db-compat" external class="text-sm text-fg-subtle hover:text-fg transition-colors">GitHub →</NuxtLink>
+        <NuxtLink to="https://github.com/onmax/db-compat" external class="text-sm text-fg-subtle hover:text-fg transition-colors">GitHub →</NuxtLink>
       </div>
     </header>
 
@@ -84,7 +85,7 @@
       <p class="mb-2">Generated <NuxtTime :datetime="compatData.__meta.generatedAt" date-style="medium" /></p>
       <div class="flex gap-4 justify-center">
         <NuxtLink to="https://unjs.io" external>UnJS</NuxtLink>
-        <NuxtLink to="https://github.com/unjs/db-compat" external>GitHub</NuxtLink>
+        <NuxtLink to="https://github.com/onmax/db-compat" external>GitHub</NuxtLink>
       </div>
     </footer>
   </div>
