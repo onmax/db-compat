@@ -31,12 +31,3 @@ export async function runAllTests(driver: TestDriver): Promise<TestResults> {
   }
   return results as TestResults
 }
-
-export async function runTest(driver: TestDriver, capabilityId: CapabilityId): Promise<CapabilityResult> {
-  const cap = capabilities.find(c => c.id === capabilityId)
-  if (!cap)
-    throw new Error(`Unknown capability: ${capabilityId}`)
-  return cap.test(driver)
-}
-
-export { capabilities }
