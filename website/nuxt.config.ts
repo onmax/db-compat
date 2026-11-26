@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-01-01',
   app: {
     head: {
-      script: [{ type: 'module', src: 'https://console.vitehub.dev/hosted-comments.js', 'data-vitehub-comments': '0673b019-0be3-47d1-857a-3ae83da3aeb6', 'data-vitehub-repo': 'onmax/db-compat' }],
+      script: [{ 'type': 'module', 'src': 'https://console.vitehub.dev/hosted-comments.js', 'data-vitehub-comments': '0673b019-0be3-47d1-857a-3ae83da3aeb6', 'data-vitehub-repo': 'onmax/db-compat' }],
     },
   },
   icon: { serverBundle: 'remote' },
